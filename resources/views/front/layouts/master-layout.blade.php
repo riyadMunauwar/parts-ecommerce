@@ -8,9 +8,12 @@
         <title>{{ $title }}</title>
 
         <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet">
-        
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
+        <!-- <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600&display=swap" rel="stylesheet"> -->
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
         <!-- Sweet Alert -->
         <link rel="stylesheet" href="{{ asset('assets/sweetalert2/sweetalert2.min.css') }}">
 
@@ -28,10 +31,11 @@
         </style>
 
     </head>
-    <body class="font-montserrat antialiased bg-gray-200">
+    <body class="font-sans antialiased bg-gray-200">
 
         @include('front.partials.top-header')
-        @include('front.partials.header')
+        @include('front.partials.desktop-header')
+        @include('front.partials.mobile-header')
 
 
 
@@ -39,6 +43,7 @@
             {{ $slot }}
         </main>
 
+        @include('front.partials.footer')
 
         @stack('modals')
 

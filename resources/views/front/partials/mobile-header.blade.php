@@ -1,9 +1,9 @@
-<header x-data="{isMenuOpen: false, isSearchOpen: false}" class="bg-white py-2 md:hidden">
+<header x-data="{isMenuOpen: false, isSearchOpen: false}" class="block bg-white py-2 md:hidden">
     <div class="mx-3 flex items-center justify-between">
         <!-- Logo -->
         <div>
             <a href="">
-                <img class="h-7 block" src="https://www.bdshop.com/pub/media/logo/stores/1/BDSHOP-LOGO-2022.jpg" alt="">
+                <img class="h-9 block" src="{{ asset('assets/logo/logo-red.png') }}" alt="Logo">
             </a>
         </div>
 
@@ -56,7 +56,7 @@
         </span>
     </div>
 
-    <nav x-show="isMenuOpen" x-transition class="fixed inset-0 w-4/5 h-full bg-white p-3">
+    <nav x-show="isMenuOpen" x-transition class="fixed inset-0 z-50 overflow-hidden w-4/5 h-full bg-white p-3">
         <div class="flex justify-between">
             <a href="">
                 <img class="h-6 block" src="https://www.bdshop.com/pub/media/logo/stores/1/BDSHOP-LOGO-2022.jpg" alt="">

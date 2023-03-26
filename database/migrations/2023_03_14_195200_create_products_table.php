@@ -30,7 +30,7 @@ return new class extends Migration
             $table->json('compatibility')->nullable();
             $table->json('features')->nullable();
             $table->json('description')->nullable();
-            $table->json('special_bedge')->nullable();
+            $table->json('color')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_published')->default(true);
             $table->boolean('is_premium')->default(false);
