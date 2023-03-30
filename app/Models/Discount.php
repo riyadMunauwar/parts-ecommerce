@@ -9,4 +9,19 @@ use Spatie\Translatable\HasTranslations;
 class Discount extends Model
 {
     use HasFactory;
+    use HasTranslations;
+
+    public $translatable = [
+        'name',
+        'description'
+    ];
+
+    protected $fillable = [
+        'name',
+        'type',
+        'amount',
+        'description'
+    ];
+
+    
 }

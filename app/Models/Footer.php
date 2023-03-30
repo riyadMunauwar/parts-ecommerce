@@ -6,28 +6,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-class Coupon extends Model
+class Footer extends Model
 {
     use HasFactory;
     use HasTranslations;
+  
 
     public $translatable = [
-        'name',
-        'description'
+        'menu_item_name',
     ];
 
     protected $fillable = [
-        'name',
-        'code',
-        'amount',
-        'start_at',
-        'end_at',
-        'description'
+        'column_name',
+        'footer_section_name',
+        'menu_item_name',
+        'menu_item_link',
     ];
-
-    protected $casts = [
-        'start_at' => 'datetime',
-        'end_at' => 'datetime'
-    ];
-
+    
 }

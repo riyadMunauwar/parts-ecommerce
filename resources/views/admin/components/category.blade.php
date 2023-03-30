@@ -1,4 +1,4 @@
-<div class="p-5 md:p-10">
+<div class="p-5 md:p-10 bg-white">
     <x-validation-errors class="mb-4" />
 
     <form wire:submit.prevent="submitHandeler" class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -14,14 +14,17 @@
         </div>
 
         <div class="">
-            <x-label for="order" value="{{ __('Order') }}" />
+            <x-label for="order" value="{{ __('Rank') }}" />
             <x-input wire:model.debounce="order" id="order" class="block mt-1 w-full" type="number"/>
         </div>
 
         <div class="">
             <x-label for="parent" value="{{ __('Parent Category') }}" />
             <x-ui.select wire:model.debounce="parentCategoryId" id="parent" class="block mt-1 w-full">
-
+                <option value="">None</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
             </x-ui.select>
         </div>
 
@@ -35,7 +38,7 @@
                     @endif
                 </div>
                 <div class="flex items-center justify-center mt-2">
-                    <button class="inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">Remove</button>
+                    <button wire:click.debounce="removeIcon" type="button" class="inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest ">Remove</button>
                 </div>
             </div>
             @else
@@ -73,4 +76,5 @@
             </x-button>
         </div>
     </form>
+    <x-ui.loading-spinner wire:loading.flex wire:target="icon" />
 </div>

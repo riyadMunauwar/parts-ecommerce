@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('discounts', function (Blueprint $table) {
             $table->id();
-            $table->json('name');
+            $table->json('name')->nullable();
             $table->enum('type', ['fixed', 'percentage'])->default('percentage');
             $table->float('amount');
             $table->json('description')->nullable();

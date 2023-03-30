@@ -97,10 +97,10 @@
 
 
         <div x-transition.duration.150ms x-show="isOpen" class="pl-7">
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('products.create') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Add new
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('products.index') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Product list
             </a>
         </div>
@@ -137,7 +137,7 @@
             <a href="{{ route('category.create') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Add new
             </a>
-            <a href="{{ route('category.create') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('category.index') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Category list
             </a>
         </div>
@@ -222,16 +222,16 @@
             <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Menu
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('caurosel') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Caurosel
             </a>
             <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Banner
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('feature-box') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Feature Box
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('footer') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Footer
             </a>
         </div>
@@ -275,6 +275,15 @@
             </a>
             <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Area
+            </a>
+            <a href="{{ route('vat') }}"  class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Vat
+            </a>
+            <a href="{{ route('discount') }}"  class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Discount
+            </a>
+            <a href="{{ route('coupon') }}"  class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Coupon
             </a>
             <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 General

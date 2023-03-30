@@ -26,15 +26,18 @@ Route::middleware([
 
     Route::view('/dashboard', 'admin.pages.dashboard')->name('dashboard');
     
-    Route::view('/categories', 'admin.pages.category')->name('category.create');
+    Route::view('/category/add', 'admin.pages.category.create')->name('category.create');
+    Route::view('/categories', 'admin.pages.category.list')->name('category.index');
     Route::view('/discounts', 'admin.pages.discount')->name('discount');
-    Route::view('/coupons', 'admin.pages.coupon')->name('discount');
-    Route::view('/products', 'admin.pages.product')->name('product');
-    Route::view('/products/create', 'admin.pages.create-product')->name('product.create');
-    Route::view('/feature-box', 'admin.pages.feature-box')->name('product');
+    Route::view('/coupons', 'admin.pages.coupon')->name('coupon');
+    Route::view('/products/create', 'admin.pages.products.create')->name('products.create');
+    Route::view('/products', 'admin.pages.create-product')->name('products.index');
+    Route::view('/feature-box', 'admin.pages.feature-box')->name('feature-box');
     Route::view('/caurosel', 'admin.pages.caurosel')->name('caurosel');
     Route::view('/banner', 'admin.pages.banner')->name('banner');
     Route::view('/menus', 'admin.pages.menu')->name('menu');
+    Route::view('/vats', 'admin.pages.vat')->name('vat');
+    Route::view('/footer', 'admin.pages.footer')->name('footer');
 
  
 });

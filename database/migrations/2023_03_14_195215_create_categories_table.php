@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
+            $table->string('search_name', 2048)->nullable();
             $table->json('name');
             $table->string('slug');
             $table->integer('order')->nullable()->default(0);

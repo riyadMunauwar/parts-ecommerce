@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
+            $table->string('search_name', 2024)->nullable();
+            $table->string('meta_title', 4000)->nullable();
+            $table->string('meta_tags', 4000)->nullable();
+            $table->text('meta_description', 1024)->nullable();
             $table->json('name');
             $table->string('slug', 2048);
             $table->float('regular_price')->nullable();
@@ -30,7 +34,8 @@ return new class extends Migration
             $table->json('compatibility')->nullable();
             $table->json('features')->nullable();
             $table->json('description')->nullable();
-            $table->json('color')->nullable();
+            $table->string('color')->nullable();
+            $table->string('color_code')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_published')->default(true);
             $table->boolean('is_premium')->default(false);
