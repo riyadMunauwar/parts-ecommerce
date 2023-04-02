@@ -1,133 +1,77 @@
+@php 
+    $setting = \App\Models\Setting::first();
+    $column_one_items = \App\Models\Footer::where('column_name', 'column_one')->get();
+    $column_two_items = \App\Models\Footer::where('column_name', 'column_two')->get();
+    $column_three_items = \App\Models\Footer::where('column_name', 'column_three')->get();
+    $column_four_items = \App\Models\Footer::where('column_name', 'column_four')->get();
+@endphp
+
+
 <footer class="bg-gray-100 dark:bg-gray-900">
     <div class="container px-6 py-8 mx-auto">
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div>
                 <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
+                    {{ $setting->footer_column_one_title ?? '' }}
                 </div>
 
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
-                </a>
+                @foreach($column_one_items ?? [] as $item)
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                        {{ $item->menu_item_name ?? '' }}
+                    </a>
+                @endforeach
+
             </div>
 
             <div>
                 <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
+                    {{ $setting->footer_column_two_title ?? '' }}
                 </div>
 
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
-                </a>
+                @foreach($column_two_items ?? [] as $item)
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                        {{ $item->menu_item_name ?? '' }}
+                    </a>
+                @endforeach
+
             </div>
 
             <div>
                 <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
+                    {{ $setting->footer_column_three_title ?? '' }}
                 </div>
 
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
-                </a>
+                @foreach($column_three_items ?? [] as $item)
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                        {{ $item->menu_item_name ?? '' }}
+                    </a>
+                @endforeach
+
             </div>
 
             <div>
                 <div class="text-xs font-medium text-gray-400 uppercase">
-                    Getting Started
+                    {{ $setting->footer_column_four_title ?? '' }}
                 </div>
 
-                <a href="#" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Installation
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Release Notes
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Upgrade Guide
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Using with Preprocessors
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Optimizing for Production
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    Browser Support
-                </a>
-                <a href="#" class="block mt-3 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
-                    IntelliSense
-                </a>
+                @foreach($column_four_items ?? [] as $item)
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium text-gray-500 duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                        {{ $item->menu_item_name ?? '' }}
+                    </a>
+                @endforeach
+
             </div>
         </div>
 
 
-        <div class="flex flex-col justify-center mx-auto mt-10 space-y-3 md:space-y-0 md:flex-row">
-            <input id="email" type="text" class="px-4 py-2 text-gray-700 bg-white border rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-opacity-40 focus:ring-blue-300" placeholder="Email Address">
-    
-            <button class="w-full px-6 py-2.5 text-sm font-medium tracking-wider text-white transition-colors duration-300 transform md:w-auto md:mx-4 focus:outline-none bg-gray-800 rounded-lg hover:bg-gray-700 focus:ring focus:ring-gray-300 focus:ring-opacity-80">
-                Subscribe
-            </button>
-        </div>
+        <!-- Subscriber -->
+        <livewire:store.subscribe />
 
 
         <hr class="my-10 border-gray-200 dark:border-gray-700">
 
         <div class="sm:flex sm:items-center sm:justify-between">
-            <p class="text-sm text-gray-400">© Copyright 2021. All Rights Reserved.</p>
+            <p class="text-sm text-gray-400">© Copyright {{ \Carbon\Carbon::now()->year }}. All Rights Reserved.</p>
 
             <div class="flex mt-3 -mx-2 sm:mt-0">
                 <a href="#" class="mx-2 text-gray-400 hover:text-gray-500 dark:hover:text-gray-300" aria-label="Reddit">

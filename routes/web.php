@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Services\SweetAlertToast;
-// use App\Services\SweetAlert;
-use App\Facades\SweetAlert;
+use App\Http\Controllers\CustomPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +32,14 @@ Route::middleware([
     Route::view('/products', 'admin.pages.create-product')->name('products.index');
     Route::view('/feature-box', 'admin.pages.feature-box')->name('feature-box');
     Route::view('/caurosel', 'admin.pages.caurosel')->name('caurosel');
-    Route::view('/banner', 'admin.pages.banner')->name('banner');
     Route::view('/menus', 'admin.pages.menu')->name('menu');
     Route::view('/vats', 'admin.pages.vat')->name('vat');
     Route::view('/footer', 'admin.pages.footer')->name('footer');
+    Route::view('/color', 'admin.pages.color')->name('color');
+    Route::view('/header', 'admin.pages.header')->name('header');
+    Route::view('/page', 'admin.pages.page')->name('page');
+    Route::view('/subscriber', 'admin.pages.subscriber-list')->name('subscriber-list');
+
 
  
 });
@@ -49,6 +51,7 @@ Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
 Route::view('/category/{slug}', 'front.pages.category')->name('category');
 Route::view('/product/{slug}', 'front.pages.single-product')->name('singleProduct');
+Route::get('/{pageSlug}', CustomPageController::class)->name('custom-page');
 
 
 Route::get('/test', function(){

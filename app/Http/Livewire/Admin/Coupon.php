@@ -72,7 +72,7 @@ class Coupon extends Component
         return view('admin.components.coupon');
     }
 
-    public function createcoupon()
+    public function createCoupon()
     {
         $this->validate();
 

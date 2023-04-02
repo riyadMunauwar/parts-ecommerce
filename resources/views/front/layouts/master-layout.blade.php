@@ -31,7 +31,7 @@
         </style>
 
     </head>
-    <body class="font-sans antialiased bg-gray-200">
+    <body class="font-sans antialiased bg-gray-300">
 
         @include('front.partials.top-header')
         @include('front.partials.desktop-header')

@@ -1,52 +1,23 @@
+
+@php 
+    $featureBoxs = \App\Models\FeatureBox::where('is_published', true)->get();
+@endphp
+
 <section>
     <div class="grid grid-cols-2 gap-1">
         <!-- Card -->
-        <div class="bg-gray-50 flex-col items-center justify-center">
-            <div class="text-center p-5">
-                <p class="mb-3">Lorem ipsum dolor sit amet.</p>
-                <h3 class="text-3xl font-bold dark:text-white mb-2">Heading 3</h3>
-                <p class="mb-3 text-sm">Lorem ipsum dolor sit amet.</p>
-                <a href="">Learne More</a>
+        @foreach($featureBoxs ?? [] as $box)
+            <div class="{{ $loop->index + 1 > 2  ? 'col-span-2' : ''}} bg-gray-50 flex-col items-center justify-center">
+                <div class="text-center p-5">
+                    <p class="mb-3">{{ $box->sup_title ?? '' }}</p>
+                    <h3 class="text-3xl font-bold dark:text-white mb-2">{{ $box->title ?? '' }}</h3>
+                    <p class="mb-3 text-sm">{{ $box->sub_title ?? '' }}</p>
+                    <a href="{{ $box->button_link ?? '' }}">{{ $box->button_text ?? '' }}</a>
+                </div>
+                <div>
+                    <img class="block w-full" src="{{ $box->image ?? '' }}" alt="{{ $box->title ?? '' }}">
+                </div>
             </div>
-            <div>
-                <img class="block w-full" src="{{ asset('assets/images/ViVid-2020-gif.gif') }}" alt="">
-            </div>
-        </div>
-
-        <div class="bg-gray-50 flex-col items-center justify-center">
-            <div class="text-center p-5">
-                <p class="mb-3">Lorem ipsum dolor sit amet.</p>
-                <h3 class="text-3xl font-bold dark:text-white mb-2">Heading 3</h3>
-                <p class="mb-3 text-sm">Lorem ipsum dolor sit amet.</p>
-                <a href="">Learne More</a>
-            </div>
-            <div>
-                <img class="block w-full" src="{{ asset('assets/images/ViVid-2020-gif.gif') }}" alt="">
-            </div>
-        </div>
-
-        <div class="col-span-2 bg-gray-50 flex-col items-center justify-center">
-            <div class="text-center p-5">
-                <p class="mb-3">Lorem ipsum dolor sit amet.</p>
-                <h3 class="text-3xl font-bold dark:text-white mb-2">Heading 3</h3>
-                <p class="mb-3 text-sm">Lorem ipsum dolor sit amet.</p>
-                <a href="">Learne More</a>
-            </div>
-            <div>
-                <img class="block w-full h-[28rem] object-contain" src="{{ asset('assets/images/ViVid-2020-gif.gif') }}" alt="">
-            </div>
-        </div>
-
-        <div class="col-span-2 bg-gray-50 flex-col items-center justify-center">
-            <div class="text-center p-5">
-                <p class="mb-3">Lorem ipsum dolor sit amet.</p>
-                <h3 class="text-3xl font-bold dark:text-white mb-2">Heading 3</h3>
-                <p class="mb-3 text-sm">Lorem ipsum dolor sit amet.</p>
-                <a href="">Learne More</a>
-            </div>
-            <div>
-                <img class="block w-full h-[28rem] object-contain" src="{{ asset('assets/images/Training-2020-v4.png') }}" alt="">
-            </div>
-        </div>
+        @endforeach
     </div>
 </section>

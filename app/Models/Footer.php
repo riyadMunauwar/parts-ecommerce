@@ -18,7 +18,6 @@ class Footer extends Model
 
     protected $fillable = [
         'column_name',
-        'footer_section_name',
         'menu_item_name',
         'menu_item_link',
     ];

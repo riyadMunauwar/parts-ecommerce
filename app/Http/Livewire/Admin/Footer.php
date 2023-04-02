@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use App\Traits\WithSweetAlert;
 use App\Models\Footer as _Footer;
+use App\Models\Setting;
 
 class Footer extends Component
 {
@@ -59,6 +60,14 @@ class Footer extends Component
         $this->preparedColumnTwoInitData();
         $this->preparedColumnThreeInitData();
         $this->preparedColumnFourInitData();
+
+        $setting = Setting::firstOrCreate();
+
+        $this->footerSectionOneName = $setting->footer_column_one_title;
+        $this->footerSectionTwoName = $setting->footer_column_two_title;
+        $this->footerSectionThreeName = $setting->footer_column_three_title;
+        $this->footerSectionFourName = $setting->footer_column_four_title;
+
     }
 
     public function render()
@@ -76,7 +85,6 @@ class Footer extends Component
 
         $save =_Footer::create([
                 'column_name' => $this->column_one,
-                'footer_section_name' => $this->footerSectionOneName,
                 'menu_item_name' => $this->footerSectionOneItemName,
                 'menu_item_link' => $this->footerSectionOneItemLink,
             ]);
@@ -94,43 +102,164 @@ class Footer extends Component
 
     public function columnOneUpdateItem()
     {
+        $this->validate([
+            'footerSectionOneItemName' => ['required', 'string']
+        ]);
+
+        $footerMenuItem = _Footer::find($this->columnOneItemId);
+
+        $save = $footerMenuItem->update([
+                    'menu_item_name' => $this->footerSectionOneItemName,
+                    'menu_item_link' => $this->footerSectionOneItemLink,
+                ]);
+
+        if($save){
+            $this->resetColumnOne();
+            $this->preparedColumnOneInitData();
+            $this->isColumnOneEditModeOn = false;
+            return $this->success('Success', 'Column one menu item updated successfully');
+        }
+
+        return $this->error('Failed', 'Something went wrong ! try again');
 
     }
 
 
     public function columnTwoAddItem()
     {
+        $this->validate([
+            'footerSectionTwoItemName' => ['required', 'string']
+        ]);
+
+        $save =_Footer::create([
+                'column_name' => $this->column_two,
+                'menu_item_name' => $this->footerSectionTwoItemName,
+                'menu_item_link' => $this->footerSectionTwoItemLink,
+            ]);
         
+        if($save){
+            $this->resetColumnTwo();
+            $this->preparedColumnTwoInitData();
+            return $this->success('Created', 'Menu item added successfully');
+        }
+
+        return $this->error('Failed', 'Failed to create new menu item. Something went wrong !');
     }
 
 
     public function columnTwoUpdateItem()
     {
-        
+        $this->validate([
+            'footerSectionTwoItemName' => ['required', 'string']
+        ]);
+
+        $footerMenuItem = _Footer::find($this->columnTwoItemId);
+
+        $save = $footerMenuItem->update([
+                    'menu_item_name' => $this->footerSectionTwoItemName,
+                    'menu_item_link' => $this->footerSectionTwoItemLink,
+                ]);
+
+        if($save){
+            $this->resetColumnTwo();
+            $this->preparedColumnTwoInitData();
+            $this->isColumnTwoEditModeOn = false;
+            return $this->success('Success', 'Column two menu item updated successfully');
+        }
+
+        return $this->error('Failed', 'Something went wrong ! try again');
     }
 
 
     public function columnThreeAddItem()
     {
+        $this->validate([
+            'footerSectionThreeItemName' => ['required', 'string']
+        ]);
+
+        $save =_Footer::create([
+                'column_name' => $this->column_three,
+                'menu_item_name' => $this->footerSectionThreeItemName,
+                'menu_item_link' => $this->footerSectionThreeItemLink,
+            ]);
         
+        if($save){
+            $this->resetColumnThree();
+            $this->preparedColumnThreeInitData();
+            return $this->success('Created', 'Menu item added successfully');
+        }
+
+        return $this->error('Failed', 'Failed to create new menu item. Something went wrong !');
     }
 
 
     public function columnThreeUpdateItem()
     {
-        
+        $this->validate([
+            'footerSectionThreeItemName' => ['required', 'string']
+        ]);
+
+        $footerMenuItem = _Footer::find($this->columnThreeItemId);
+
+        $save = $footerMenuItem->update([
+                    'menu_item_name' => $this->footerSectionThreeItemName,
+                    'menu_item_link' => $this->footerSectionThreeItemLink,
+                ]);
+
+        if($save){
+            $this->resetColumnThree();
+            $this->preparedColumnThreeInitData();
+            $this->isColumnThreeEditModeOn = false;
+            return $this->success('Success', 'Column three menu item updated successfully');
+        }
+
+        return $this->error('Failed', 'Something went wrong ! try again');
     }
 
 
     public function columnFourAddItem()
     {
+        $this->validate([
+            'footerSectionFourItemName' => ['required', 'string']
+        ]);
+
+        $save =_Footer::create([
+                'column_name' => $this->column_four,
+                'menu_item_name' => $this->footerSectionFourItemName,
+                'menu_item_link' => $this->footerSectionFourItemLink,
+            ]);
         
+        if($save){
+            $this->resetColumnFour();
+            $this->preparedColumnFourInitData();
+            return $this->success('Created', 'Menu item added successfully');
+        }
+
+        return $this->error('Failed', 'Failed to create new menu item. Something went wrong !');
     }
 
 
     public function columnFourUpdateItem()
     {
-        
+        $this->validate([
+            'footerSectionFourItemName' => ['required', 'string']
+        ]);
+
+        $footerMenuItem = _Footer::find($this->columnFourItemId);
+
+        $save = $footerMenuItem->update([
+                    'menu_item_name' => $this->footerSectionFourItemName,
+                    'menu_item_link' => $this->footerSectionFourItemLink,
+                ]);
+
+        if($save){
+            $this->resetColumnFour();
+            $this->preparedColumnFourInitData();
+            $this->isColumnFourEditModeOn = false;
+            return $this->success('Success', 'Column four menu item updated successfully');
+        }
+
+        return $this->error('Failed', 'Something went wrong ! try again');
     }
 
 
@@ -152,6 +281,73 @@ class Footer extends Component
 
 
     // 
+    public function updateColumnTitle($column)
+    {
+        $setting = Setting::first();
+
+        if($column === 'column_one')
+        {
+            $this->validate([
+                'footerSectionOneName' => ['required', 'string']
+            ]);
+
+            $setting->footer_column_one_title = $this->footerSectionOneName;
+
+            if($setting->save()){
+                return $this->success('Success', 'Column one title updated successfully');
+            }
+
+            return $this->error('Failed', 'Something went wrong try again');
+        }
+
+        if($column === 'column_two')
+        {
+            $this->validate([
+                'footerSectionTwoName' => ['required', 'string']
+            ]);
+
+            $setting->footer_column_two_title = $this->footerSectionTwoName;
+
+            if($setting->save()){
+                return $this->success('Success', 'Column two title updated successfully');
+            }
+
+            return $this->error('Failed', 'Something went wrong try again');
+        }
+
+        if($column === 'column_three')
+        {
+            $this->validate([
+                'footerSectionThreeName' => ['required', 'string']
+            ]);
+
+            $setting->footer_column_three_title = $this->footerSectionThreeName;
+
+            if($setting->save()){
+                return $this->success('Success', 'Column Three title updated successfully');
+            }
+
+            return $this->error('Failed', 'Something went wrong try again');
+        }
+
+        if($column === 'column_four')
+        {
+            $this->validate([
+                'footerSectionOneName' => ['required', 'string']
+            ]);
+
+            $setting->footer_column_four_title = $this->footerSectionFourName;
+
+            if($setting->save()){
+                return $this->success('Success', 'Column four title updated successfully');
+            }
+
+            return $this->error('Failed', 'Something went wrong try again');
+        }
+
+    }
+
+
     public function enableEditMode($column, $id)
     {
         if($column === 'column_one')

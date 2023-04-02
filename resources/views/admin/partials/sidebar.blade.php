@@ -174,13 +174,10 @@
 
         <div x-transition.duration.150ms x-show="isOpen" class="pl-7">
             <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
-                Add new
+                Customer List
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
-                Employee List
-            </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
-                ID card
+            <a href="{{ route('subscriber-list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Subscriber List
             </a>
         </div>
     </div>
@@ -213,23 +210,23 @@
 
 
         <div x-transition.duration.150ms x-show="isOpen" class="pl-7">
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('color') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Color
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('header') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Header
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('menu') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Menu
             </a>
             <a href="{{ route('caurosel') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Caurosel
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
-                Banner
-            </a>
             <a href="{{ route('feature-box') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Feature Box
+            </a>
+            <a href="{{ route('page') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Pages
             </a>
             <a href="{{ route('footer') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Footer

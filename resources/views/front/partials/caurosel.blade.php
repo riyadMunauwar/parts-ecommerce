@@ -1,29 +1,26 @@
+@php 
+
+    $slides = \App\Models\Caurosel::where('is_published', true)->get();
+
+@endphp
+
+@if($slides)
+
 <section class="bg-gray-50">
     <div class="max-w-6xl mx-auto">
         <!-- Silder -->
         <div class="imageCaurosel">
         <!-- Slide -->
+        @foreach($slides as $slide)
             <div>
-                <a target="_blank" href="https://www.ebnshop.com">
-                    <img class="w-full block lg:h-[32rem] object-contain" src="https://www.fixez.com/media/banners/s23-now-available-web_2_.webp" alt="">
+                <a target="_blank" href="{{ $slide->image_link ?? '' }}">
+                    <img class="w-full block lg:h-[32rem] object-contain" src="{{ $slide->image ?? '' }}" alt="{{ $slide->image_link }}">
                 </a>
             </div>
-            <div>
-                <a target="_blank" href="https://www.ebnshop.com">
-                    <img class="w-full block lg:h-[32rem] object-contain" src="https://www.fixez.com/media/banners/CLONE-DZ03-FACE-ID-TAG-ON-web.webp" alt="">
-                </a>
-            </div>
-            <div>
-                <a target="_blank" href="https://www.ebnshop.com">
-                    <img class="w-full block lg:h-[32rem] object-contain" src="https://www.fixez.com/media/banners/do-you-know-vividfx-incell-comes-with-Damage-4.webp" alt="">
-                </a>
-            </div>
+        @endforeach
         </div>
     </div>
 </section>
-
-
-
 
 
 
@@ -51,4 +48,6 @@
         })()
     </script>
 @endpush
+
+@endif
 

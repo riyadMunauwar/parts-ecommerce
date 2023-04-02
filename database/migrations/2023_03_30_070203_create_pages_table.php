@@ -13,11 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('footers', function (Blueprint $table) {
+        Schema::create('pages', function (Blueprint $table) {
             $table->id();
-            $table->string('column_name');
-            $table->json('menu_item_name', 2048);
-            $table->string('menu_item_link', 4000)->nullable();
+            $table->json('meta_title')->nullable();
+            $table->json('meta_tags')->nullable();
+            $table->json('meta_description')->nullable();
+            $table->json('name');
+            $table->string('slug');
+            $table->json('content');
+            $table->boolean('is_published')->default(true);
             $table->timestamps();
         });
     }
@@ -29,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('footers');
+        Schema::dropIfExists('pages');
     }
 };

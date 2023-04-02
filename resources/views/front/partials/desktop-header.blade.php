@@ -1,21 +1,21 @@
 <header x-data="{isSearchOpen: false}" class="hidden md:block relative z-50 bg-black text-white">
     
   <div class="bg-white py-1 text-gray-900 px-5">
-    <div class="max-w-7xl mx-auto flex justify-between">
+    <div class="container mx-auto flex justify-between">
         <div>
 
         </div>
         <div class="space-x-3">
           <a href="" class="text-thin uppercase text-xs">Track Order</a>
-          <a href="" class="text-thin uppercase text-xs">Create Account</a>
-          <a href="" class="text-thin uppercase text-xs">Sign In</a>
+          <a href="{{ route('register') }}" class="text-thin uppercase text-xs">Create Account</a>
+          <a href="{{ route('login') }}" class="text-thin uppercase text-xs">Sign In</a>
         </div>
     </div>
   </div>
 
 
-    <nav aria-label="Top" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="border-b border-gray-200 py-2">
+    <nav aria-label="Top" class="container mx-auto px-4 md:px-0 pt-2">
+      <div class="py-1">
         <div class="flex h-16 items-center">
           <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
           <button type="button" class="rounded-md bg-white p-2 text-gray-400 lg:hidden">
@@ -33,214 +33,15 @@
             </a>
           </div>
 
-          <!-- Flyout menus -->
-          <div class="hidden lg:ml-8 lg:block lg:self-stretch">
-            <div class="flex h-full space-x-8">
-
-              <div x-data="{isOpen : false}" class="flex">
-                <div class="relative flex">
-                  <!-- Item active: "border-indigo-600 text-indigo-600", Item inactive: "border-transparent text-gray-700 hover:text-gray-800" -->
-                  <button @click="isOpen = !isOpen" type="button" class="border-transparent text-white hover:text-gray-800 relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out" aria-expanded="false">
-                    <span>
-                      Women
-                    </span>
-                    <span x-show="isOpen" class="ml-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                        </svg>
-                    </span>
-
-                    <span x-show="!isOpen" class="ml-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                        </svg>
-                    </span>
-                  </button>
-                </div>
-
-                <!--
-                  'Women' flyout menu, show/hide based on flyout menu state.
-
-                  Entering: "transition ease-out duration-200"
-                    From: "opacity-0"
-                    To: "opacity-100"
-                  Leaving: "transition ease-in duration-150"
-                    From: "opacity-100"
-                    To: "opacity-0"
-                -->
-                <div x-show="isOpen" class="absolute inset-x-0 top-full text-sm text-gray-500">
-                  <!-- Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow -->
-                  <div class="absolute inset-0 top-1/2 bg-white shadow" aria-hidden="true"></div>
-
-                  <div class="relative bg-white p-10">
-                    <div class="mx-auto max-w-7xl px-8">
-                      <div class="grid grid-cols-6 gap-y-10 gap-x-8 text-sm">
-                        <div>
-                            <p id="Clothing-heading" class="font-medium text-gray-900">Clothing</p>
-                            <ul role="list" aria-labelledby="Clothing-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                              <li x-data="{isOpen: false}" class="flex flex-col">
-                                <a @click="isOpen = !isOpen" class="hover:text-gray-800 flex items-center w-full">
-                                  <span>
-                                      Shirt
-                                  </span>
-
-                                  <span x-show="isOpen" class="ml-auto">
-                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                                      </svg>
-                                  </span>
-
-                                  <span x-show="!isOpen" class="ml-auto">
-                                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                          <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                      </svg>
-                                  </span>
-
-                                </a>
-
-                                <ul x-show="isOpen" role="list" aria-labelledby="Clothing-heading" class="ml-3 mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                                  <li x-data="{isOpen: false}" class="flex">
-                                    <a @click="isOpen = !isOpen" class="hover:text-gray-800 flex items-center w-full">
-                                      <span>
-                                          Shirt
-                                      </span>
-
-                                      <span x-show="isOpen" class="ml-auto">
-                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                                          </svg>
-                                      </span>
-
-                                      <span x-show="!isOpen" class="ml-auto">
-                                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                          </svg>
-                                      </span>
-
-                                    </a>
-                                  </li>
-
-                                  <li class="flex">
-                                    <a href="#" class="hover:text-gray-800">Pants</a>
-                                  </li>
-
-                                  <li class="flex">
-                                    <a href="#" class="hover:text-gray-800">Sweaters</a>
-                                  </li>
-
-                                  <li class="flex">
-                                    <a href="#" class="hover:text-gray-800">T-Shirts</a>
-                                  </li>
-
-                                  <li class="flex">
-                                    <a href="#" class="hover:text-gray-800">Jackets</a>
-                                  </li>
-
-                                  <li class="flex">
-                                    <a href="#" class="hover:text-gray-800">Activewear</a>
-                                  </li>
-
-                                  <li class="flex">
-                                    <a href="#" class="hover:text-gray-800">Browse All</a>
-                                  </li>
-                                </ul>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Pants</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Sweaters</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">T-Shirts</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Jackets</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Activewear</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Browse All</a>
-                              </li>
-                            </ul>
-                          </div>
-
-                          <div>
-                            <p id="Accessories-heading" class="font-medium text-gray-900">Accessories</p>
-                            <ul role="list" aria-labelledby="Accessories-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Watches</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Wallets</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Bags</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Sunglasses</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Hats</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Belts</a>
-                              </li>
-                            </ul>
-                          </div>
-
-                          <div>
-                            <p id="Brands-heading" class="font-medium text-gray-900">Brands</p>
-                            <ul role="list" aria-labelledby="Brands-heading" class="mt-6 space-y-6 sm:mt-4 sm:space-y-4">
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Re-Arranged</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Counterfeit</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">Full Nelson</a>
-                              </li>
-
-                              <li class="flex">
-                                <a href="#" class="hover:text-gray-800">My Way</a>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </div>
 
 
-              <a href="#" class="flex items-center text-sm font-medium text-white hover:text-gray-800">Company</a>
-
-              <a href="#" class="flex items-center text-sm font-medium text-white hover:text-gray-800">Stores</a>
-            </div>
-          </div>
-
-          <div class="ml-auto flex items-center">
-            <div class="hidden lg:ml-8 lg:flex">
-              <a href="#" class="flex items-center text-gray-700 hover:text-gray-800">
-                <img src="https://tailwindui.com/img/flags/flag-canada.svg" alt="" class="block h-auto w-5 flex-shrink-0">
-                <span class="ml-3 block text-white text-sm font-medium">Spanish</span>
-                <span class="sr-only">, change language</span>
-              </a>
+            <div class="ml-auto flex items-center">
+              <div class="hidden lg:ml-8 lg:flex">
+                <a href="#" class="flex items-center text-gray-700 hover:text-gray-800">
+                  <img src="https://tailwindui.com/img/flags/flag-canada.svg" alt="" class="block h-auto w-5 flex-shrink-0">
+                  <span class="ml-3 block text-white text-sm font-medium">Spanish</span>
+                  <span class="sr-only">, change language</span>
+                </a>
             </div>
 
             <!-- Search -->
@@ -269,6 +70,41 @@
       </div>
     </nav>
 
+    @php 
+      $menus = \App\Models\Menu::all();
+    @endphp
+
+    <nav class="bg-black relative">
+        <div class="container mx-auto flex">
+
+          @foreach($menus ?? [] as $menu)
+            <a class="group cursor-pointer text-white px-2 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
+                <span>{{ $menu->name ?? '' }}</span>
+                <span class="ml-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                  </svg>
+                </span>
+
+                <div class="group-hover:block hidden absolute z-40 top-full left-0 w-full h-96 bg-white text-black shadow p-5">
+                    <div class="container mx-auto flex gap-5">
+                        <div class="w-1/6 py-4">
+                          <div class="text-xs font-medium text-gray-900 uppercase">
+                              Hello world
+                          </div>
+
+                          <div class="mt-3 space-y-1 h-72 overflow-y-auto megamenu-scroll-bar">
+                            <h1 id="anker" data-link="{{ route('caurosel') }}" class="cursor-pointer text-xs hover:text-orange-600">Iphone 6</h1>
+                          </div>
+                          
+                        </div>
+                    </div>
+                </div>
+            </a>
+          @endforeach
+        </div>
+    </nav>
+
     <div x-show="isSearchOpen" x-transition class="bg-black">
         <div class="max-w-3xl mx-auto px-5 py-5 flex">
             <form class="flex items-center flex-grow">
@@ -292,3 +128,21 @@
     </div>
 
 </header>
+
+
+@push('scripts')
+
+  <script>
+
+    let ankers = Array.from(document.querySelectorAll('#anker'));
+
+    ankers.forEach(anker => {
+      anker.addEventListener('click', (e) => {
+        window.location.href=e.target.dataset.link;
+      })
+    })
+
+
+  </script>
+
+@endpush

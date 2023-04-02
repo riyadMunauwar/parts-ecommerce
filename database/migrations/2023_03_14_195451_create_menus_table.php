@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->json('name');
-            $table->string('link', 2048)->nullalbe();
-            $table->foreignId('category_id')->nullalbe()->constrained();
+            $table->string('link', 2048)->nullable();
+            $table->foreignId('category_id')->nullable()->constrained();
             $table->timestamps();
         });
     }
