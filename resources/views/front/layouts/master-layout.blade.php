@@ -28,6 +28,64 @@
 
         <style>
             [x-cloak] { display: none !important; }
+
+            .primary-bg {
+
+            }
+
+            .primary-hover {
+
+            }
+
+            .secondary-bg {
+
+            }
+
+            .secondary-hover {
+
+            }
+
+
+            .primary-text {
+
+            }
+
+            .primary-text-hover {
+
+            }
+
+            .secondary-text {
+
+            }
+
+            .secondary-text-hover {
+
+            }
+
+            .top-header-bg {
+
+            }
+
+            .top-header-text {
+
+            }
+
+            .middle-header-bg {
+
+            }
+
+            .middel-header-text {
+
+            }
+
+            .main-header-bg {
+
+            }
+
+            .main-header-text {
+                
+            }
+
         </style>
 
     </head>

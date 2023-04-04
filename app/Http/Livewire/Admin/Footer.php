@@ -272,6 +272,7 @@ class Footer extends Component
     public function menuItemDeleteHandeler($id)
     {
         if(_Footer::destroy($id)){
+            $this->reset();
             $this->preparedAllInitData();
             return $this->success('Success', 'Menu item deleted successfully');
         }

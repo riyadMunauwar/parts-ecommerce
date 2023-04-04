@@ -27,5 +27,34 @@ class Setting extends Model implements HasMedia
         'footer_column_four_title',
     ];
 
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('logo')->singleFile();
+
+        $this->addMediaCollection('favicon')->singleFile();
+
+    }
+
+
+    public function logoUrl()
+    {
+        if($this->hasMedia('logo'))
+        {
+            return $this->getFirstMediaUrl('logo');
+        }
+
+        return '';
+    }
+
+
+    public function faviconUrl()
+    {
+        if($this->hasMedia('favicon'))
+        {
+            return $this->getFirstMediaUrl('favicon');
+        }
+
+        return '';
+    }
 
 }

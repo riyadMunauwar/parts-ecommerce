@@ -1,7 +1,7 @@
 <section>
     <div class="grid grid-cols-1 md:grid-cols-2 md:gap-5">
         <!-- Column 1 -->
-        <div class="bg-white p-5 md:rounded-md">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-4">Column 1</h1>
 
             <x-validation-errors class="mb-4" />
@@ -9,7 +9,7 @@
             <div>
                 <div>
                     <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
-                    <x-input wire:model.debounce="footerSectionOneName" id="columnTitle" class="block h-8 mt-1 w-full" type="text" required />
+                    <x-input wire:model.debounce="footerSectionOneName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
                     <button type="button" wire:click.debounce="updateColumnTitle('column_one')" class="inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Update</button>
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 p-2 border rounded-md">
+            <div class="mt-5 p-5 border rounded-md">
                 <div>
                     <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
                     <x-input wire:model.debounce="footerSectionOneItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
@@ -61,7 +61,7 @@
         </div>
 
         <!-- Column 2 -->
-        <div class="bg-white p-5 md:rounded-md"">
+        <div class="bg-white p-5 md:p-7 md:rounded-md"">
             <h1 class="mb-4">Column 2</h1>
 
             <x-validation-errors class="mb-4" />
@@ -69,7 +69,7 @@
             <div>
                 <div>
                     <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
-                    <x-input wire:model.debounce="footerSectionTwoName" id="columnTitle" class="block h-8 mt-1 w-full" type="text" required />
+                    <x-input wire:model.debounce="footerSectionTwoName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
                     <button type="button" wire:click.debounce="updateColumnTitle('column_two')" class="inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Update</button>
@@ -100,7 +100,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 p-2 border rounded-md">
+            <div class="mt-5 p-5 border rounded-md">
                 <div>
                     <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
                     <x-input wire:model.debounce="footerSectionTwoItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
@@ -120,7 +120,7 @@
             </div>
         </div>
         <!-- Column 3 -->
-        <div class="bg-white p-5 md:rounded-md"">
+        <div class="bg-white p-5 md:p-7 md:rounded-md"">
             <h1 class="mb-4">Column 3</h1>
 
             <x-validation-errors class="mb-4" />
@@ -128,7 +128,7 @@
             <div>
                 <div>
                     <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
-                    <x-input wire:model.debounce="footerSectionThreeName" id="columnTitle" class="block h-8 mt-1 w-full" type="text" required />
+                    <x-input wire:model.debounce="footerSectionThreeName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
                     <button type="button" wire:click.debounce="updateColumnTitle('column_three')" class="inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Update</button>
@@ -159,7 +159,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 p-2 border rounded-md">
+            <div class="mt-5 p-5 border rounded-md">
                 <div>
                     <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
                     <x-input wire:model.debounce="footerSectionThreeItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
@@ -180,7 +180,7 @@
         </div>
 
         <!-- Column 4 -->
-        <div class="bg-white p-5 md:rounded-md"">
+        <div class="bg-white p-5 md:p-7 md:rounded-md"">
             <h1 class="mb-4">Column 4</h1>
 
             <x-validation-errors class="mb-4" />
@@ -188,7 +188,7 @@
             <div>
                 <div>
                     <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
-                    <x-input wire:model.debounce="footerSectionFourName" id="columnTitle" class="block h-8 mt-1 w-full" type="text" required />
+                    <x-input wire:model.debounce="footerSectionFourName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
                     <button type="button" wire:click.debounce="updateColumnTitle('column_four')" class="inline-flex items-center px-2 py-1 bg-gray-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Update</button>
@@ -219,7 +219,7 @@
                 </div>
             </div>
 
-            <div class="mt-5 p-2 border rounded-md">
+            <div class="mt-5 p-5 border rounded-md">
                 <div>
                     <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
                     <x-input wire:model.debounce="footerSectionFourItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />

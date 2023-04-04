@@ -1,6 +1,6 @@
 <x-admin.master-layout title="Category List">
 
-        <div class="max-w-4xl mx-auto">
+        <div class="">
             <livewire:admin.category-list />
         </div>
 

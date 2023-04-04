@@ -63,6 +63,7 @@ class Vat extends Component
     public function deleteVat($id)
     {
         if(VatModel::destroy($id)){
+            $this->reset();
             $this->vats = VatModel::all();
             return $this->success('Deleted', 'Vat deleted successfully');
         }

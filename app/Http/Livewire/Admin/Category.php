@@ -38,7 +38,7 @@ class Category extends Component
 
     public function mount()
     {
-        $this->categories = ProductCategory::all();
+        $this->preparedInitState();
     }
 
     public function render()
@@ -55,6 +55,7 @@ class Category extends Component
 
     public function removeIcon()
     {
+        $this->icon->delete();
         return $this->icon = null;
     }
 
@@ -85,6 +86,11 @@ class Category extends Component
         }
 
         return $this->error('Failed', 'Failed to create category. Try again');
+    }
+
+    private function preparedInitState()
+    {
+        $this->categories = ProductCategory::all();
     }
 
 }

@@ -103,7 +103,7 @@ class Menu extends Component
     public function deleteMenuHandeler($id)
     {
         if(_Menu::destroy($id)) {
-
+            $this->reset();
             $this->preparedInitialData();
             return $this->success('Deleted', 'Menu deleted successfully');
         }

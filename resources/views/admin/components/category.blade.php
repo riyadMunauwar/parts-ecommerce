@@ -1,7 +1,7 @@
-<div class="p-5 md:p-10 bg-white">
+<div class="p-5 md:p-7 md:rounded-md bg-white">
     <x-validation-errors class="mb-4" />
 
-    <form wire:submit.prevent="submitHandeler" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <form class="grid grid-cols-1 gap-5">
 
         <div>
             <x-label  for="name" value="{{ __('Name') }}" />
@@ -13,12 +13,12 @@
             <x-input wire:model.debounce="slug" id="slug" class="block mt-1 w-full" type="text" required />
         </div>
 
-        <div class="">
+        <div>
             <x-label for="order" value="{{ __('Rank') }}" />
             <x-input wire:model.debounce="order" id="order" class="block mt-1 w-full" type="number"/>
         </div>
 
-        <div class="">
+        <div>
             <x-label for="parent" value="{{ __('Parent Category') }}" />
             <x-ui.select wire:model.debounce="parentCategoryId" id="parent" class="block mt-1 w-full">
                 <option value="">None</option>
@@ -28,13 +28,13 @@
             </x-ui.select>
         </div>
 
-        <div class="col-span-2">
-            <x-label for="parent" value="{{ __('Icon') }}" />
+        <div>
+            <x-label class="block mb-1" for="parent" value="{{ __('Icon') }}" />
             @if($icon)
             <div>
                 <div class="flex items-center justify-center">
                     @if ($icon)
-                        <img class="w-1/2 block" src="{{ $icon->temporaryUrl() }}">
+                        <img class="w-1/2 rounded-md block" src="{{ $icon->temporaryUrl() }}">
                     @endif
                 </div>
                 <div class="flex items-center justify-center mt-2">
@@ -56,12 +56,31 @@
             @endif
         </div>
 
-        <div class="col-span-2">
+        <div>
             <x-label for="desc" value="{{ __('Description') }}" />
             <x-ui.textarea wire:model.debounce="description" id="desc" class="block mt-1 w-full">
 
             </x-ui.textarea>
         </div>
+
+
+        <div>
+            <x-label  for="metaTitle" value="{{ __('Meta Title') }}" />
+            <x-input wire:model.debounce="metaTitle" id="metaTitle" class="block mt-1 w-full" type="text" />
+        </div>
+
+
+        <div>
+            <x-label  for="metaTags" value="{{ __('Meta Tags') }}" />
+            <x-input wire:model.debounce="metaTags" id="metaTags" class="block mt-1 w-full" type="text" />
+        </div>
+
+
+        <div>
+            <x-label  for="metaDesc" value="{{ __('Meta Description') }}" />
+            <x-ui.textarea wire:model.debounce="metaDescription" id="metaDesc" class="block mt-1 w-full" type="text" />
+        </div>
+
 
         <div class="block">
             <label for="isPublished" class="flex items-center">
@@ -71,10 +90,11 @@
         </div>
 
         <div class="flex items-center justify-end">
-            <x-button class="ml-4">
+            <x-button wire:click.debounce="submitHandeler" type="button" class="ml-4">
                 {{ __('Create') }}
             </x-button>
         </div>
     </form>
-    <x-ui.loading-spinner wire:loading.flex wire:target="icon" />
+    <x-ui.text-loading-spinner loadingText="Uploading..." wire:loading.flex wire:target="icon" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="submitHandeler" />
 </div>

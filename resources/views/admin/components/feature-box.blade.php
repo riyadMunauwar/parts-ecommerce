@@ -1,11 +1,11 @@
 <section class="grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div>
-        <div class="bg-white p-5">
+        <div class="bg-white mx-auto p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Add Feature Box</h1>
 
             <x-validation-errors class="mb-4" />
 
-            <div class=" space-y-3">
+            <div class="space-y-3">
                 <div>
                     <x-label  for="sup_title" value="{{ __('Sup Title') }}" />
                     <x-input wire:model.debounce="supTitle" id="sup_title" class="block mt-1 w-full" type="text" required />
@@ -33,11 +33,11 @@
 
 
                 <div class="">
-                    <x-label for="parent" value="{{ __('Image') }}" />
+                    <x-label class="block mb-1" for="parent" value="{{ __('Image') }}" />
 
                     @if($oldImage && !$image)
                     <div class="flex items-center justify-center mb-3">
-                        <img class="w-full block" src="{{ $oldImage ?? '' }}">
+                        <img class="w-full rounded-md block" src="{{ $oldImage ?? '' }}">
                     </div>
                     @endif
 
@@ -45,7 +45,7 @@
                     <div class="">
                         <div class="flex items-center justify-center">
                             @if ($image)
-                                <img class="w-full block" src="{{ $image->temporaryUrl() }}">
+                                <img class="w-full rounded-md block" src="{{ $image->temporaryUrl() }}">
                             @endif
                         </div>
                         <div class="flex items-center justify-center mt-2">
@@ -95,11 +95,11 @@
         </div>
     </div>
     <div class="col-span-2">
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 rounded-md">
             <h1 class="mb-5">Feature Box list</h1>
 
             <div class="overflow-x-auto">
-                <table class="wrap w-full text-sm text-left text-gray-500 dark:text-gray-400">
+                <table class="wrap w-full whitespace-nowrap text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" class="px-4 py-3">Image</th>
@@ -161,5 +161,6 @@
             </div>
         </div>
     </div>
-    <x-ui.loading-spinner wire:loading.flex wire:target="image" />
+    <x-ui.text-loading-spinner loadingText="Uploading..." wire:loading.flex wire:target="image" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="confirmDeleteFeatureBox, enableFeatureBoxEditMode, updateFeatureBox, updateFeatureBox, cancelFeatureBoxEditMode" />
 </section>

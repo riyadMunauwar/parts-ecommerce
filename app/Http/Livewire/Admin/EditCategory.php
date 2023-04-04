@@ -25,6 +25,7 @@ class EditCategory extends Component
 
     public $isEditModeOn = false;
     public $newIcon;
+    public $oldIcon;
     public $categoryId;
 
 
@@ -94,6 +95,7 @@ class EditCategory extends Component
         $this->parentCategoryId = $category->parent_id;
         $this->description = $category->description;
         $this->isPublished = $category->is_published;
+        $this->oldIcon = $category->icon;
         $this->categoryId = $category->id;
 
         $this->isEditModeOn = true;

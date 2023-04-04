@@ -129,9 +129,8 @@ class Coupon extends Component
     public function deleteCouponHandeler($id)
     {
         if(_Coupon::destroy($id)) {
-
+            $this->reset();
             $this->preparedInitialData();
-
             return $this->success('Deleted', 'Coupon deleted successfully');
         }
 

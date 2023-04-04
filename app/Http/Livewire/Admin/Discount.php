@@ -107,7 +107,7 @@ class Discount extends Component
     public function deleteDiscountHandeler($id)
     {
         if(_Discount::destroy($id)) {
-
+            $this->reset();
             $this->preparedInitialData();
             return $this->success('Deleted', 'Discount deleted successfully');
         }

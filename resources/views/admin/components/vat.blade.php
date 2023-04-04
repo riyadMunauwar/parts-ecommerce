@@ -1,4 +1,4 @@
-<div class="p-5 md:p-10 bg-white">
+<div class="p-5 md:p-10 md:rounded-md bg-white">
     <x-validation-errors class="mb-4" />
 
     <form >
@@ -59,4 +59,5 @@
             </tbody>
         </table>
     </div>
+    <x-ui.loading-spinner wire:loading.flex wire:target="deleteVat, enableEditMode, updateVatHandeler, cancelEditMode, createVatHandeler" />
 </div>

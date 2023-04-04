@@ -1,6 +1,6 @@
 <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div>
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Add Slide</h1>
 
             <x-validation-errors class="mb-4" />
@@ -12,11 +12,11 @@
                 </div>
 
                 <div class="">
-                    <x-label for="parent" value="{{ __('Image') }}" />
+                    <x-label class="block mb-1" for="parent" value="{{ __('Image') }}" />
 
                     @if($oldSlide && !$image)
                     <div class="flex items-center justify-center mb-3">
-                        <img class="w-full block" src="{{ $oldSlide ?? '' }}">
+                        <img class="w-full rounded-md block" src="{{ $oldSlide ?? '' }}">
                     </div>
                     @endif
 
@@ -24,7 +24,7 @@
                     <div class="">
                         <div class="flex items-center justify-center">
                             @if ($image)
-                                <img class="w-full block" src="{{ $image->temporaryUrl() }}">
+                                <img class="w-full block rounded-md" src="{{ $image->temporaryUrl() }}">
                             @endif
                         </div>
                         <div class="flex items-center justify-center mt-2">
@@ -74,7 +74,7 @@
         </div>
     </div>
     <div class="col-span-2">
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Slide list</h1>
 
             <div class="overflow-x-auto">
@@ -124,5 +124,6 @@
             </div>
         </div>
     </div>
-    <x-ui.loading-spinner wire:loading.flex wire:target="image" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="confirmDeleteSlide, enableSlideEditMode, updateSlide, createSlide, cancelSlideEditMode" />
+    <x-ui.text-loading-spinner loadingText="Uploading..." wire:loading.flex wire:target="image" />
 </section>

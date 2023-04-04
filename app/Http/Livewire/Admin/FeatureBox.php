@@ -119,6 +119,7 @@ class FeatureBox extends Component
 
     public function removeImage()
     {
+        $this->image->delete();
         $this->image = null;
     }
 
@@ -132,7 +133,7 @@ class FeatureBox extends Component
     public function deleteFeatureBoxHandeler($id)
     {
         if(_FeatureBox::destroy($id)) {
-
+            $this->reset();
             $this->preparedInitialData();
             return $this->success('Deleted', 'Feature box deleted successfully');
         }

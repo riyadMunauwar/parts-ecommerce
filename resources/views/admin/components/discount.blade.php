@@ -1,6 +1,6 @@
 <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div>
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Add Discount</h1>
             <x-validation-errors class="mb-4" />
             <div class=" space-y-3">
@@ -50,7 +50,7 @@
         </div>
     </div>
     <div class="col-span-2">
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Discount list</h1>
 
             <div class="overflow-x-auto">
@@ -96,4 +96,6 @@
             </div>
         </div>
     </div>
+
+    <x-ui.loading-spinner wire:loading.flex wire:target="confirmDeleteDiscount, enableDiscountEditMode, createDiscount, updateDiscount, cancelDiscountEditMode" />
 </section>

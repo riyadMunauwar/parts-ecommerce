@@ -1,7 +1,7 @@
 <div>
     @if($isEditModeOn)
-    <x-ui.edit-modal class="max-w-2xl">
-        <div class="p-5 md:p-10 bg-white">
+    <x-ui.edit-modal class="max-w-xl">
+        <div class="p-5 md:p-10 bg-white rounded-md">
             <x-validation-errors class="mb-4" />
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -32,11 +32,18 @@
 
                 <div class="col-span-2">
                     <x-label for="parent" value="{{ __('Icon') }}" />
+
+                    @if (!$newIcon && $oldIcon)
+                        <div class="flex items-center justify-center">
+                            <img class="w-20 h-20 object-contain block" src="{{ $oldIcon ?? '' }}">
+                        </div>
+                    @endif
+
                     @if($newIcon)
                     <div>
                         <div class="flex items-center justify-center">
                             @if ($newIcon)
-                                <img class="w-1/2 block" src="{{ $newIcon->temporaryUrl() }}">
+                                <img class="w-20 h-20 object-contain block" src="{{ $newIcon->temporaryUrl() }}">
                             @endif
                         </div>
                         <div class="flex items-center justify-center mt-2">
@@ -80,7 +87,8 @@
                     </x-button>
                 </div>
             </div>
-            <x-ui.loading-spinner wire:loading.flex wire:target="icon" />
+            <x-ui.text-loading-spinner wire:loading.flex wire:target="updateCategory, cancelEditMode" />
+            <x-ui.text-loading-spinner loadingText="Uploading..." wire:loading.flex wire:target="newIcon" />
         </div>
     </x-ui.edit-modal>
     @endif

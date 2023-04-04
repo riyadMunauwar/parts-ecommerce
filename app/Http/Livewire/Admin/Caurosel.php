@@ -101,6 +101,7 @@ class Caurosel extends Component
 
     public function removeImage()
     {
+        $this->image->delete();
         $this->image = null;
     }
 
@@ -114,7 +115,7 @@ class Caurosel extends Component
     public function deleteSlideHandeler($id)
     {
         if(_Caurosel::destroy($id)) {
-
+            $this->reset();
             $this->preparedInitialData();
             return $this->success('Deleted', 'Slide deleted successfully');
         }

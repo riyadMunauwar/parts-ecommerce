@@ -1,9 +1,9 @@
 <section class="grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div>
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Add coupon</h1>
             <x-validation-errors class="mb-4" />
-            <div class=" space-y-3">
+            <div class=" space-y-4">
                 <div>
                     <x-label  for="name" value="{{ __('Name') }}" />
                     <x-input wire:model.debounce="name" id="name" class="block mt-1 w-full" type="text" required />
@@ -73,7 +73,7 @@
         </div>
     </div>
     <div class="col-span-2">
-        <div class="bg-white p-5">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">Coupon list</h1>
 
             <div class="overflow-x-auto">
@@ -133,5 +133,6 @@
             </div>
         </div>
     </div>
+    <x-ui.loading-spinner wire:loading.flex wire:target="confirmDeleteCoupon, enableCouponEditMode, updateCoupon, createCoupon, cancelCouponEditMode" />
 </section>
 
