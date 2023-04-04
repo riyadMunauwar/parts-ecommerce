@@ -89,7 +89,7 @@ class Header extends Component
 
     private function preparedInitData()
     {
-        $setting = Setting::first();
+        $setting = Setting::firstOrCreate();
 
         $this->top_header_message_text = $setting->top_header_message_text;
         $this->top_header_button_text = $setting->top_header_button_text;

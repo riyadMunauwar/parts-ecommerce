@@ -53,6 +53,14 @@ return new class extends Migration
             $table->boolean('is_social_icon_active')->default(true);
             $table->boolean('is_selling_feature_banner_active')->default(true);
 
+            $table->json('meta_title')->nullable();
+            $table->json('meta_description')->nullable();
+            $table->json('meta_tags')->nullable();
+
+            $table->string('website_name')->nullable();
+            $table->string('website_email')->nullable();
+            $table->string('website_phone')->nullable();
+            $table->string('website_contact_address')->nullable();
 
             $table->json('footer_column_one_title')->nullable();
             $table->json('footer_column_two_title')->nullable();

@@ -38,6 +38,7 @@ Route::middleware([
     Route::view('/color', 'admin.pages.color')->name('color');
     Route::view('/header', 'admin.pages.header')->name('header');
     Route::view('/page', 'admin.pages.page')->name('page');
+    Route::view('/setting', 'admin.pages.setting')->name('setting');
     Route::view('/subscriber', 'admin.pages.subscriber-list')->name('subscriber-list');
 
 

@@ -25,6 +25,9 @@ class Setting extends Model implements HasMedia
         'footer_column_two_title',
         'footer_column_three_title',
         'footer_column_four_title',
+        'meta_title',
+        'meta_description',
+        'meta_tags'
     ];
 
     public function registerMediaCollections(): void

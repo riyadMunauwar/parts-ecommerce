@@ -1,4 +1,4 @@
-<header class="md:ml-52 bg-white h-10 flex items-center py-1">
+<header class="md:ml-52 sticky top-0 bg-white h-10 flex items-center py-1">
     <div class="container mx-auto flex justify-between items-center px-4">
 
         <!-- Navigation Open  Button -->
@@ -20,7 +20,7 @@
         <!-- Logo -->
         <div>
             <a href="/">
-                <img class="h-7 block" src="https://www.bdshop.com/pub/media/logo/stores/1/BDSHOP-LOGO-2022.jpg" alt="">
+                <h1 class="text-2xl uppercase ont-extrabold text-gray-900 dark:text-white"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">MobileConsuma</span></h1>
             </a>
         </div>
         

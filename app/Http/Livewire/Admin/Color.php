@@ -33,7 +33,7 @@ class Color extends Component
 
     public function mount()
     {
-        $this->setting = Setting::first();
+        $this->setting = Setting::firstOrCreate();
     }
 
 

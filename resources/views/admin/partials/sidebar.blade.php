@@ -282,7 +282,7 @@
             <a href="{{ route('coupon') }}"  class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Coupon
             </a>
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('setting') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 General
             </a>
         </div>
