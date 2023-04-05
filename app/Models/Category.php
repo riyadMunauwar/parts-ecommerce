@@ -8,6 +8,7 @@ use App\Models\Product;
 use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use App\Models\Menu;
 
 class Category extends Model implements HasMedia
 {
@@ -17,17 +18,24 @@ class Category extends Model implements HasMedia
 
     public $translatable = [
         'name',
-        'description'
+        'description',
+        'meta_title',
+        'meta_description',
+        'meta_tags',
     ];
 
     protected $fillable = [
         'name',
+        'search_name',
         'slug',
         'order',
         'description',
         'is_published',
         'order_id',
         'parent_id',
+        'meta_title',
+        'meta_description',
+        'meta_tags',
     ];
 
 
@@ -56,5 +64,10 @@ class Category extends Model implements HasMedia
     public function products()
     {
         return $this->belongsToMany(Product::class);
+    }
+
+    public function menu()
+    {
+        return $this->hasOne(Menu::class);
     }
 }

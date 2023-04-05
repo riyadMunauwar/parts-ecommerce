@@ -20,6 +20,9 @@ class EditCategory extends Component
     public $parentCategoryId;
     public $description;
     public $isPublished = false;
+    public $metaTitle;
+    public $metaTags;
+    public $metaDescription;
 
     public $categories = [];
 
@@ -68,6 +71,9 @@ class EditCategory extends Component
         $category->parent_id = $this->parentCategoryId;
         $category->description = $this->description;
         $category->is_published = $this->isPublished;
+        $category->meta_title = $this->metaTitle;
+        $category->meta_description = $this->metaDescription;
+        $category->meta_tags = $this->metaTags;
 
         if($this->newIcon){
             $category->addMedia($this->newIcon)->toMediaCollection('icon');
@@ -97,6 +103,9 @@ class EditCategory extends Component
         $this->isPublished = $category->is_published;
         $this->oldIcon = $category->icon;
         $this->categoryId = $category->id;
+        $this->metaTitle = $category->meta_title;
+        $this->metaDescription = $category->meta_description;
+        $this->metaTags = $category->meta_tags;
 
         $this->isEditModeOn = true;
 
@@ -105,6 +114,7 @@ class EditCategory extends Component
 
     public function removeIcon()
     {
+        $this->newIcon->delete();
         $this->newIcon = null;
     }
 

@@ -25,11 +25,11 @@ Route::middleware([
     Route::view('/dashboard', 'admin.pages.dashboard')->name('dashboard');
     
     Route::view('/category/add', 'admin.pages.category.create')->name('category.create');
-    Route::view('/categories', 'admin.pages.category.list')->name('category.index');
+    Route::view('/categories', 'admin.pages.category.list')->name('category.list');
     Route::view('/discounts', 'admin.pages.discount')->name('discount');
     Route::view('/coupons', 'admin.pages.coupon')->name('coupon');
     Route::view('/products/create', 'admin.pages.products.create')->name('products.create');
-    Route::view('/products', 'admin.pages.create-product')->name('products.index');
+    Route::view('/products', 'admin.pages.products.list')->name('products.list');
     Route::view('/feature-box', 'admin.pages.feature-box')->name('feature-box');
     Route::view('/caurosel', 'admin.pages.caurosel')->name('caurosel');
     Route::view('/menus', 'admin.pages.menu')->name('menu');

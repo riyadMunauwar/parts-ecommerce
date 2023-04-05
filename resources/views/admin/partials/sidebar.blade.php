@@ -100,7 +100,7 @@
             <a href="{{ route('products.create') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Add new
             </a>
-            <a href="{{ route('products.index') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('products.list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Product list
             </a>
         </div>
@@ -137,7 +137,7 @@
             <a href="{{ route('category.create') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Add new
             </a>
-            <a href="{{ route('category.index') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('category.list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Category list
             </a>
         </div>

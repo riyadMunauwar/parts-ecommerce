@@ -14,6 +14,9 @@ class Category extends Component
     use WithFileUploads;
     use WithSweetAlert;
     
+    public $metaTitle;
+    public $metaTags;
+    public $metaDescription;
     public $name;
     public $slug;
     public $order;
@@ -66,11 +69,15 @@ class Category extends Component
 
         $category = ProductCategory::create([
                     'name' => $this->name,
+                    'search_name' => $this->name,
                     'slug' => $this->slug,
                     'order' => $this->order,
                     'parent_id' => $this->parentCategoryId,
                     'description' => $this->description,
                     'isPublished' => $this->isPublished,
+                    'meta_title' => $this->metaTitle,
+                    'meta_description' => $this->metaDescription,
+                    'meta_tags' => $this->metaTags,
                 ]);
 
         if($category) {

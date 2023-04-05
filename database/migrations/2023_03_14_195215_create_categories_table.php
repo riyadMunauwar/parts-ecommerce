@@ -15,6 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('search_name', 2048)->nullable();
             $table->json('name');
+            $table->json('meta_title');
+            $table->json('meta_tags');
+            $table->json('meta_description');
             $table->string('slug');
             $table->integer('order')->nullable()->default(0);
             $table->json('description')->nullable();

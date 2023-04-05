@@ -71,7 +71,7 @@
     </nav>
 
     @php 
-      $menus = \App\Models\Menu::all();
+      $menus = \App\Models\Menu::with('category')->get();
     @endphp
 
     <nav class="bg-black relative">
@@ -88,16 +88,21 @@
 
                 <div class="group-hover:block hidden absolute z-40 top-full left-0 w-full h-96 bg-white text-black shadow p-5">
                     <div class="container mx-auto flex gap-5">
+
+                      @foreach($menu->category->children as $child)
                         <div class="w-1/6 py-4">
                           <div class="text-xs font-medium text-gray-900 uppercase">
-                              Hello world
+                              {{ $child->name ?? 'None' }}
                           </div>
 
                           <div class="mt-3 space-y-1 h-72 overflow-y-auto megamenu-scroll-bar">
-                            <h1 id="anker" data-link="{{ route('caurosel') }}" class="cursor-pointer text-xs hover:text-orange-600">Iphone 6</h1>
+                            @foreach($child->products as $product)
+                              <h1 id="anker" data-link="{{ route('caurosel') }}" class="cursor-pointer text-xs hover:text-orange-600">{{ $product->name ?? '' }}</h1>
+                            @endforeach
                           </div>
                           
                         </div>
+                      @endforeach
                     </div>
                 </div>
             </a>

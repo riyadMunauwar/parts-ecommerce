@@ -71,6 +71,24 @@
                     </x-ui.textarea>
                 </div>
 
+                <div class="col-span-2">
+                    <x-label  for="metaTitle" value="{{ __('Meta Title') }}" />
+                    <x-input wire:model.debounce="metaTitle" id="metaTitle" class="block mt-1 w-full" type="text" />
+                </div>
+
+
+                <div class="col-span-2">
+                    <x-label  for="metaTags" value="{{ __('Meta Tags') }}" />
+                    <x-input wire:model.debounce="metaTags" id="metaTags" class="block mt-1 w-full" type="text" />
+                </div>
+
+
+                <div class="col-span-2">
+                    <x-label  for="metaDesc" value="{{ __('Meta Description') }}" />
+                    <x-ui.textarea wire:model.debounce="metaDescription" id="metaDesc" class="block mt-1 w-full" type="text" />
+                </div>
+
+
                 <div class="block">
                     <label for="isPublished" class="flex items-center">
                         <x-checkbox wire:model.debounce="isPublished" id="isPublished" name="remember" />

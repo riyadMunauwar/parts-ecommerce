@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->dateTime('order_date')->nullable();
             $table->dateTime('paid_at')->nullable();
-            $table->float('total_product_price');
-            $table->float('shipping_cost')->nullable();
-            $table->float('total_vat')->nullable();
+            $table->decimal('total_product_price', 12, 2);
+            $table->decimal('shipping_cost', 12, 2)->nullable();
+            $table->decimal('total_vat', 12, 2)->nullable();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('admin_id')->nullalbe()->constrained('users', 'id');
             $table->foreignId('coupon_id')->nullalbe()->constrained();

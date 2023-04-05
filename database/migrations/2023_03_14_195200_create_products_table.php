@@ -13,24 +13,24 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('search_name', 2024)->nullable();
             $table->json('meta_title');
             $table->json('meta_tags');
             $table->json('meta_description');
+            $table->string('search_name', 2048);
             $table->json('name');
             $table->string('slug', 2048);
-            $table->float('regular_price')->nullable();
-            $table->float('sale_price');
+            $table->decimal('regular_price', 12, 2)->nullable();
+            $table->decimal('sale_price', 12, 2);
             $table->string('sku')->nullable();
             $table->integer('stock_qty');
             $table->integer('rating')->nullable();
             $table->integer('total_review')->nullable();
-            $table->string('weight_unit')->nullalbe();
-            $table->float('weight')->nullable();
-            $table->string('dimension_unit')->nullalbe();
-            $table->float('length')->nullable();
-            $table->float('width')->nullable();
-            $table->float('heigth')->nullable();
+            $table->string('weight_unit')->default('g')->nullalbe();
+            $table->decimal('weight', 12, 2)->nullable();
+            $table->string('dimension_unit')->default('cm')->nullalbe();
+            $table->decimal('length', 12, 2)->nullable();
+            $table->decimal('width', 12, 2)->nullable();
+            $table->decimal('height', 12, 2)->nullable();
             $table->json('compatibility')->nullable();
             $table->json('features')->nullable();
             $table->json('description')->nullable();
