@@ -89,7 +89,7 @@
                 <div class="group-hover:block hidden absolute z-40 top-full left-0 w-full h-96 bg-white text-black shadow p-5">
                     <div class="container mx-auto flex gap-5">
 
-                      @foreach($menu->category->children as $child)
+                      @foreach($menu->category->children ?? [] as $child)
                         <div class="w-1/6 py-4">
                           <div class="text-xs font-medium text-gray-900 uppercase">
                               {{ $child->name ?? 'None' }}
