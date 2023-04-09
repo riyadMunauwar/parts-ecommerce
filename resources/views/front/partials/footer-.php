@@ -14,7 +14,7 @@
             </div>
 
             <div>
-                <p class="font-semibold text-gray-800 dark:text-white">Quick Link</p>
+                <p class="font-semibold footer-text dark:text-white">Quick Link</p>
 
                 <div class="flex flex-col items-start mt-5 space-y-2">
                     <a href="#" class="text-gray-600 transition-colors duration-300 dark:text-gray-300 dark:hover:text-blue-400 hover:underline hover:text-blue-500">Home</a>

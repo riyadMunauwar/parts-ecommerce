@@ -63,15 +63,56 @@ class Product extends Model implements HasMedia
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection('thumbnail')
-             ->singleFile();
+            ->singleFile();
+        //     ->registerMediaConversions(function (Media $media = null) {
+            
+        //     $this->addMediaConversion('thumb')
+        //         ->width(150)
+        //         ->height(150)
+        //         ->format('webp')
+        //         ->quality(80);
+
+        //     $this->addMediaConversion('small')
+        //         ->width(640)
+        //         ->height(640)
+        //         ->format('webp')
+        //         ->quality(80);
+
+        //     $this->addMediaConversion('medium')
+        //         ->width(800)
+        //         ->height(800)
+        //         ->format('webp')
+        //         ->quality(80);  
+        // });
 
         $this->addMediaCollection('gallery');
+        //     ->registerMediaConversions(function (Media $media = null) {
+            
+        //     $this->addMediaConversion('thumb')
+        //         ->width(150)
+        //         ->height(150)
+        //         ->format('webp')
+        //         ->quality(80);
+
+        //     $this->addMediaConversion('small')
+        //         ->width(640)
+        //         ->height(640)
+        //         ->format('webp')
+        //         ->quality(80);
+
+        //     $this->addMediaConversion('medium')
+        //         ->width(800)
+        //         ->height(800)
+        //         ->format('webp')
+        //         ->quality(80);  
+
+        // });
 
     }
 
 
 
-    public function thumbnailUrl($size)
+    public function thumbnailUrl($size = 'thumb')
     {
         if($this->hasMedia('thumbnail'))
         {
@@ -79,31 +120,9 @@ class Product extends Model implements HasMedia
         }
     }
 
-    // public function registerMediaConversions(Media $media = null): void
-    // {
-    //     $this->addMediaConversion('thumb')
-    //         ->width(150)
-    //         ->height(150)
-    //         ->format('webp');
-
-    //     $this->addMediaConversion('small')
-    //         ->width(640)
-    //         ->height(640)
-    //         ->format('webp');
-
-    //     $this->addMediaConversion('medium')
-    //         ->width(800)
-    //         ->height(800)
-    //         ->format('webp');
-
-    //     $this->addMediaConversion('large')
-    //         ->width(1200)
-    //         ->height(1200)
-    //         ->format('webp');
-    // }
-
 
     // Relationship
+
     public function recommendation()
     {
         return $this->belongsToMany(Product::class, 'recommendations', 'recommended_id', 'recommended_by_id');
@@ -114,5 +133,7 @@ class Product extends Model implements HasMedia
     {
         return $this->belongsToMany(Category::class);
     }
+
+
 
 }

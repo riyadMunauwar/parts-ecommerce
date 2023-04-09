@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomPageController;
+use App\Http\Controllers\SingleProductController;
+use App\Http\Controllers\CategoryWiseProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +35,7 @@ Route::middleware([
     Route::view('/feature-box', 'admin.pages.feature-box')->name('feature-box');
     Route::view('/caurosel', 'admin.pages.caurosel')->name('caurosel');
     Route::view('/menus', 'admin.pages.menu')->name('menu');
+    Route::view('/customers', 'admin.pages.customer')->name('customer');
     Route::view('/vats', 'admin.pages.vat')->name('vat');
     Route::view('/footer', 'admin.pages.footer')->name('footer');
     Route::view('/color', 'admin.pages.color')->name('color');
@@ -50,12 +53,7 @@ Route::middleware([
 Route::view('/', 'front.pages.home')->name('home');
 Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
-Route::view('/category/{slug}', 'front.pages.category')->name('category');
-Route::view('/product/{slug}', 'front.pages.single-product')->name('singleProduct');
+Route::get('/category/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
 Route::get('/{pageSlug}', CustomPageController::class)->name('custom-page');
+Route::get('/product/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
 
-
-Route::get('/test', function(){
-    SweetAlert::success('Hello', 'How are you ?');
-    return redirect()->to('/');
-});

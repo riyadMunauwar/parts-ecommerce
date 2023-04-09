@@ -28,7 +28,8 @@ class CategoryList extends Component
         $search = $this->search;
 
         $query->when($this->search, function($query) use($search){
-            $query->where('name', 'like', '%' . $search . '%');
+            $query->where('search_name', 'like', '%' . $search . '%')
+                    ->orWhere('search_name', '%' . $search . '%');
         });
 
         $categories = $query->paginate(20);

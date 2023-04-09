@@ -75,6 +75,10 @@ class EditCategory extends Component
         $category->meta_description = $this->metaDescription;
         $category->meta_tags = $this->metaTags;
 
+        if(app()->getLocale() === 'en'){
+            $category->search_name = $this->name;
+        }
+
         if($this->newIcon){
             $category->addMedia($this->newIcon)->toMediaCollection('icon');
         }

@@ -117,4 +117,5 @@
 
 @push('modals')
     <livewire:admin.edit-product />
+    <livewire:admin.add-stock />
 @endpush

@@ -2,10 +2,10 @@
 @if($is_edit_mode_on)
     <x-ui.edit-modal class="max-w-6xl">
 
-        <div class="grid grid-cols-1 md:grid-cols-6 md:gap-5 p-10 bg-gray-200 rounded-md">
+        <div class="grid grid-cols-1 md:grid-cols-6 md:gap-5 p-5 bg-white rounded-md">
 
             <div class="col-span-4">
-                <div class="rounded-md bg-white p-5 md:p-10">
+                <div class="rounded-md bg-white p-5 md:p-10 border">
                     <h1 class="font-bold text-xl mb-4">Edit Product</h1>
                     <x-validation-errors class="mb-4" />
 
@@ -90,7 +90,7 @@
                 </div>
 
 
-                <div class="rounded-md bg-white p-5 md:p-10 md:mt-5">
+                <div class="rounded-md bg-white p-5 md:p-10 md:mt-5 border">
                     <h1 class="font-bold text-xl mb-4">Description</h1>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -117,7 +117,7 @@
                     </div>
                 </div>
 
-                <div class="rounded-md bg-white p-5 md:p-10 md:mt-5">
+                <div class="rounded-md bg-white p-5 md:p-10 md:mt-5 border">
                     <h1 class="font-bold text-xl mb-4">SEO Details</h1>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -140,7 +140,7 @@
 
             <div class="col-span-2">
 
-                <div class="rounded-md bg-white p-5 md:p-10 grid grid-cols-1 gap-5">
+                <div class="rounded-md bg-white p-5 md:p-10 grid grid-cols-1 gap-5 border">
                         <div class="space-y-2">
                             <div class="block">
                                 <label for="isPublished" class="flex items-center">
@@ -179,6 +179,12 @@
 
                         <div class="mt-2">
                             <x-label class="mb-1 block" for="gallery" value="{{ __('Thumbnail') }}" />
+                            @if (!$thumbnail && $old_thumbnail)
+                                <div class="flex items-center justify-center mb-2">
+                                    <img class="w-full rounded-md block" src="{{ $old_thumbnail }}">
+                                </div>
+                            @endif
+
                             @if($thumbnail)
                             <div class="mt-3">
                                 <div class="flex items-center justify-center">
@@ -193,11 +199,11 @@
                             @else
                             <div>
                                 <div class="flex items-center justify-center">
-                                    <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
-                                        <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                    <label class="w-full flex flex-col items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
+                                        <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                         </svg>
-                                        <span class="mt-2 text-base leading-normal">Select a Image</span>
+                                        <span class="mt-2 text-sm leading-normal">Select a Image</span>
                                         <input wire:model="thumbnail" type='file' class="hidden" />
                                     </label>
                                 </div>
@@ -207,12 +213,31 @@
 
                         <div class="mt-2">
                             <x-label class="mb-1 block" for="gallery" value="{{ __('Gallery') }}" />
+                            @if (count($old_gallery) > 0)
+                                <div class="mt-3">
+                                    <div class="grid grid-cols-3 gap-2">
+                                        @foreach($old_gallery as $image)
+                                        <div class="group relative">
+                                            <img class="block w-20 h-20 border rounded-sm object-cover" src="{{ $image->getUrl() }}">
+                                            <div style="background-color: rgba(0, 0, 0, .6)" class="group-hover:block hidden absolute inset-0 w-full h-full">
+                                                <button wire:click.debounce="removeGalleryItem({{ $image->id }})" class="group-hover:block hidden absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 z-50 text-white">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            @endif
+
                             @if($gallery)
                             <div class="mt-3">
-                                <div class="grid grid-cols-4 gap-5">
+                                <div class="grid grid-cols-3 gap-3">
                                     @if ($gallery)
                                         @foreach($gallery as $image)
-                                            <img class="block w-20 h-20 rounded-sm object-cover" src="{{ $image->temporaryUrl() }}">
+                                            <img class="border block w-20 h-20 rounded-sm object-cover" src="{{ $image->temporaryUrl() }}">
                                         @endforeach
                                     @endif
                                 </div>
@@ -222,12 +247,12 @@
                             </div>
                             @else
                             <div>
-                                <div class="flex items-center justify-center">
-                                    <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
-                                        <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <div class="mt-2 flex items-center justify-center">
+                                    <label class="w-full flex flex-col items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
+                                        <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                         </svg>
-                                        <span class="mt-2 text-base leading-normal">Select Image</span>
+                                        <span class="mt-2 text-sm leading-normal">Select Image</span>
                                         <input wire:model="gallery" type='file' class="hidden" multiple />
                                     </label>
                                 </div>
@@ -249,9 +274,9 @@
     </x-ui.edit-modal>
 @endif
 
-    <x-ui.text-loading-spinner loadingText="It will take a time... we are saving this product and optimizing your image..." wire:loading.flex wire:target="createProduct" />
+    <x-ui.text-loading-spinner loadingText="It will take a time... we are saving this product and optimizing your image..." wire:loading.flex wire:target="updateSave" />
     <x-ui.text-loading-spinner loadingText="Uploading..." wire:loading.flex wire:target="gallery, thumbnail" />
-    <x-ui.loading-spinner wire:loading.flex wire:target="removeThumbnail, removeGallery" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="removeThumbnail, removeGallery, removeGalleryItem" />
 
 </div>
 
@@ -280,6 +305,7 @@
 
 
         function createTinymceInstance(selector){
+            tinymce.remove('#' + selector)
             tinymce.init({
                 selector: '#' + selector,
                 min_height: 350,

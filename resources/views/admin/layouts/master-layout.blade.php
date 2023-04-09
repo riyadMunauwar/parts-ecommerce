@@ -23,8 +23,85 @@
         <!-- Styles -->
         @livewireStyles
 
+        @php 
+            $setting = config('setting');
+        @endphp
+
         <style>
             [x-cloak] { display: none !important; }
+
+            .primary-bg {
+                background-color: {{ $setting->primary_color }};
+            }
+
+            .primary-hover-bg:hover {
+                background-color: {{ $setting->primary_color }};
+            }
+
+            .secondary-bg {
+                background-color: {{ $setting->secondary_color }};
+            }
+
+            .secondary-hover-bg:hover {
+                background-color: {{ $setting->secondary_color }};
+            }
+
+            .primary-text {
+                color: {{ $setting->primary_text_color }};
+            }
+
+            .primary-hover-text:hover {
+                color: {{ $setting->primary_text_color }};
+            }
+
+            .secondary-text {
+                color: {{ $setting->secondary_text_color }};
+            }
+
+            .secondary-hover-text:hover {
+                color: {{ $setting->secondary_text_color }};
+            }
+
+            .top-header-bg {
+                background-color: {{ $setting->top_header_bg_color }};
+            }
+
+            .top-header-text {
+                color: {{ $setting->top_header_text_color }};
+            }
+
+            .top-header-button-text {
+                color: {{ $setting->top_header_button_text_color }};
+            }
+
+            .middle-header-bg {
+                background-color: {{ $setting->middle_header_bg_color }};
+            }
+
+            .middle-header-text {
+                color: {{ $setting->middle_header_text_color }};
+            }
+
+            .main-header-bg {
+                background-color: {{ $setting->main_header_bg_color }};
+            }
+
+            .main-header-text {
+                color: {{ $setting->main_header_text_color }};
+            }
+
+            .footer-bg {
+                background-color: {{ $setting->footer_bg_color }};
+            }
+
+            .footer-text {
+                color: {{ $setting->footer_text_color }};
+            }
+
+            .footer-border {
+                border: 1px solid {{ $setting->footer_text_color }};
+            }
+
         </style>
 
     </head>

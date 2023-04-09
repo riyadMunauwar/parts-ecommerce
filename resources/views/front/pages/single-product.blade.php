@@ -1,4 +1,4 @@
-<x-front.master-layout title="Single Product">
+<x-front.master-layout meta_title="Single Product">
     @include('front.partials.breadcrumbs')
 
     <section class="py-12 bg-white">

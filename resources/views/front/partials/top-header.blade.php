@@ -1,4 +1,4 @@
-<header class="flex justify-center gap-3 py-2 bg-black text-white">
-    <h1>iPhone 11 Starting at $16.95 Now. </h1>
-    <a href="" class="text-amber-400">Shop now</a>
+<header class="flex justify-center gap-3 py-2 top-header-bg top-header-text">
+    <h1>{{ config('setting')->top_header_message_text ?? '' }}</h1>
+    <a href="{{ config('setting')->top_header_button_link ?? '' }}" class="top-header-button-text">{{ config('setting')->top_header_button_text ?? '' }}</a>
 </header>

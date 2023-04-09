@@ -5,7 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ $title }}</title>
+        <title>{{ $meta_title ?? '' }}</title>
+        <meta name="title" content="{{ $meta_title ?? '' }}" />
+        <meta name="description" content="{{ $meta_description ?? '' }}" />
+        <meta name="keywords" content="{{ $meta_tags ?? '' }}" />
+        <meta name="robots" content="INDEX,FOLLOW" />
+        <meta name="format-detection" content="telephone=no" />
 
         <!-- Fonts -->
         <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->
@@ -26,64 +31,84 @@
         <!-- Styles -->
         @livewireStyles
 
+        @php 
+            $setting = config('setting');
+        @endphp
+
         <style>
+
             [x-cloak] { display: none !important; }
 
             .primary-bg {
-
+                background-color: {{ $setting->primary_color }};
             }
 
-            .primary-hover {
-
+            .primary-hover-bg:hover {
+                background-color: {{ $setting->primary_color }};
             }
 
             .secondary-bg {
-
+                background-color: {{ $setting->secondary_color }};
             }
 
-            .secondary-hover {
-
+            .secondary-hover-bg:hover {
+                background-color: {{ $setting->secondary_color }};
             }
-
 
             .primary-text {
-
+                color: {{ $setting->primary_text_color }};
             }
 
-            .primary-text-hover {
-
+            .primary-hover-text:hover {
+                color: {{ $setting->primary_text_color }};
             }
 
             .secondary-text {
-
+                color: {{ $setting->secondary_text_color }};
             }
 
-            .secondary-text-hover {
-
+            .secondary-hover-text:hover {
+                color: {{ $setting->secondary_text_color }};
             }
 
             .top-header-bg {
-
+                background-color: {{ $setting->top_header_bg_color }};
             }
 
             .top-header-text {
+                color: {{ $setting->top_header_text_color }};
+            }
 
+            .top-header-button-text {
+                color: {{ $setting->top_header_button_text_color }};
             }
 
             .middle-header-bg {
-
+                background-color: {{ $setting->middle_header_bg_color }};
             }
 
-            .middel-header-text {
-
+            .middle-header-text {
+                color: {{ $setting->middle_header_text_color }};
             }
 
             .main-header-bg {
-
+                background-color: {{ $setting->main_header_bg_color }};
             }
 
             .main-header-text {
-                
+                color: {{ $setting->main_header_text_color }};
+            }
+
+            .footer-bg {
+                background-color: {{ $setting->footer_bg_color }};
+            }
+
+            .footer-text {
+                color: {{ $setting->footer_text_color }};
+            }
+
+            .footer-border {
+                border: 1px solid {{ $setting->footer_text_color }};
             }
 
         </style>

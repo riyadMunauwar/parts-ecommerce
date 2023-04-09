@@ -34,6 +34,12 @@ class ProductList extends Component
     }
 
 
+    public function openAddStockModal($id)
+    {
+        $this->emit('onAddStockModalShow', $id);
+    }
+
+
     public function confirmDeleteProduct($id)
     {
         return $this->ifConfirmThenDispatch('onProductDelete', $id, 'Are you sure ?', 'Product will delete permanently !');
@@ -71,7 +77,7 @@ class ProductList extends Component
             ->orWhere('search_name', $search);
         });
 
-        return $query->latest()->paginate(5);
+        return $query->latest()->paginate(25);
 
     }
 }

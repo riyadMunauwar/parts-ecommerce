@@ -173,7 +173,7 @@
 
 
         <div x-transition.duration.150ms x-show="isOpen" class="pl-7">
-            <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+            <a href="{{ route('customer') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Customer List
             </a>
             <a href="{{ route('subscriber-list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >

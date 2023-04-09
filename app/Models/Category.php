@@ -41,7 +41,23 @@ class Category extends Model implements HasMedia
 
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('icon')->singleFile();
+        $this->addMediaCollection('icon')
+            ->singleFile();
+            // ->registerMediaConversions(function (Media $media = null) {
+                    
+            //     $this->addMediaConversion('thumb')
+            //         ->width(150)
+            //         ->height(150)
+            //         ->format('webp')
+            //         ->quality(80);
+
+            //     $this->addMediaConversion('small')
+            //         ->width(240)
+            //         ->height(240)
+            //         ->format('webp')
+            //         ->quality(80);
+                    
+            // });
     }
 
     public function getIconAttribute()
@@ -49,9 +65,10 @@ class Category extends Model implements HasMedia
         return $this->getFirstMediaUrl('icon');
     }
 
+    
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id', 'id');
+        return $this->hasMany(Category::class, 'parent_id')->with('children');
     }
 
 

@@ -49,6 +49,7 @@ class EditProduct extends Component
 
 
     public $old_thumbnail;
+    public $old_gallery = [];
     public $thumbnail;
     public $product_id;
     public $gallery = [];
@@ -86,6 +87,7 @@ class EditProduct extends Component
 
     protected $listeners = [
         'onProductEdit' => 'enableProductEditMode',
+        'refresh' => '$refresh'
     ];
 
     public function mount()
@@ -183,10 +185,19 @@ class EditProduct extends Component
         $this->gallery = [];
     }
 
+    public function removeGalleryItem($id)
+    {
+        $item = $this->old_gallery->find($id);
+        $item->delete();
+        $this->emit('refresh');
+        $this->successToast('Gallery item reomved');
+        
+    }
+
 
     public function cancelEditMode()
     {
-        // $this->reset();
+        $this->reset();
         $this->is_edit_mode_on = false;
     }
 
@@ -222,6 +233,8 @@ class EditProduct extends Component
         $this->vat_id = $product->vat_id;
 
         $this->old_thumbnail = $product->thumbnailUrl('small');
+
+        $this->old_gallery = $product->getMedia('gallery');
 
         $this->is_edit_mode_on = true;
 

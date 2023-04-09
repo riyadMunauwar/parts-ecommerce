@@ -239,4 +239,5 @@
             </div>
         </div>
     </div>
+    <x-ui.loading-spinner  wire:loading.flex wire:target="columnOneAddItem,columnTwoAddItem,columnThreeAddItem,columnFourAddItem, columnOneUpdateItem, columnTwoUpdateItem, columnThreeUpdateItem, columnFourUpdateItem, cancelEditMode, updateColumnTitle" />
 </section>

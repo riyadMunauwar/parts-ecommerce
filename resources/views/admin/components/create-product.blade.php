@@ -188,11 +188,11 @@
                         @else
                         <div>
                             <div class="flex items-center justify-center">
-                                <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
-                                    <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <label class="w-full flex flex-col items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
+                                    <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                     </svg>
-                                    <span class="mt-2 text-base leading-normal">Select a Image</span>
+                                    <span class="mt-2 text-sm leading-normal">Select a Image</span>
                                     <input wire:model="thumbnail" type='file' class="hidden" />
                                 </label>
                             </div>
@@ -204,10 +204,10 @@
                         <x-label class="mb-1 block" for="gallery" value="{{ __('Gallery') }}" />
                         @if($gallery)
                         <div class="mt-3">
-                            <div class="grid grid-cols-4 gap-5">
+                            <div class="grid grid-cols-3 gap-3">
                                 @if ($gallery)
                                     @foreach($gallery as $image)
-                                        <img class="block w-20 h-20 rounded-sm object-cover" src="{{ $image->temporaryUrl() }}">
+                                        <img class="block w-20 border h-20 rounded-sm object-cover" src="{{ $image->temporaryUrl() }}">
                                     @endforeach
                                 @endif
                             </div>
@@ -218,11 +218,11 @@
                         @else
                         <div>
                             <div class="flex items-center justify-center">
-                                <label class="w-full flex flex-col items-center px-4 py-6 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
-                                    <svg class="w-8 h-8" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <label class="w-full flex flex-col items-center px-2 py-2 bg-white text-blue rounded-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-gray-800">
+                                    <svg class="w-5 h-5" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
                                     </svg>
-                                    <span class="mt-2 text-base leading-normal">Select Image</span>
+                                    <span class="mt-2 text-sm leading-normal">Select Image</span>
                                     <input wire:model="gallery" type='file' class="hidden" multiple />
                                 </label>
                             </div>
@@ -238,11 +238,13 @@
             </div>
         </div>
     </div>
-</div>
 
     <x-ui.text-loading-spinner loadingText="It will take a time... we are saving this product and optimizing your image..." wire:loading.flex wire:target="createProduct" />
     <x-ui.text-loading-spinner loadingText="Uploading..." wire:loading.flex wire:target="gallery, thumbnail" />
     <x-ui.loading-spinner wire:loading.flex wire:target="removeThumbnail, removeGallery" />
+
+</div>
+
 
 @push('scripts')
     <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
