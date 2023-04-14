@@ -1,4 +1,4 @@
-<header x-data="{isMenuOpen: false, isSearchOpen: false}" class="sticky top-0 block border-b bg-white py-2 md:hidden">
+<header x-data="{isMenuOpen: false, isSearchOpen: false}" class="fixed inset-0 z-50 w-full block border-b h-12 bg-white py-2 md:hidden">
     <div class="mx-3 flex items-center justify-between">
 
         <div class="flex gap-3 items-center justify-center">
@@ -14,7 +14,7 @@
         <!-- Logo -->
         <div>
             <a href="/">
-                <h1 class="text-xl uppercase ont-extrabold text-gray-900 dark:text-white"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">{{ config('setting')->website_name ?? 'Store' }}</span></h1>
+                <h1 class="text-xl uppercase ont-extrabold text-gray-900 "><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">{{ config('setting')->website_name ?? 'Store' }}</span></h1>
             </a>
         </div>
         
@@ -35,16 +35,16 @@
         </div>
     </div>
 
-    <div x-show="isSearchOpen" x-transition class="mt-3 px-5 py-3 flex">
+    <div x-show="isSearchOpen" x-transition class="mt-3 bg-white px-5 py-3 flex">
         <form class="flex items-center flex-grow">
             <label for="simple-search" class="sr-only">Search</label>
             <div class="relative w-full">
                 <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                    <svg aria-hidden="true" class="w-4 h-4 dark:text-gray-400" fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <svg aria-hidden="true" class="w-4 h-4 " fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" />
                     </svg>
                 </div>
-                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full pl-10 p-1 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Search" required="">
+                <input type="text" id="simple-search" class="bg-gray-50 border border-gray-300  text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 w-full pl-10 p-1" placeholder="Search" required="">
             </div>
         </form>
 
@@ -55,7 +55,7 @@
         </span>
     </div>
 
-    <nav x-show="isMenuOpen" x-cloak x-transition class="fixed inset-0 overflow-hidden w-4/5 h-full primary-bg primary-text p-3">
+    <nav x-show="isMenuOpen" x-cloak x-transition class="fixed inset-0 z-50 overflow-hidden w-4/5 h-full primary-bg primary-text p-3">
         @auth
             <div class="ml-3 relative">
                 <x-dropdown align="right" width="48">

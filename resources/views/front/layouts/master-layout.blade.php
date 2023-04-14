@@ -119,13 +119,15 @@
 
         @include('front.partials.top-header')
         @include('front.partials.desktop-header')
-        @include('front.partials.mobile-header')
+
 
 
 
         <main>
             {{ $slot }}
         </main>
+
+        @include('front.partials.mobile-header')
 
         @include('front.partials.footer')
 

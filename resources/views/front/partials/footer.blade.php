@@ -7,7 +7,7 @@
 @endphp
 
 
-<footer class="footer-bg footer-text dark:bg-gray-900">
+<footer class="footer-bg footer-text">
     <div class="container px-6 py-8 mx-auto">
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div>
@@ -16,7 +16,7 @@
                 </div>
 
                 @foreach($column_one_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -29,7 +29,7 @@
                 </div>
 
                 @foreach($column_two_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -42,7 +42,7 @@
                 </div>
 
                 @foreach($column_three_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -55,7 +55,7 @@
                 </div>
 
                 @foreach($column_four_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700 dark:text-gray-300 hover:text-gray-400 dark:hover:text-gray-200 hover:underline">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -74,7 +74,7 @@
             <p class="text-sm footer-text">© Copyright {{ \Carbon\Carbon::now()->year }}. All Rights Reserved.</p>
 
             <div class="flex mt-3 -mx-2 sm:mt-0">
-                <a href="#" class="mx-2 footer-text hover:text-gray-500 dark:hover:text-gray-300" aria-label="Reddit">
+                <a href="#" class="mx-2 footer-text hover:text-gray-500" aria-label="Reddit">
                     <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path

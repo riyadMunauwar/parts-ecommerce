@@ -63,9 +63,9 @@
             </div>
 
             <div class="col-span-2 rounded-sm p-5 bg-gray-200">
-                <h3 class="text-2xl mb-3 font-bold dark:text-white">Summery</h3>
+                <h3 class="text-2xl mb-3 font-bold">Summery</h3>
 
-                <h3 class="text-md font-thin dark:text-white uppercase">TO RECEIVE PACKAGE BY</h3>
+                <h3 class="text-md font-thin">TO RECEIVE PACKAGE BY</h3>
 
                 <div class="py-2 border-t border-b space-y-2">
                     <div class="flex justify-between">
@@ -84,15 +84,15 @@
 
                 <div class="py-4 border-b">
                     <div class="flex justify-between">
-                        <h3 class="text-xl mb-3 font-bold dark:text-white">Order Total</h3>
-                        <h3 class="text-xl mb-3 font-bold dark:text-white">$ {{ $orderTotalPrice }}</h3>
+                        <h3 class="text-xl mb-3 font-bold">Order Total</h3>
+                        <h3 class="text-xl mb-3 font-bold">$ {{ $orderTotalPrice }}</h3>
                     </div>
                 </div>
 
 
                 <div x-data="{ isOpen: false }" class="py-3">
                     <div @click="isOpen = !isOpen" class="cursor-pointer flex justify-between items-center">
-                        <h4 class="text-md font-medium dark:text-white">APPLY COUPON</h4>
+                        <h4 class="text-md font-medium">APPLY COUPON</h4>
                         <span x-show="!isOpen">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
