@@ -21,12 +21,14 @@ class Menu extends Component
     // Form variable
     public $name;
     public $link;
+    public $order;
     public $categoryId;
 
 
     protected $rules = [
         'name' => ['required', 'string'],
         'link' => ['nullable', 'string'],
+        'order' => ['nullable', 'numeric'],
         'categoryId' => ['nullable', 'integer']
     ];
 
@@ -53,6 +55,7 @@ class Menu extends Component
         $menu = _Menu::create([
             'name' => $this->name,
             'link' => $this->link,
+            'order' => $this->order,
             'category_id' => $this->categoryId,
         ]);
 
@@ -79,6 +82,7 @@ class Menu extends Component
 
         $menu->name = $this->name;
         $menu->link = $this->link;
+        $menu->order = $this->order;
         $menu->category_id = $this->categoryId;
 
         if($menu->save()){
@@ -102,13 +106,17 @@ class Menu extends Component
 
     public function deleteMenuHandeler($id)
     {
-        if(_Menu::destroy($id)) {
-            $this->reset();
-            $this->preparedInitialData();
-            return $this->success('Deleted', 'Menu deleted successfully');
-        }
+        try {
 
-        return $this->error('Failed', 'Something went wrong ! try again');
+            if(_Menu::destroy($id)) {
+                $this->reset();
+                $this->preparedInitialData();
+                return $this->success('Deleted', 'Menu deleted successfully');
+            }
+        }catch(\Exception $e)
+        {
+            return $this->error('Failed', 'Something went wrong try again.');
+        }
 
     }
 
@@ -120,6 +128,7 @@ class Menu extends Component
         $this->menuId = $menu->id;
         $this->name = $menu->name;
         $this->link = $menu->link;
+        $this->order = $menu->order;
         $this->categoryId = $menu->category_id;
 
         $this->isEditModeOn = true;

@@ -4,7 +4,7 @@
 @endphp
 
 <section>
-    <div class="grid grid-cols-2 gap-1">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
         <!-- Card -->
         @foreach($featureBoxs ?? [] as $box)
             <div class="{{ $loop->index + 1 > 2  ? 'col-span-2' : ''}} bg-gray-50 flex-col items-center justify-center">

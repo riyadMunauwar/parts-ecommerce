@@ -34,6 +34,6 @@
 
             </div>
         </x-ui.edit-modal>
+        <x-ui.loading-spinner wire:loading.flex wire:target="addStock, cancelAddStock" />
     @endif
-    <x-ui.loading-spinner wire:loading.flex wire:target="addStock, cancelAddStock" />
 </div>

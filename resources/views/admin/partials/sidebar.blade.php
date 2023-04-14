@@ -219,6 +219,9 @@
             <a href="{{ route('menu') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Menu
             </a>
+            <a href="{{ route('social-link') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Social links
+            </a>
             <a href="{{ route('caurosel') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Caurosel
             </a>
@@ -264,6 +267,9 @@
 
 
         <div x-transition.duration.150ms x-show="isOpen" class="pl-7">
+            <a href="{{ route('admins.list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Admins
+            </a>
             <a class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Payment
             </a>

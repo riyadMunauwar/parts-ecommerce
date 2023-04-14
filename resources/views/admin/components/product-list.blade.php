@@ -111,7 +111,7 @@
         </div>
     </div>
     <x-ui.loading-spinner wire:loading.flex wire:target="search" />
-    <x-ui.loading-spinner wire:loading.flex wire:target="enableproductEditMode" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="enableProductEditMode, openAddStockModal, confirmDeleteProduct" />
 </section>
 
 

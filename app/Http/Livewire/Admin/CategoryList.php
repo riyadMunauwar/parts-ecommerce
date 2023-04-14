@@ -63,7 +63,7 @@ class CategoryList extends Component
 
         }catch(\Excetpion $e)
         {
-            return this->error('Failed', 'This Category has child category or product');
+            return this->error('Failed', 'This Category has child category or product or relaed with menu.');
         }
         
     }

@@ -11,6 +11,7 @@
         <meta name="keywords" content="{{ $meta_tags ?? '' }}" />
         <meta name="robots" content="INDEX,FOLLOW" />
         <meta name="format-detection" content="telephone=no" />
+        <link rel="icon" href="{{ config('setting')->faviconUrl() }}" type="image/png">
 
         <!-- Fonts -->
         <!-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> -->

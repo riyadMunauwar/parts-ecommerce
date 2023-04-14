@@ -39,6 +39,7 @@ class CreateProduct extends Component
     public $color_code;
     public $compatibility;
     public $features;
+    public $youtube_video_url;
     public $description;
     public $is_featured = false;
     public $is_published = true;
@@ -63,10 +64,10 @@ class CreateProduct extends Component
         'regular_price' => ['required', 'numeric'],
         'sale_price' => ['required', 'numeric'],
         'stock_qty' => ['required', 'integer'],
-        'height' => ['nullable', 'string'],
-        'width' => ['nullable', 'string'],
-        'length' => ['nullable', 'string'],
-        'weight' => ['nullable', 'string'],
+        'height' => ['required', 'numeric'],
+        'width' => ['required', 'numeric'],
+        'length' => ['required', 'numeric'],
+        'weight' => ['required', 'numeric'],
         'color' => ['nullable', 'string'],
         'color_code' => ['nullable', 'string'],
         'compatibility' => ['nullable', 'string'],
@@ -100,8 +101,13 @@ class CreateProduct extends Component
     public function createProduct()
     {
         $this->validate();
+
+        if($this->youtube_video_url && !$this->validateYouTubeLink($this->youtube_video_url))
+        {
+            return $this->errorToast('Invalid youtube video link');
+        }
        
-        // try{
+        try{
 
             DB::transaction(function(){
 
@@ -131,9 +137,9 @@ class CreateProduct extends Component
             $this->clearTinymceState();
             return $this->success('Created', 'Product created successfully');
 
-        // }catch(\Exception $e){
-        //     $this->error('Failed', 'Something went wrong !');
-        // }
+        }catch(\Exception $e){
+            $this->error('Failed', 'Something went wrong !');
+        }
 
     }
 
@@ -162,6 +168,34 @@ class CreateProduct extends Component
         $this->vats = Vat::all();
     }
 
+    private function validateYouTubeLink($link) {
+        $regex = '/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+$/';
+        if(preg_match($regex, $link)) {
+          parse_str(parse_url($link, PHP_URL_QUERY), $params);
+          if(isset($params['v']) && strlen($params['v']) == 11) {
+            return true;
+          }
+        }
+        return false;
+    }
+
+    private function extractYouTubeID($link) {
+
+        if(!$link) return null;
+
+        $regex = '/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+$/';
+
+        if(preg_match($regex, $link)) {
+          parse_str(parse_url($link, PHP_URL_QUERY), $params);
+          if(isset($params['v']) && strlen($params['v']) == 11) {
+            return $params['v'];
+          }
+        }
+
+        return null;
+
+    }
+
     private function newProduct()
     {
         return [
@@ -182,6 +216,8 @@ class CreateProduct extends Component
             'description' => $this->description,
             'compatibility' => $this->compatibility,
             'features' => $this->features,
+            'youtube_video_url' => $this->youtube_video_url,
+            'youtube_video_id' => $this->extractYouTubeID($this->youtube_video_url),
             'color' => $this->color,
             'color_code' => $this->color_code,
             'vat_id' => $this->vat_id,

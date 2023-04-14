@@ -81,6 +81,25 @@ class AddDiscount extends Component
     }
 
 
+    public function removeCurrentDiscount()
+    {
+        $customer = User::find($this->customer->id);
+
+        if($customer){
+            $customer->discount_type = null;
+            $customer->discount_amount = null;
+
+            if($customer->save())
+            {
+                $this->reset();
+                $this->is_add_discount_modal_show = false; 
+                $this->emit('onDiscountAdded');
+                return $this->success('Removed', 'Discount removed successfully');
+            }
+        }
+    }
+
+
     public function showAddDiscountModal($id)
     {
         $this->customer = User::find($id);

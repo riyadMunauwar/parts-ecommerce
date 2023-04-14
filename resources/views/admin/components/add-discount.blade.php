@@ -40,6 +40,12 @@
                         </div>
                     @endif
 
+                    <div class="flex items-center justify-start">
+                        <x-button wire:click.debounce="removeCurrentDiscount" type="button" class="h-8 bg-indigo-400">
+                            {{ __('Remove Current Discount') }}
+                        </x-button>
+                    </div>
+
                     <div class="flex items-center justify-end">
                         <x-button wire:click.debounce="addDiscount" type="button" class="ml-4">
                             {{ __('Add') }}
@@ -50,9 +56,9 @@
                     </div>
 
                 </div>
-
+                
             </div>
         </x-ui.edit-modal>
+        <x-ui.loading-spinner wire:loading.flex wire:target="removeCurrentDiscount, addDiscount, cancelAddDiscount" />
     @endif
-    <x-ui.loading-spinner wire:loading.flex wire:target="addDiscount, cancelAddDiscount" />
 </div>

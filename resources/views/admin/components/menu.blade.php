@@ -11,6 +11,11 @@
                     <x-input wire:model.debounce="name" id="name" class="block mt-1 w-full" type="text" required />
                 </div>
 
+                <div>
+                    <x-label  for="order" value="{{ __('Showing Order') }}" />
+                    <x-input wire:model.debounce="order" id="order" class="block mt-1 w-full" type="text" />
+                </div>
+
                 <div class="block">
                     <label for="useLink" class="flex items-center">
                         <x-checkbox wire:model.debounce="useLink" id="useLink" name="remember" />
@@ -22,6 +27,7 @@
                     <div>
                         <x-label for="cat_it" value="{{ __('Category ID') }}" />
                         <x-ui.select wire:model.debounce="categoryId" id="cat_it" class="block mt-1 w-full">
+                            <option value="">Select</option>
                             @foreach($categories ?? [] as $category)
                                 <option value="{{ $category->id }}">{{ $category->name ?? '' }}</option>
                             @endforeach
@@ -64,6 +70,7 @@
                         <tr>
                             <th scope="col" class="px-4 py-3">Menu</th>
                             <th scope="col" class="px-4 py-3">Menu Link</th>
+                            <th scope="col" class="px-4 py-3">Showing Order</th>
                             <th scope="col" class="px-4 py-3">Link Category</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -80,7 +87,10 @@
                                 {{ $menu->link ?? '' }}
                             </th>
                             <th scope="row" class="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $menu->category_id ?? 'None' }}</span>
+                                {{ $menu->order ?? '' }}
+                            </th>
+                            <th scope="row" class="px-4 py-3 text-gray-900 whitespace-nowrap dark:text-white">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $menu->category->name ?? 'None' }}</span>
                             </th>
                             <td class="px-4 py-3 flex items-center justify-end">
                                 <button wire:click.debounce="enableMenuEditMode({{ $menu->id }})" type="button">

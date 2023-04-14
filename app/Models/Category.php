@@ -72,9 +72,26 @@ class Category extends Model implements HasMedia
     }
 
 
+    public function hasChildren()
+    {
+        return count($this->children) ?? false;
+    }
+
+
     public function parent()
     {
         return $this->belongsTo(Category::class, 'parent_id', 'id');
+    }
+
+    public function getParentsAttribute()
+    {
+        $parents = collect();
+        $category = $this;
+        while ($category->parent) {
+            $parents->prepend($category->parent);
+            $category = $category->parent;
+        }
+        return $parents;
     }
 
 

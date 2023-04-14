@@ -1,4 +1,4 @@
-<header class="md:ml-52 sticky top-0 bg-white h-10 flex items-center py-1">
+<header class="md:ml-52 sticky top-0 bg-white h-10 flex items-center py-2 border-b z-50">
     <div class="container mx-auto flex justify-between items-center px-4">
 
         <!-- Navigation Open  Button -->

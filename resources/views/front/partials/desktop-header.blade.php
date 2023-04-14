@@ -1,14 +1,72 @@
 <header x-data="{isSearchOpen: false}" class="hidden md:block relative z-50 main-header-bg main-header-text">
     
-  <div class="middle-header-bg middle-header-text py-1 text-gray-900 px-5">
-    <div class="container mx-auto flex justify-between">
+<div class="middle-header-bg middle-header-text py-1 text-gray-900 px-5">
+    <div class="container mx-auto flex justify-between items-center">
         <div>
             <a class="middle-header-text" href="">{{ config('setting')->middle_header_message_text ?? '' }}</a>
         </div>
-        <div class="space-x-3">
+
+        <div class="flex gap-3 items-center">
           <a href="" class="text-thin middle-header-text uppercase text-xs">Track Order</a>
-          <a href="{{ route('register') }}" class="text-thin middle-header-text uppercase text-xs">Create Account</a>
-          <a href="{{ route('login') }}" class="text-thin middle-header-text uppercase text-xs">Sign In</a>
+          
+          @guest 
+            <a href="{{ route('register') }}" class="text-thin middle-header-text uppercase text-xs">Create Account</a>
+            <a href="{{ route('login') }}" class="text-thin middle-header-text uppercase text-xs">Sign In</a>
+          @endguest
+          
+          @auth 
+            <div class="ml-3 relative">
+              <x-dropdown align="right" width="48">
+                  <x-slot name="trigger">
+                      @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                          <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                              <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                          </button>
+                      @else
+                          <span class="inline-flex rounded-md">
+                              <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                  {{ Auth::user()->name }}
+
+                                  <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                      <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                  </svg>
+                              </button>
+                          </span>
+                      @endif
+                  </x-slot>
+
+                  <x-slot name="content">
+                      <!-- Account Management -->
+                      <div class="block px-4 py-2 text-xs text-gray-400">
+                          {{ __('Manage Account') }}
+                      </div>
+
+                      <x-dropdown-link href="{{ route('profile.show') }}">
+                          {{ __('Profile') }}
+                      </x-dropdown-link>
+
+                      @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                          <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                              {{ __('API Tokens') }}
+                          </x-dropdown-link>
+                      @endif
+
+                      <div class="border-t border-gray-200"></div>
+
+                      <!-- Authentication -->
+                      <form method="POST" action="{{ route('logout') }}" x-data>
+                          @csrf
+
+                          <x-dropdown-link href="{{ route('logout') }}"
+                                      @click.prevent="$root.submit();">
+                              {{ __('Log Out') }}
+                          </x-dropdown-link>
+                      </form>
+                  </x-slot>
+              </x-dropdown>
+            </div>
+          @endauth
+
         </div>
     </div>
   </div>
@@ -17,31 +75,27 @@
     <nav aria-label="Top" class="container mx-auto px-4 md:px-0 pt-2">
       <div class="py-1">
         <div class="flex h-16 items-center">
-          <!-- Mobile menu toggle, controls the 'mobileMenuOpen' state. -->
-          <button type="button" class="rounded-md bg-white p-2 text-gray-400 lg:hidden">
-            <span class="sr-only">Open menu</span>
-            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
-          </button>
-
           <!-- Logo -->
           <div class="ml-4 flex lg:ml-0">
-            <a href="#">
+            <a href="/">
               <span class="sr-only">Your Company</span>
-              <img class="h-14 w-auto" src="{{ asset('assets/logo/logo-white.png') }}" alt="Logo">
+              <img class="h-14 w-auto" src="{{ config('setting')->logoUrl() }}" alt="Logo">
             </a>
           </div>
 
-
-
             <div class="ml-auto flex items-center">
               <div class="hidden lg:ml-8 lg:flex">
-                <a href="#" class="flex items-center text-gray-700 hover:text-gray-800">
-                  <img src="https://tailwindui.com/img/flags/flag-canada.svg" alt="" class="block h-auto w-5 flex-shrink-0">
-                  <span class="ml-3 block primary-text secondary-hover-text text-sm font-medium">Spanish</span>
-                  <span class="sr-only">, change language</span>
-                </a>
+                @if(app()->getLocale() === 'en')
+                  <a href="{{ route('locale', ['language' => 'es']) }}" class="flex items-center text-gray-700 hover:text-gray-800">
+                    <span class="ml-3 block primary-text secondary-hover-text text-sm font-medium">Spanish</span>
+                    <span class="sr-only">change language</span>
+                  </a>
+                @else
+                  <a href="{{ route('locale', ['language' => 'en']) }}" class="flex items-center text-gray-700 hover:text-gray-800">
+                    <span class="ml-3 block primary-text secondary-hover-text text-sm font-medium">English</span>
+                    <span class="sr-only">change language</span>
+                  </a>
+                @endif
             </div>
 
             <!-- Search -->
@@ -55,15 +109,7 @@
             </div>
 
             <!-- Cart -->
-            <div class="ml-4 flow-root lg:ml-6">
-              <a href="#" class="group -m-2 flex items-center p-2">
-                <svg class="h-6 w-6 flex-shrink-0 primary-text secondary-hover-text" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                </svg>
-                <span class="ml-2 text-sm font-medium primary-text secondary-hover-text ">0</span>
-                <span class="sr-only">items in cart, view bag</span>
-              </a>
-            </div>
+            <livewire:front.desktop-cart-button />
           </div>
 
         </div>
@@ -71,42 +117,50 @@
     </nav>
 
     @php 
-      $menus = \App\Models\Menu::with('category')->get();
+      $menus = \App\Models\Menu::with('category')->orderBy('order', 'asc')->get();
     @endphp
 
     <nav class="main-header-bg main-header-text relative">
         <div class="container mx-auto flex">
 
-          @foreach($menus ?? [] as $menu)
-            <a class="group cursor-pointer text-white px-2 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
-                <span>{{ $menu->name ?? '' }}</span>
-                <span class="ml-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                  </svg>
-                </span>
-
-                <div class="group-hover:block hidden absolute z-40 top-full left-0 w-full h-96 bg-white text-black shadow p-5">
-                    <div class="container mx-auto flex gap-5">
-
-                      @foreach($menu->category->children ?? [] as $child)
-                        <div class="w-1/6 py-4">
-                          <div class="text-md top-header-button-text font-medium text-gray-900 uppercase">
-                              {{ $child->name ?? 'None' }}
-                          </div>
-
-                          <div class="mt-3 h-72 overflow-y-auto megamenu-scroll-bar">
-                            @foreach($child->children ?? [] as $grandChild)
-                              <h1 id="anker" data-link="{{ route('category-product', ['categoryId' => $grandChild->id, 'categorySlug' => $grandChild->slug]) }}" class="cursor-pointer text-sm text-gray-600 px-2 py-1 hover:text-orange-600">{{ $grandChild->name ?? '' }}</h1>
-                            @endforeach
-                          </div>
-                          
-                        </div>
-                      @endforeach
-                    </div>
-                </div>
+            <a href="{{ route('parent-category') }}" class="group cursor-pointer text-white px-3 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
+                All
             </a>
-          @endforeach
+
+            @foreach($menus ?? [] as $menu)
+              @if($menu->category_id)
+                <a class="group cursor-pointer text-white px-3 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
+                    <span>{{ $menu->name ?? '' }}</span>
+                    <span class="ml-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                      </svg>
+                    </span>
+
+                    <div class="group-hover:block hidden absolute z-40 top-full left-0 w-full h-96 bg-white text-black shadow p-5">
+                        <div class="container mx-auto flex gap-5">
+                            @foreach($menu->category->children ?? [] as $child)
+                              <div class="w-1/6 py-4">
+                                  <div id="anker" data-link="{{ route('category-product', ['categoryId' => $child->id, 'categorySlug' => $child->slug]) }}" class="text-md top-header-button-text font-medium text-gray-900 uppercase">
+                                      {{ $child->name ?? 'None' }}
+                                  </div>
+
+                                  <div class="mt-3 h-72 overflow-y-auto megamenu-scroll-bar">
+                                    @foreach($child->children ?? [] as $grandChild)
+                                      <h1 id="anker" data-link="{{ route('category-product', ['categoryId' => $grandChild->id, 'categorySlug' => $grandChild->slug]) }}" class="cursor-pointer text-sm text-gray-600 px-2 py-1 hover:text-orange-600">{{ $grandChild->name ?? '' }}</h1>
+                                    @endforeach
+                                  </div>
+                              </div>
+                            @endforeach
+                        </div>
+                    </div>
+                </a>
+              @else 
+                <a href="{{ $menu->link ?? '' }}" class="group cursor-pointer text-white px-3 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
+                    {{ $menu->name ?? '' }}
+                </a>
+              @endif
+            @endforeach
         </div>
     </nav>
 

@@ -47,6 +47,8 @@ class Product extends Model implements HasMedia
         'width',
         'length',
         'compatibility',
+        'youtube_video_url',
+        'youtube_video_id',
         'features',
         'description',
         'is_premium',
@@ -111,7 +113,6 @@ class Product extends Model implements HasMedia
     }
 
 
-
     public function thumbnailUrl($size = 'thumb')
     {
         if($this->hasMedia('thumbnail'))
@@ -120,6 +121,163 @@ class Product extends Model implements HasMedia
         }
     }
 
+    public function regularPrice()
+    {
+        return $this->regular_price;
+    }
+
+
+    public function salePrice()
+    {
+        $salePrice = $this->sale_price;
+        $discountAmount = null;
+        $discountType = null;
+
+        if(auth()->check()){
+
+            $customer = auth()->user();
+
+            $discountAmount = $customer->discount_amount ?? null;
+            $discountType = $customer->discount_type ?? null;
+
+        }
+
+        if($discountAmount && $discountType && $discountType === 'percentage')
+        {
+            return $this->calculateSalePrice($salePrice, $discountAmount);
+        }
+
+        if($discountAmount && $discountType && $discountType === 'fixed')
+        {
+            return $salePrice - $discountAmount;
+        }
+
+        return $salePrice;
+    }
+
+
+
+    private function calculateDiscountAmount($actualPrice, $discountRate)
+    {
+        return $actualPrice * ($discountRate / 100);
+    }
+
+
+    private function calculateSalePrice($actualPrice, $discountRate) {
+        $discountAmount = $this->calculateDiscountAmount($actualPrice, $discountRate);
+        return $actualPrice - $discountAmount;
+    }
+
+
+    private function calculateDiscountPercentage($regularPrice, $salePrice) {
+
+        if($regularPrice) return 0;
+
+        $discountAmount = $regularPrice - $salePrice;
+        $discountPercentage = ($discountAmount / $regularPrice) * 100;
+        return $discountPercentage;
+    }
+
+
+
+    public function hasDiscount()
+    {
+        $discountType = null;
+        $discountAmount = null;
+
+        if(auth()->check()){
+
+            $customer = auth()->user();
+
+            $discountAmount = $customer->discount_amount ?? null;
+            $discountType = $customer->discount_type ?? null;
+
+        }
+
+        if($discountType && $discountAmount)
+        {
+            return true;
+        }
+
+        if($this->sale_price && floatval($this->regular_price))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function discountType()
+    {
+        $discountType = null;
+        $discountAmount = null;
+
+        if(auth()->check()){
+
+            $customer = auth()->user();
+
+            $discountAmount = $customer->discount_amount ?? null;
+            $discountType = $customer->discount_type ?? null;
+
+        }
+
+        if($discountAmount && $discountType && $discountType === 'percentage')
+        {
+            return "{$discountAmount} %";
+        }
+
+        if($discountAmount && $discountType && $discountType === 'fixed')
+        {
+            return "{$discountAmount} $";
+        }
+
+        if($this->regular_price && $this->sale_price)
+        {
+            $discountPercentage = $this->calculateDiscountPercentage($this->regular_price, $this->sale_price);
+            return "{$discountPercentage} %";
+        }
+
+        return 0;
+    }
+
+
+    public function discountAmount()
+    {
+        $discountType = null;
+        $discountAmount = null;
+
+        if(auth()->check()){
+
+            $customer = auth()->user();
+
+            $discountAmount = $customer->discount_amount ?? null;
+            $discountType = $customer->discount_type ?? null;
+
+        }
+
+        if($discountAmount && $discountType && $discountType === 'percentage')
+        {
+            return $this->calculateDiscountAmount($this->sale_price, $discountAmount);
+        }
+
+        if($discountAmount && $discountType && $discountType === 'fixed')
+        {
+            return $discountAmount;
+        }
+
+        if($this->regular_price && $this->sale_price)
+        {
+            return $this->regular_price - $this->sale_price;
+        }
+
+        return 0;
+    }
+
+
+    public function vatAmount()
+    {
+        return 0;
+    }
 
     // Relationship
 

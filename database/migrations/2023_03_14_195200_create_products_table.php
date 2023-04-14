@@ -34,11 +34,15 @@ return new class extends Migration
             $table->json('compatibility')->nullable();
             $table->json('features')->nullable();
             $table->json('description')->nullable();
+            $table->string('youtube_video_url')->nullable();
+            $table->string('youtube_video_id')->nullable();
             $table->string('color')->nullable();
             $table->string('color_code')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_published')->default(true);
             $table->boolean('is_premium')->default(false);
+            $table->boolean('is_recommendation_active')->default(false);
+            $table->boolean('is_random_recommendation')->default(false);
             $table->foreignId('vat_id')->nullable()->constrained();
             $table->timestamps();
         });

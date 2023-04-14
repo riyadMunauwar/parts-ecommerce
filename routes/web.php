@@ -4,6 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomPageController;
 use App\Http\Controllers\SingleProductController;
 use App\Http\Controllers\CategoryWiseProductController;
+use App\Http\Controllers\LocalizationController;
+use App\Http\Controllers\ParentCategoryController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -43,9 +46,10 @@ Route::middleware([
     Route::view('/page', 'admin.pages.page')->name('page');
     Route::view('/setting', 'admin.pages.setting')->name('setting');
     Route::view('/subscriber', 'admin.pages.subscriber-list')->name('subscriber-list');
+    Route::view('/admins', 'admin.pages.admins-list')->name('admins.list');
+    Route::view('/solcial-links', 'admin.pages.social-links')->name('social-link');
 
 
- 
 });
 
 
@@ -53,7 +57,9 @@ Route::middleware([
 Route::view('/', 'front.pages.home')->name('home');
 Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
+Route::get('categories/all', ParentCategoryController::class)->name('parent-category');
 Route::get('/category/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
 Route::get('/{pageSlug}', CustomPageController::class)->name('custom-page');
 Route::get('/product/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
+Route::get('locale/{language}', LocalizationController::class)->name('locale');
 

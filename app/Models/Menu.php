@@ -20,6 +20,7 @@ class Menu extends Model
     protected $fillable = [
         'name',
         'link',
+        'order',
         'category_id',
     ];
     

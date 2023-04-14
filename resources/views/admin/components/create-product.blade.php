@@ -62,22 +62,22 @@
                         </div>
 
                         <div class="">
-                            <x-label for="weight" value="{{ __('Weight') }}" />
+                            <x-label for="weight" value="{{ __('Weight (g)') }}" />
                             <x-input wire:model.debounce="weight" id="weight" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                     </div>
 
                     <div class="col-span-2 grid grid-cols-3 gap-5 mt-2">
                         <div>
-                            <x-label  for="height" value="{{ __('Height') }}" />
+                            <x-label  for="height" value="{{ __('Height (cm)') }}" />
                             <x-input wire:model.debounce="height" id="height" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                         <div>
-                            <x-label  for="wdith" value="{{ __('Width') }}" />
+                            <x-label  for="wdith" value="{{ __('Width (cm)') }}" />
                             <x-input wire:model.debounce="width" id="wdith" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                         <div>
-                            <x-label  for="length" value="{{ __('Length') }}" />
+                            <x-label  for="length" value="{{ __('Length (cm)') }}" />
                             <x-input wire:model.debounce="length" id="length" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                     </div>
@@ -170,6 +170,11 @@
                             @endforeach
 
                         </div>
+                    </div>
+
+                    <div class="mt-2">
+                        <x-label  for="youtube_video_url" value="{{ __('Guide Youtube Video Url') }}" />
+                        <x-input wire:model.debounce="youtube_video_url" id="youtube_video_url" class="block mt-1 h-8 w-full" type="text"/>
                     </div>
 
                     <div class="mt-2">

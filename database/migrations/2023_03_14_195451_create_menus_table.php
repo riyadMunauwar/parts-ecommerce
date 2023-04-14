@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->json('name');
+            $table->integer('order')->nullable();
             $table->string('link', 2048)->nullable();
             $table->foreignId('category_id')->nullable()->constrained();
             $table->timestamps();

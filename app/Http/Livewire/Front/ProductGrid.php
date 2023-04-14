@@ -8,16 +8,26 @@ use App\Models\Category;
 
 class ProductGrid extends Component
 {
+    public $category;
     public $show = 10;
     public $sort_by = 'search_name';
     public $order_by = 'asc';
     public $categoryId;
     public $categorySlug;
+    public $has_children = false;
+    public $children = [];
 
     public function mount($categoryId, $categorySlug)
     {
         $this->categoryId = $categoryId;
         $this->categorySlug = $categorySlug;
+        $this->category = Category::find($categoryId);
+
+        if(count($this->category->children) > 0)
+        {
+            $this->children = $this->category->children;
+            $this->has_children = true;
+        }
     }
 
 

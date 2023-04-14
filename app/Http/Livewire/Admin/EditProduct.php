@@ -41,6 +41,7 @@ class EditProduct extends Component
     public $compatibility;
     public $features;
     public $description;
+    public $youtube_video_url;
     public $is_featured = false;
     public $is_published = true;
     public $is_premium = false;
@@ -64,18 +65,19 @@ class EditProduct extends Component
         'meta_description' => ['nullable', 'string'],
         'name' => ['required', 'string'],
         'slug' => ['required', 'string'],
-        'regular_price' => ['required', 'numeric'],
+        'regular_price' => ['nullable', 'numeric'],
         'sale_price' => ['required', 'numeric'],
         'stock_qty' => ['required', 'integer'],
-        'height' => ['nullable', 'string'],
-        'width' => ['nullable', 'string'],
-        'length' => ['nullable', 'string'],
-        'weight' => ['nullable', 'string'],
+        'height' => ['required', 'numeric'],
+        'width' => ['required', 'numeric'],
+        'length' => ['required', 'numeric'],
+        'weight' => ['required', 'numeric'],
         'color' => ['nullable', 'string'],
         'color_code' => ['nullable', 'string'],
         'compatibility' => ['nullable', 'string'],
         'features' => ['nullable', 'string'],
         'description' => ['nullable', 'string'],
+        'youtube_video_url' => ['nullable', 'string'],
         'is_premium' => ['nullable', 'boolean'],
         'is_published' => ['nullable', 'boolean'],
         'is_featured' => ['nullable', 'boolean'],
@@ -106,9 +108,21 @@ class EditProduct extends Component
         $this->slug = Str::slug($value);
     }
 
+    public function updatedRegularPrice($value)
+    {
+        if(!$value){
+            $this->regular_price = 0;
+        }
+    }
+
     public function updateSave()
     {
         $this->validate();
+
+        if($this->youtube_video_url && !$this->validateYouTubeLink($this->youtube_video_url))
+        {
+            return $this->errorToast('Invalid youtube video link');
+        }
        
         $product = Product::find($this->product_id);
 
@@ -132,6 +146,8 @@ class EditProduct extends Component
         $product->compatibility = $this->compatibility;
         $product->features = $this->features;
         $product->description = $this->description;
+        $product->youtube_video_url = $this->youtube_video_url;
+        $product->youtube_video_id = $this->extractYouTubeID($this->youtube_video_url);
         $product->is_featured = $this->is_featured;
         $product->is_published = $this->is_published;
         $product->is_premium = $this->is_premium;
@@ -227,6 +243,7 @@ class EditProduct extends Component
         $this->compatibility = $product->compatibility;
         $this->features = $product->features;
         $this->description = $product->description;
+        $this->youtube_video_url = $product->youtube_video_url;
         $this->is_featured = $product->is_featured;
         $this->is_published = $product->is_published;
         $this->is_premium = $product->is_premium;
@@ -252,34 +269,64 @@ class EditProduct extends Component
         $this->vats = Vat::all();
     }
 
-    private function updatedProduct()
-    {
-        return [
-            'meta_title' => $this->meta_title,
-            'meta_tags' => $this->meta_tags,
-            'meta_description' => $this->meta_description,
-            'name' => $this->name,
-            'search_name' => $this->name,
-            'slug' => $this->slug,
-            'sale_price' => $this->sale_price,
-            'regular_price' => $this->regular_price,
-            'stock_qty' => $this->stock_qty,
-            'sku' => $this->sku,
-            'weight' => $this->weight,
-            'height' => $this->height,
-            'width' => $this->width,
-            'length' => $this->length,
-            'description' => $this->description,
-            'compatibility' => $this->compatibility,
-            'features' => $this->features,
-            'color' => $this->color,
-            'color_code' => $this->color_code,
-            'vat_id' => $this->vat_id,
-            'is_featured' => $this->is_featured,
-            'is_premium' => $this->is_premium,
-            'is_published' => $this->is_published,
-        ];
+    private function validateYouTubeLink($link) {
+        $regex = '/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+$/';
+        if(preg_match($regex, $link)) {
+          parse_str(parse_url($link, PHP_URL_QUERY), $params);
+          if(isset($params['v']) && strlen($params['v']) == 11) {
+            return true;
+          }
+        }
+        return false;
     }
+
+    private function extractYouTubeID($link) {
+
+        if(!$link) return null;
+
+        $regex = '/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+$/';
+
+        if(preg_match($regex, $link)) {
+          parse_str(parse_url($link, PHP_URL_QUERY), $params);
+          if(isset($params['v']) && strlen($params['v']) == 11) {
+            return $params['v'];
+          }
+        }
+
+        return null;
+
+    }
+
+    // private function updatedProduct()
+    // {
+    //     return [
+    //         'meta_title' => $this->meta_title,
+    //         'meta_tags' => $this->meta_tags,
+    //         'meta_description' => $this->meta_description,
+    //         'name' => $this->name,
+    //         'search_name' => $this->name,
+    //         'slug' => $this->slug,
+    //         'sale_price' => $this->sale_price,
+    //         'regular_price' => $this->regular_price,
+    //         'stock_qty' => $this->stock_qty,
+    //         'sku' => $this->sku,
+    //         'weight' => $this->weight,
+    //         'height' => $this->height,
+    //         'width' => $this->width,
+    //         'length' => $this->length,
+    //         'description' => $this->description,
+    //         'compatibility' => $this->compatibility,
+    //         'features' => $this->features,
+    //         'youtube_video_url' => $this->youtbue_video_url,
+    //         'youtube_video_id' => $this->extractYouTubeID($this->youtube_video_url),
+    //         'color' => $this->color,
+    //         'color_code' => $this->color_code,
+    //         'vat_id' => $this->vat_id,
+    //         'is_featured' => $this->is_featured,
+    //         'is_premium' => $this->is_premium,
+    //         'is_published' => $this->is_published,
+    //     ];
+    // }
 
 
     private function clearTinymceState()

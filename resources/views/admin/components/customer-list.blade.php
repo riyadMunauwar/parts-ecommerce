@@ -51,8 +51,10 @@
                                 <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
                                     @if($customer->discount_type === 'fixed')
                                         {{ $customer->discount_amount }} $
-                                    @else 
+                                    @elseif($customer->discount_type === 'percentage')
                                         {{ $customer->discount_amount }} %
+                                    @else
+                                        Default
                                     @endif
                                 </span>
                             </td>

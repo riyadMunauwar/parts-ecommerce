@@ -1,38 +1,37 @@
-<header x-data="{isMenuOpen: false, isSearchOpen: false}" class="block bg-white py-2 md:hidden">
+<header x-data="{isMenuOpen: false, isSearchOpen: false}" class="sticky top-0 block border-b bg-white py-2 md:hidden">
     <div class="mx-3 flex items-center justify-between">
-        <!-- Logo -->
-        <div>
-            <a href="">
-                <img class="h-9 block" src="{{ asset('assets/logo/logo-red.png') }}" alt="Logo">
-            </a>
-        </div>
 
         <div class="flex gap-3 items-center justify-center">
-
-            <a href="" class="relative inline-flex justify-center items-center text-sm font-medium text-center">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 00-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 00-16.536-1.84M7.5 14.25L5.106 5.272M6 20.25a.75.75 0 11-1.5 0 .75.75 0 011.5 0zm12.75 0a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
-                    </svg>
-                </span>
-                <div class="absolute inline-flex items-center justify-center w-5 h-5 text-xs text-white bg-red-500 border-2 border-white rounded-full -top-2 -right-2 dark:border-gray-900">8</div>
-            </a>
+            <livewire:front.mobile-cart-button />
 
             <span @click="isSearchOpen = !isSearchOpen" class="cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                 </svg>
             </span>
-            <span @click="isMenuOpen = !isMenuOpen" x-show="!isMenuOpen" class="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-                </svg>
-            </span>
-            <span @click="isMenuOpen = !isMenuOpen" x-show="isMenuOpen">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </span>
+        </div>
+
+        <!-- Logo -->
+        <div>
+            <a href="/">
+                <h1 class="text-xl uppercase ont-extrabold text-gray-900 dark:text-white"><span class="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">{{ config('setting')->website_name ?? 'Store' }}</span></h1>
+            </a>
+        </div>
+        
+        <div class="flex gap-3 items-center justify-center">            
+            <div>
+                <span x-cloak @click="isMenuOpen = !isMenuOpen" x-show="!isMenuOpen">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 5.25h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5m-16.5 4.5h16.5" />
+                    </svg>
+                </span>
+
+                <span x-cloak @click="isMenuOpen = !isMenuOpen" x-show="isMenuOpen">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
         </div>
     </div>
 
@@ -56,42 +55,89 @@
         </span>
     </div>
 
-    <nav x-show="isMenuOpen" x-transition class="fixed inset-0 z-50 overflow-hidden w-4/5 h-full bg-white p-3">
-        <div class="flex justify-between">
-            <a href="">
-                <img class="h-6 block" src="https://www.bdshop.com/pub/media/logo/stores/1/BDSHOP-LOGO-2022.jpg" alt="">
-            </a>
+    <nav x-show="isMenuOpen" x-cloak x-transition class="fixed inset-0 overflow-hidden w-4/5 h-full primary-bg primary-text p-3">
+        @auth
+            <div class="ml-3 relative">
+                <x-dropdown align="right" width="48">
+                    <x-slot name="trigger">
+                        @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                            <button class="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition">
+                                <img class="h-8 w-8 rounded-full object-cover" src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                            </button>
+                        @else
+                            <span class="inline-flex rounded-md">
+                                <button type="button" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none focus:bg-gray-50 active:bg-gray-50 transition ease-in-out duration-150">
+                                    {{ Auth::user()->name }}
 
-            <span @click="isMenuOpen = !isMenuOpen" x-show="isMenuOpen" class="cursor-pointer">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </span>
-        </div>
+                                    <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                    </svg>
+                                </button>
+                            </span>
+                        @endif
+                    </x-slot>
 
+                    <x-slot name="content">
+                        <!-- Account Management -->
+                        <div class="block px-4 py-2 text-xs text-gray-400">
+                            {{ __('Manage Account') }}
+                        </div>
+
+                        <x-dropdown-link href="{{ route('profile.show') }}">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+
+                        @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
+                            <x-dropdown-link href="{{ route('api-tokens.index') }}">
+                                {{ __('API Tokens') }}
+                            </x-dropdown-link>
+                        @endif
+
+                        <div class="border-t border-gray-200"></div>
+
+                        <!-- Authentication -->
+                        <form method="POST" action="{{ route('logout') }}" x-data>
+                            @csrf
+
+                            <x-dropdown-link href="{{ route('logout') }}"
+                                        @click.prevent="$root.submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
+                    </x-slot>
+                </x-dropdown>
+            </div>
+        @endauth
+
+        @php 
+            $menus = \App\Models\Menu::with('category')->orderBy('order', 'asc')->get();
+        @endphp
+          
         <div>
             <ul class="flex flex-col mt-4">
-                <li x-data="{isOpen: false}">
-                    <a @click="isOpen = !isOpen" :class="!isOpen ? 'border-b border-gray-100' : ''" class="flex items-center rounded-md py-1 font-medium pr-4 pl-3 text-gray-700 hover:bg-gray-200">
-                        <span>Home</span>
+                @guest
+                    <li>
+                        <a href="{{ route('register') }}" class="flex border-b uppercase items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                            Create Account
+                        </a>
+                    </li>
 
-                        <span x-show="isOpen" class="ml-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                            </svg>
-                        </span>
+                    <li>
+                        <a href="{{ route('login') }}" class="flex border-b uppercase items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                            Sign In
+                        </a>
+                    </li>
+                @endguest
 
-                        <span x-show="!isOpen" class="ml-auto">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </span>
-                    </a>
-
-                    <ul x-show="isOpen" class="flex flex-col ml-5">
+                <a href="{{ route('parent-category') }}" class="group cursor-pointer border-b border-t text-white px-3 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
+                    All
+                </a>
+        
+                @foreach($menus ?? [] as $menu)
+                    @if($menu->category_id)
                         <li x-data="{isOpen: false}">
-                            <a @click="isOpen = !isOpen" :class="!isOpen ? 'border-b border-gray-100' : ''" class="border-l flex items-center py-1 font-medium pr-4 pl-3 text-gray-700 hover:bg-gray-200">
-                                <span>Home</span>
+                            <a @click="isOpen = !isOpen" :class="!isOpen ? 'border-b border-gray-100' : ''" class="flex items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                                <span>{{ $menu->name ?? '' }}</span>
 
                                 <span x-show="isOpen" class="ml-auto">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
@@ -105,32 +151,56 @@
                                     </svg>
                                 </span>
                             </a>
+                            @foreach($menu->category->children ?? [] as $child)
+                                @if($child->hasChildren())
+                                    <ul x-show="isOpen" class="flex border-l flex-col ml-5">
+                                        <li x-data="{isOpen: false}">
+                                            <a @click="isOpen = !isOpen" class="flex items-center py-1 font-medium pr-4 pl-3 primary-text secondar-hover-bg">
+                                                <span>{{ $child->name ?? '' }}</span>
 
-                            <ul x-show="isOpen" class="flex flex-col ml-5">
-                                <li x-data="{isOpen: false}">
-                                    <a @click="isOpen = !isOpen" :class="!isOpen ? 'border-b border-gray-100' : ''" class="border-l flex items-center py-1 font-medium pr-4 pl-3 text-gray-700 hover:bg-gray-200">
-                                        <span>Home</span>
+                                                <span x-show="isOpen" class="ml-auto">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                                    </svg>
+                                                </span>
 
-                                        <span x-show="isOpen" class="ml-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                                            </svg>
-                                        </span>
-
-                                        <span x-show="!isOpen" class="ml-auto">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
-                                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                                            </svg>
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
+                                                <span x-show="!isOpen" class="ml-auto">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-3 h-3">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                                    </svg>
+                                                </span>
+                                            </a>
+                                            @foreach($child->children ?? [] as $grandChild)
+                                                <ul x-show="isOpen" class="flex flex-col ml-5">
+                                                    <li>
+                                                        <a href="{{ route('category-product', ['categoryId' => $grandChild->id ,'categorySlug' => $grandChild->slug]) }}" class="border-l flex items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                                                            <span>{{ $grandChild->name ?? '' }}</span>
+                                                        </a>
+                                                    </li>
+                                                </ul>
+                                            @endforeach
+                                        </li>
+                                    </ul>
+                                @else 
+                                    <ul x-show="isOpen" class="flex border-l flex-col ml-5">
+                                        <li>
+                                            <a href="{{ route('category-product', ['categoryId' => $child->id ,'categorySlug' => $child->slug]) }}" class="flex items-center py-1 font-medium pr-4 pl-3 primary-text secondar-hover-bg">
+                                                <span>{{ $child->name ?? '' }}</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                @endif
+                            @endforeach
                         </li>
-                    </ul>
-                    
-                </li>
+                    @else 
+                        <li>
+                            <a href="{{ $menu->link ?? '/' }}" class="flex border-b items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                                <span>{{ $menu->name ?? '' }}</span>
+                            </a>
+                        </li>
+                    @endif
+                @endforeach
             </ul>
         </div>
- 
     </nav>
 </header>

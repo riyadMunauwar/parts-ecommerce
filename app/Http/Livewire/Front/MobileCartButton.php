@@ -3,11 +3,24 @@
 namespace App\Http\Livewire\Front;
 
 use Livewire\Component;
+use App\Actions\Front\ShoppingCart;
 
 class MobileCartButton extends Component
 {
+    public $itemCount = 0;
+
+    protected $listeners = [
+        'onCartItemAdded' => '$refresh',
+        'onCartItemRemoved' => '$refresh',
+        'onCartItemQuantityChange' => '$refresh',
+    ];
+
+
     public function render()
     {
-        return view('livewire.front.mobile-cart-button');
+        $cart = new ShoppingCart();
+        $this->itemCount = $cart->totalItems();
+
+        return view('front.components.mobile-cart-button');
     }
 }
