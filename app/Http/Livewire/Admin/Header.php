@@ -12,6 +12,8 @@ class Header extends Component
     use WithFileUploads;
     use WithSweetAlert;
 
+    public $locale;
+
     public $new_logo;
     public $old_logo;
 
@@ -36,6 +38,7 @@ class Header extends Component
 
     public function mount()
     {
+        $this->locale = app()->getLocale();
         $this->preparedInitData();
     }
 
@@ -46,9 +49,20 @@ class Header extends Component
     }
 
 
+    public function updatedLocale($value)
+    {
+        $this->locale = $value;
+        $this->preparedInitData();
+    }
+
+
     public function saveSetting()
     {
         $this->validate();
+
+        if($this->locale){
+            app()->setLocale($this->locale);
+        }
 
 
         $setting = Setting::first();
@@ -89,6 +103,11 @@ class Header extends Component
 
     private function preparedInitData()
     {
+        
+        if($this->locale){
+            app()->setLocale($this->locale);
+        }
+
         $setting = Setting::firstOrCreate();
 
         $this->top_header_message_text = $setting->top_header_message_text;

@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Variation;
 use App\Models\Vat;
 use Illuminate\Support\Facades\DB;
+use App;
 
 class EditProduct extends Component
 {
@@ -20,6 +21,7 @@ class EditProduct extends Component
     use WithSweetAlertToast;
 
     public $is_edit_mode_on = false;
+    public $locale;
 
     public $meta_title;
     public $meta_tags;
@@ -89,7 +91,8 @@ class EditProduct extends Component
 
     protected $listeners = [
         'onProductEdit' => 'enableProductEditMode',
-        'refresh' => '$refresh'
+        'refresh' => '$refresh',
+        'onLocaleChange' => 'enableProductEditMode',
     ];
 
     public function mount()
@@ -103,11 +106,6 @@ class EditProduct extends Component
     }
 
 
-    public function updatedName($value)
-    {
-        $this->slug = Str::slug($value);
-    }
-
     public function updatedRegularPrice($value)
     {
         if(!$value){
@@ -115,9 +113,15 @@ class EditProduct extends Component
         }
     }
 
+
     public function updateSave()
     {
         $this->validate();
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         if($this->youtube_video_url && !$this->validateYouTubeLink($this->youtube_video_url))
         {
@@ -151,7 +155,12 @@ class EditProduct extends Component
         $product->is_featured = $this->is_featured;
         $product->is_published = $this->is_published;
         $product->is_premium = $this->is_premium;
-        $product->vat_id = $this->vat_id;
+
+        if($this->vat_id){
+            $product->vat_id = $this->vat_id;
+        }else {
+            $product->vat_id = null;
+        }
 
         if(app()->getLocale() === 'en'){
             $product->search_name = $this->name;
@@ -217,8 +226,21 @@ class EditProduct extends Component
         $this->is_edit_mode_on = false;
     }
 
-    public function enableProductEditMode($id)
+    public function enableProductEditMode($id, $locale = null)
     {
+        
+        if($locale)
+        {
+            $this->locale = $locale;
+        }else {
+            $this->locale = app()->getLocale();
+        }
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $this->preparedInitData();
 
         $product = Product::with('categories')->find($id);
@@ -255,18 +277,20 @@ class EditProduct extends Component
 
         $this->is_edit_mode_on = true;
 
-        $this->dispatchBrowserEvent('init:tinymce');
         $this->dispatchBrowserEvent('tinymce:set:description', $product->description);
         $this->dispatchBrowserEvent('tinymce:set:features', $product->features);
         $this->dispatchBrowserEvent('tinymce:setcompatibility', $product->compatibility);
+
+        $this->dispatchBrowserEvent('init:tinymce');
       
     }
 
     // Component Helper
     private function preparedInitData()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->vats = Vat::all();
+        $this->locale = app()->getLocale();
     }
 
     private function validateYouTubeLink($link) {
@@ -296,37 +320,6 @@ class EditProduct extends Component
         return null;
 
     }
-
-    // private function updatedProduct()
-    // {
-    //     return [
-    //         'meta_title' => $this->meta_title,
-    //         'meta_tags' => $this->meta_tags,
-    //         'meta_description' => $this->meta_description,
-    //         'name' => $this->name,
-    //         'search_name' => $this->name,
-    //         'slug' => $this->slug,
-    //         'sale_price' => $this->sale_price,
-    //         'regular_price' => $this->regular_price,
-    //         'stock_qty' => $this->stock_qty,
-    //         'sku' => $this->sku,
-    //         'weight' => $this->weight,
-    //         'height' => $this->height,
-    //         'width' => $this->width,
-    //         'length' => $this->length,
-    //         'description' => $this->description,
-    //         'compatibility' => $this->compatibility,
-    //         'features' => $this->features,
-    //         'youtube_video_url' => $this->youtbue_video_url,
-    //         'youtube_video_id' => $this->extractYouTubeID($this->youtube_video_url),
-    //         'color' => $this->color,
-    //         'color_code' => $this->color_code,
-    //         'vat_id' => $this->vat_id,
-    //         'is_featured' => $this->is_featured,
-    //         'is_premium' => $this->is_premium,
-    //         'is_published' => $this->is_published,
-    //     ];
-    // }
 
 
     private function clearTinymceState()

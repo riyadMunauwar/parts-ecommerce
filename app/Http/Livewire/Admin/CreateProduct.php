@@ -164,7 +164,7 @@ class CreateProduct extends Component
     // Component Helper
     private function preparedInitData()
     {
-        $this->categories = Category::all();
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
         $this->vats = Vat::all();
     }
 
@@ -220,7 +220,7 @@ class CreateProduct extends Component
             'youtube_video_id' => $this->extractYouTubeID($this->youtube_video_url),
             'color' => $this->color,
             'color_code' => $this->color_code,
-            'vat_id' => $this->vat_id,
+            'vat_id' => $this->vat_id ?? null,
             'is_featured' => $this->is_featured,
             'is_premium' => $this->is_premium,
             'is_published' => $this->is_published,

@@ -11,6 +11,8 @@ class Footer extends Component
 {
     use WithSweetAlert;
 
+    public $locale;
+
     public $column_one = 'column_one';
     public $column_two = 'column_two';
     public $column_three = 'column_three';
@@ -56,6 +58,8 @@ class Footer extends Component
 
     public function mount()
     {
+        $this->locale = app()->getLocale();
+
         $this->preparedColumnOneInitData();
         $this->preparedColumnTwoInitData();
         $this->preparedColumnThreeInitData();
@@ -75,6 +79,14 @@ class Footer extends Component
         return view('admin.components.footer');
     }
 
+    public function updatedLocale($value)
+    {
+        $this->preparedAllInitData($value);
+        $this->cancelEditMode('column_one');
+        $this->cancelEditMode('column_two');
+        $this->cancelEditMode('column_three');
+        $this->cancelEditMode('column_four');
+    }
 
 
     public function columnOneAddItem()
@@ -82,6 +94,11 @@ class Footer extends Component
         $this->validate([
             'footerSectionOneItemName' => ['required', 'string']
         ]);
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $save =_Footer::create([
                 'column_name' => $this->column_one,
@@ -105,6 +122,11 @@ class Footer extends Component
         $this->validate([
             'footerSectionOneItemName' => ['required', 'string']
         ]);
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $footerMenuItem = _Footer::find($this->columnOneItemId);
 
@@ -131,6 +153,11 @@ class Footer extends Component
             'footerSectionTwoItemName' => ['required', 'string']
         ]);
 
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $save =_Footer::create([
                 'column_name' => $this->column_two,
                 'menu_item_name' => $this->footerSectionTwoItemName,
@@ -152,6 +179,11 @@ class Footer extends Component
         $this->validate([
             'footerSectionTwoItemName' => ['required', 'string']
         ]);
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $footerMenuItem = _Footer::find($this->columnTwoItemId);
 
@@ -177,6 +209,11 @@ class Footer extends Component
             'footerSectionThreeItemName' => ['required', 'string']
         ]);
 
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $save =_Footer::create([
                 'column_name' => $this->column_three,
                 'menu_item_name' => $this->footerSectionThreeItemName,
@@ -198,6 +235,11 @@ class Footer extends Component
         $this->validate([
             'footerSectionThreeItemName' => ['required', 'string']
         ]);
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $footerMenuItem = _Footer::find($this->columnThreeItemId);
 
@@ -223,6 +265,11 @@ class Footer extends Component
             'footerSectionFourItemName' => ['required', 'string']
         ]);
 
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $save =_Footer::create([
                 'column_name' => $this->column_four,
                 'menu_item_name' => $this->footerSectionFourItemName,
@@ -244,6 +291,11 @@ class Footer extends Component
         $this->validate([
             'footerSectionFourItemName' => ['required', 'string']
         ]);
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $footerMenuItem = _Footer::find($this->columnFourItemId);
 
@@ -284,6 +336,11 @@ class Footer extends Component
     // 
     public function updateColumnTitle($column)
     {
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+        
         $setting = Setting::first();
 
         if($column === 'column_one')
@@ -351,6 +408,11 @@ class Footer extends Component
 
     public function enableEditMode($column, $id)
     {
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         if($column === 'column_one')
         {
             $item = _Footer::find($id);
@@ -449,12 +511,29 @@ class Footer extends Component
     }
 
 
-    private function preparedAllInitData()
+    private function preparedAllInitData($locale = null)
     {
+        if($locale)
+        {
+            $this->locale = $locale;
+        }else {
+            $this->locale = app()->getLocale();
+        }
+
+
+        app()->setLocale($this->locale);
+
         $this->preparedColumnOneInitData();
         $this->preparedColumnTwoInitData();
         $this->preparedColumnThreeInitData();
         $this->preparedColumnFourInitData();
+
+        $setting = Setting::firstOrCreate();
+
+        $this->footerSectionOneName = $setting->footer_column_one_title;
+        $this->footerSectionTwoName = $setting->footer_column_two_title;
+        $this->footerSectionThreeName = $setting->footer_column_three_title;
+        $this->footerSectionFourName = $setting->footer_column_four_title;
     }
 
     private function resetColumnOne()

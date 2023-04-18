@@ -97,7 +97,7 @@ class Category extends Component
 
     private function preparedInitState()
     {
-        $this->categories = ProductCategory::all();
+        $this->categories = ProductCategory::with('children')->whereNull('parent_id')->get();
     }
 
 }

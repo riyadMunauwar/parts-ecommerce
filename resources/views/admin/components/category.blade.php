@@ -19,13 +19,131 @@
         </div>
 
         <div>
-            <x-label for="parent" value="{{ __('Parent Category') }}" />
-            <x-ui.select wire:model.debounce="parentCategoryId" id="parent" class="block mt-1 w-full">
-                <option value="">None</option>
+            <x-label for="gallery" value="{{ __('Parent Category') }}" />
+            <div class="mt-2 p-4 rounded-md bg-gray-50 overflow-x-auto">
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @if($category->hasChildren())
+                        <div class="block">
+                            <label for="categories" class="flex items-center">
+                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $category->id }}" id="categories" />
+                                <span class="ml-2 text-sm text-gray-600"> {{ $category->name ?? '' }} </span>
+                            </label>
+                            <div class="ml-2 border-l pl-2">
+                                @foreach($category->children as $child)
+                                    @if($child->hasChildren())
+                                        <div class="block">
+                                            <label for="categories" class="flex items-center">
+                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $child->id }}" id="categories" />
+                                                <span class="ml-2 text-sm text-gray-600"> {{ $child->name ?? '' }} </span>
+                                            </label>
+                                            <div class="ml-2 border-l pl-2">
+                                                @foreach($child->children as $grandChild)
+                                                    @if($grandChild->hasChildren())
+                                                        <div class="block">
+                                                            <label for="categories" class="flex items-center">
+                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandChild->id }}" id="categories" />
+                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandChild->name ?? '' }} </span>
+                                                            </label>
+                                                            <div class="ml-2 border-l pl-2">
+                                                                @foreach($grandChild->children as $grandGrandChild)
+                                                                    @if($grandGrandChild->hasChildren())
+                                                                        <div class="block">
+                                                                            <label for="categories" class="flex items-center">
+                                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandGrandChild->id }}" id="categories" />
+                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandChild->name ?? '' }} </span>
+                                                                            </label>
+                                                                            <div class="ml-2 border-l pl-2">
+                                                                                @foreach($grandGrandChild->children as $grandGrandGrandChildren)
+                                                                                    @if($grandGrandGrandChildren->hasChildren())
+                                                                                        <div class="block">
+                                                                                            <label for="categories" class="flex items-center">
+                                                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandGrandGrandChildren->id }}" id="categories" />
+                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandChildren->name ?? '' }} </span>
+                                                                                            </label>
+                                                                                            <div class="ml-2 border-l pl-2">
+                                                                                                @foreach($grandGrandGrandChildren->children as $grandGrandGrandGrandChidlren)
+                                                                                                    @if($grandGrandGrandGrandChidlren->hasChildren())
+                                                                                                            <div class="block">
+                                                                                                                <label for="categories" class="flex items-center">
+                                                                                                                    <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandGrandGrandGrandChidlren->id }}" id="categories" />
+                                                                                                                    <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandGrandChidlren->name ?? '' }} </span>
+                                                                                                                </label>
+                                                                                                                <div class="ml-2 border-l pl-2">
+                                                                                                                    @foreach($grandGrandGrandGrandChidlren->children as $lastChild)
+                                                                                                                        <div class="block">
+                                                                                                                            <label for="categories" class="flex items-center">
+                                                                                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $lastChild->id }}" id="categories" />
+                                                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $lastChild->name ?? '' }} </span>
+                                                                                                                            </label>
+                                                                                                                        </div>
+                                                                                                                    @endforeach
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                                    @else
+                                                                                                        <div class="block">
+                                                                                                            <label for="categories" class="flex items-center">
+                                                                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandGrandGrandGrandChidlren->id }}" id="categories" />
+                                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandGrandChidlren->name ?? '' }} </span>
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    @endif
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @else 
+                                                                                        <div class="block">
+                                                                                            <label for="categories" class="flex items-center">
+                                                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandGrandGrandChildren->id }}" id="categories" />
+                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandChildren->name ?? '' }} </span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="block">
+                                                                            <label for="categories" class="flex items-center">
+                                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandGrandChild->id }}" id="categories" />
+                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandChild->name ?? '' }} </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="block">
+                                                            <label for="categories" class="flex items-center">
+                                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $grandChild->id }}" id="categories" />
+                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandChild->name ?? '' }} </span>
+                                                            </label>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="block">
+                                            <label for="categories" class="flex items-center">
+                                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $child->id }}" id="categories" />
+                                                <span class="ml-2 text-sm text-gray-600"> {{ $child->name ?? '' }} </span>
+                                            </label>
+                                        </div>
+                                    @endif
+                                @endforeach
+                            </div>
+                        </div>
+                    @else
+                        <div class="block">
+                            <label for="categories" class="flex items-center">
+                                <x-ui.radio name="parent_id" wire:model.debounce="parentCategoryId" value="{{ $category->id }}" id="categories" />
+                                <span class="ml-2 text-sm text-gray-600"> {{ $category->name ?? '' }} </span>
+                            </label>
+                        </div>
+                    @endif
                 @endforeach
-            </x-ui.select>
+            </div>
         </div>
 
         <div>

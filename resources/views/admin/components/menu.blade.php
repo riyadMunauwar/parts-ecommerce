@@ -1,13 +1,40 @@
 <section class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div>
         <div class="bg-white p-5 md:p-7 md:rounded-md">
-            <h1 class="mb-5">Add Menu</h1>
+            <div class="flex justify-between flex-col md:flex-row">
+                <h1 class="mb-3">
+                    @if($isEditModeOn)
+                        Update Menu
+                    @else 
+                        Add Menu
+                    @endif
+                </h1>
+
+                <div class="flex gap-2 mb-4">
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+                        </label>
+                    </div>
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
 
             <x-validation-errors class="mb-4" />
 
             <div class="space-y-4">
                 <div>
-                    <x-label  for="name" value="{{ __('Menu Name') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Menu Name') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="name" id="name" class="block mt-1 w-full" type="text" required />
                 </div>
 

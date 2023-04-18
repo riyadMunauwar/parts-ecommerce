@@ -1,14 +1,34 @@
 <section>
+
+    <div class="flex gap-2 p-5 bg-white md:rounded-md md:mb-4">
+        <div class="block">
+            <label for="locale" class="flex items-center">
+                <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+            </label>
+        </div>
+        <div class="block">
+            <label for="locale" class="flex items-center">
+                <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+            </label>
+        </div>
+    </div>
+
     <div class="grid grid-cols-1 md:grid-cols-2 md:gap-5">
         <!-- Column 1 -->
         <div class="bg-white p-5 md:p-7 md:rounded-md">
+
             <h1 class="mb-4">Column 1</h1>
 
             <x-validation-errors class="mb-4" />
 
             <div>
                 <div>
-                    <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Column Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionOneName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
@@ -42,7 +62,10 @@
 
             <div class="mt-5 p-5 border rounded-md">
                 <div>
-                    <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Menu Item Text') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionOneItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
                 </div>
                 <div class="mt-4">
@@ -61,14 +84,18 @@
         </div>
 
         <!-- Column 2 -->
-        <div class="bg-white p-5 md:p-7 md:rounded-md"">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
+
             <h1 class="mb-4">Column 2</h1>
 
             <x-validation-errors class="mb-4" />
 
             <div>
                 <div>
-                    <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Column Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionTwoName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
@@ -102,7 +129,10 @@
 
             <div class="mt-5 p-5 border rounded-md">
                 <div>
-                    <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Menu Item Text') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionTwoItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
                 </div>
                 <div class="mt-4">
@@ -120,14 +150,17 @@
             </div>
         </div>
         <!-- Column 3 -->
-        <div class="bg-white p-5 md:p-7 md:rounded-md"">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-4">Column 3</h1>
 
             <x-validation-errors class="mb-4" />
 
             <div>
                 <div>
-                    <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Column Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionThreeName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
@@ -161,7 +194,10 @@
 
             <div class="mt-5 p-5 border rounded-md">
                 <div>
-                    <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Menu Item Text') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionThreeItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
                 </div>
                 <div class="mt-4">
@@ -180,14 +216,17 @@
         </div>
 
         <!-- Column 4 -->
-        <div class="bg-white p-5 md:p-7 md:rounded-md"">
+        <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-4">Column 4</h1>
 
             <x-validation-errors class="mb-4" />
 
             <div>
                 <div>
-                    <x-label  for="columnTitle" value="{{ __('Column Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Column Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionFourName" id="columnTitle" class="block h-10 mt-1 w-full" type="text" required />
                 </div>
                 <div class="flex justify-end mt-3">
@@ -221,7 +260,10 @@
 
             <div class="mt-5 p-5 border rounded-md">
                 <div>
-                    <x-label  for="item" class="text-xs" value="{{ __('Menu Item Text') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Menu Item Text') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="footerSectionFourItemName" id="item" class="block h-8 mt-1 w-full" type="text" required />
                 </div>
                 <div class="mt-4">

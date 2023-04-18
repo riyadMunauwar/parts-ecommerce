@@ -1,14 +1,35 @@
 <div class="rounded-md p-5 md:p-7 bg-white py-4">
 
-    <div class="border p-5 rounded-md">
+    <div class="flex gap-2">
+        <div class="block">
+            <label for="locale" class="flex items-center">
+                <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+            </label>
+        </div>
+        <div class="block">
+            <label for="locale" class="flex items-center">
+                <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+            </label>
+        </div>
+    </div>
+
+    <div class="border p-5 rounded-md mt-7">
         <h1 class="mb-4">Top Header</h1>
         <div class="space-y-4">
             <div>
-                <x-label  for="" value="{{ __('Top Header Message Text') }}" />
+                <div class="flex gap-1">
+                    <x-label  for="" value="{{ __('Top Header Message Text') }}" />
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                </div>
                 <x-input wire:model.debounce="top_header_message_text" id="" class="block mt-1 w-full" type="text" required />
             </div>
             <div>
-                <x-label  for="" value="{{ __('Top Header Button Text') }}" />
+                <div class="flex gap-1">
+                    <x-label  for="" value="{{ __('Top Header Button Text') }}" />
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                </div>
                 <x-input wire:model.debounce="top_header_button_text" id="" class="block mt-1 w-full" type="text" required />
             </div>
             <div>
@@ -23,7 +44,10 @@
         <h1 class="mb-4">Middle Header</h1>
         <div class="space-y-4">
             <div>
-                <x-label  for="" value="{{ __('Middle Header Message Text') }}" />
+                <div class="flex gap-1">
+                    <x-label  for="" value="{{ __('Middle Header Message Text') }}" />
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                </div>
                 <x-input wire:model.debounce="middle_header_message_text" id="" class="block mt-1 w-full" type="text" required />
             </div>
             <div>
@@ -38,7 +62,10 @@
         <h1 class="mb-4">Main Header</h1>
         <div class="space-y-4">
             <div>
-                <x-label  for="" value="{{ __('Main Header Message Text') }}" />
+                <div class="flex gap-1">
+                    <x-label  for="" value="{{ __('Main Header Message Text') }}" />
+                    <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                </div>
                 <x-input wire:model.debounce="main_header_message_text" id="" class="block mt-1 w-full" type="text" required />
             </div>
             <div>

@@ -34,6 +34,7 @@ class ProductGrid extends Component
     public function render()
     {
         $products = $this->getProducts();
+
         return view('front.components.product-grid', compact('products'));
     }
 

@@ -2,6 +2,22 @@
     <div class="col-span-2">
         <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">General Setting</h1>
+
+            <div class="flex gap-2 mb-5">
+                <div class="block">
+                    <label for="locale" class="flex items-center">
+                        <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                        <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+                    </label>
+                </div>
+                <div class="block">
+                    <label for="locale" class="flex items-center">
+                        <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                        <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+                    </label>
+                </div>
+            </div>
+
             <x-validation-errors class="mb-4" />
             <div class="space-y-3">
 
@@ -21,12 +37,18 @@
                 </div>
 
                 <div>
-                    <x-label  for="name" value="{{ __('Meta Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Meta Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="meta_title" id="name" class="block mt-1 w-full" type="text"  />
                 </div>
 
                 <div class="">
-                    <x-label for="tags" value="{{ __('Meta Tags') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Meta Tags') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-ui.textarea wire:model.debounce="meta_tags" id="tags" class="block mt-1 w-full">
 
                     </x-ui.textarea>
@@ -34,7 +56,10 @@
 
 
                <div class="">
-                    <x-label for="desc" value="{{ __('Meta Description') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Meta Description') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-ui.textarea wire:model.debounce="meta_description" id="desc" class="block mt-1 w-full">
 
                     </x-ui.textarea>

@@ -14,6 +14,8 @@ class EditCategory extends Component
     use WithFileUploads;
     use WithSweetAlert;
     
+    public $locale;
+
     public $name;
     public $slug;
     public $order;
@@ -44,6 +46,7 @@ class EditCategory extends Component
 
     protected $listeners = [
         'onCategoryEditMode' => 'enableCategoryEditMode',
+        'onLocaleChange' => 'enableCategoryEditMode',
     ];
 
 
@@ -53,27 +56,32 @@ class EditCategory extends Component
     }
 
 
-    public function updatedName()
-    {
-        $this->slug = Str::slug($this->name);
-    }
-    
-
     public function updateCategory()
     {
         $this->validate();
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
 
         $category = Category::find($this->categoryId);
 
         $category->name = $this->name;
         $category->slug = $this->slug;
         $category->order = $this->order;
-        $category->parent_id = $this->parentCategoryId;
         $category->description = $this->description;
         $category->is_published = $this->isPublished;
         $category->meta_title = $this->metaTitle;
         $category->meta_description = $this->metaDescription;
         $category->meta_tags = $this->metaTags;
+
+        if($this->parentCategoryId){
+            $category->parent_id = $this->parentCategoryId;
+        }else {
+            $category->parent_id = null;
+        }
 
         if(app()->getLocale() === 'en'){
             $category->search_name = $this->name;
@@ -93,9 +101,23 @@ class EditCategory extends Component
     }
 
 
-    public function enableCategoryEditMode($id)
+    public function enableCategoryEditMode($id, $locale = null)
     {
-        $this->categories = Category::all();
+
+        if($locale)
+        {
+            $this->locale = $locale;
+        }else {
+            $this->locale = app()->getLocale();
+        }
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
+
+        $this->categories = Category::with('children')->whereNull('parent_id')->get();
 
         $category = Category::find($id);
 

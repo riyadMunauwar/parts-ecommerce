@@ -11,6 +11,8 @@ class Menu extends Component
 {
     use WithSweetAlert;
 
+    public $locale;
+
     public $menus = [];
     public $categories = [];
     public $isEditModeOn = false;
@@ -48,9 +50,20 @@ class Menu extends Component
         return view('admin.components.menu');
     }
 
+    public function updatedLocale($localeValue)
+    {
+        $this->preparedInitialData($localeValue);
+        $this->cancelMenuEditMode();
+    }
+
     public function createMenu()
     {
         $this->validate();
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $menu = _Menu::create([
             'name' => $this->name,
@@ -77,6 +90,11 @@ class Menu extends Component
     public function updateMenu()
     {
         $this->validate();
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $menu = _Menu::find($this->menuId);
 
@@ -123,6 +141,11 @@ class Menu extends Component
 
     public function enableMenuEditMode($id)
     {
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $menu = _Menu::find($id);
 
         $this->menuId = $menu->id;
@@ -137,14 +160,24 @@ class Menu extends Component
 
     public function cancelMenuEditMode()
     {
+        $locale = $this->locale;
         $this->reset();
-        $this->preparedInitialData();
+        $this->preparedInitialData($locale);
         $this->isEditModeOn = false;
     }
 
 
-    private function preparedInitialData()
+    private function preparedInitialData($locale = null)
     {
+        if($locale)
+        {
+            $this->locale = $locale;
+        }
+        else 
+        {
+            $this->locale = app()->getLocale();
+        }
+
         $this->menus = _Menu::all();
         $this->categories = Category::where('is_published', true)->get();
     }

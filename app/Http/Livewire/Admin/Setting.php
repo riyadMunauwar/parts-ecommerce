@@ -12,6 +12,7 @@ class Setting extends Component
     use WithFileUploads;
     use WithSweetAlert;
 
+    public $locale;
 
     public $website_name;
     public $website_email;
@@ -46,10 +47,20 @@ class Setting extends Component
         return view('admin.components.setting');
     }
 
+    public function updatedLocale($localeValue)
+    {
+        $this->preparedInitData($localeValue);
+    }
+
     public function saveSetting()
     {
         
         $this->validate();
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
 
         $setting = _Setting::first();
 
@@ -82,8 +93,21 @@ class Setting extends Component
         $this->new_favicon = null;
     }
 
-    private function preparedInitData()
+    private function preparedInitData($locale = null)
     {
+
+        if($locale)
+        {
+           $this->locale =$locale; 
+        }else {
+            $this->locale = app()->getLocale();
+        }
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $setting = _Setting::firstOrCreate();
 
         $this->website_name = $setting->website_name;

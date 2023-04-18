@@ -11,8 +11,14 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
+                        <livewire:admin.localization-switching :payload="$product_id" />
+
                         <div class="col-span-2">
-                            <x-label  for="name" value="{{ __('Name') }}" />
+                            <div class="flex gap-1">
+                                <x-label  for="name" value="{{ __('Name')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
+                            
                             <x-input wire:model.debounce="name" id="name" class="block mt-1 h-8 w-full" type="text" required />
                         </div>
 
@@ -44,7 +50,7 @@
 
         
                             <div>
-                                <x-label for="vat_id" value="{{ __('Vat') }}" />
+                                <x-label for="vat_id" value="{{ __('Vat/Tax') }}" />
                                 <x-ui.select wire:model.debounce="vat_id" id="vat_id" class="block mt-1 h-8 w-full">
                                     <option value="">None</option>
                                     @foreach($vats as $vat)
@@ -94,25 +100,34 @@
                     <h1 class="font-bold text-xl mb-4">Description</h1>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div wire:ignore class="col-span-2">
-                            <x-label  for="compatibity" class="mb-1 block" value="{{ __('Compatibility') }}" />
-                            <textarea wire:model.debounce="compatibility" id="compatibility" >
-
-                            </textarea>
+                        <div class="col-span-2">
+                            <div class="flex gap-1 mb-2">
+                                <x-label  for="name" value="{{ __('Compatibility')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
+                            <div wire:ignore>
+                                <textarea wire:model.debounce="compatibility" id="compatibility"></textarea>
+                            </div>
                         </div>
 
-                        <div wire:ignore class="col-span-2">
-                            <x-label  for="features" class="mb-1 block" value="{{ __('Features') }}" />
-                            <textarea wire:model.debounce="features" id="features" >
-
-                            </textarea>
+                        <div class="col-span-2">
+                            <div class="flex gap-1 mb-2">
+                                <x-label  for="name" value="{{ __('Features')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
+                            <div wire:ignore>
+                                <textarea wire:model.debounce="features" id="features" ></textarea>
+                            </div>
                         </div>
 
-                        <div wire:ignore class="col-span-2">
-                            <x-label  for="description" class="mb-1 block" value="{{ __('Description') }}" />
-                            <textarea wire:model.debounce="description" id="description" >
-
-                            </textarea>
+                        <div class="col-span-2">
+                            <div class="flex gap-1 mb-2">
+                                <x-label  for="name" value="{{ __('Description')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
+                            <div wire:ignore >
+                                <textarea wire:model.debounce="description" id="description" ></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -122,15 +137,24 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="col-span-2">
-                            <x-label  for="meta_title" value="{{ __('Meta Title') }}" />
+                            <div class="flex gap-1">
+                                <x-label  for="name" value="{{ __('Meta Title')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
                             <x-input wire:model.debounce="meta_title" id="meta_title" class="block mt-1 h-8 w-full" type="text"  />
                         </div>
                         <div class="col-span-2">
-                            <x-label  for="meta_tags" value="{{ __('Meta Tags') }}" />
+                            <div class="flex gap-1">
+                                <x-label  for="name" value="{{ __('Meta Tags')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
                             <x-input wire:model.debounce="meta_tags" id="meta_tags" class="block mt-1 h-8 w-full" type="text" />
                         </div>
                         <div class="col-span-2">
-                            <x-label  for="meta_description" value="{{ __('Meta Description') }}" />
+                            <div class="flex gap-1">
+                                <x-label  for="name" value="{{ __('Meta Description')  }}" />
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                            </div>
                             <x-ui.textarea wire:model.debounce="meta_description" id="meta_description" class="block mt-1 text-md w-full" type="text" />
                         </div>
                     </div>
@@ -164,18 +188,132 @@
 
                         <div class="mt-2">
                             <x-label for="gallery" value="{{ __('Category') }}" />
-                            <div class="mt-2 h-32 p-4 rounded-md bg-gray-50 overflow-y-auto">
+                            <div class="mt-2 p-4 rounded-md bg-gray-50 overflow-x-auto">
                                 @foreach($categories as $category)
-                                    <div class="block">
-                                        <label for="categories" class="flex items-center">
-                                            <x-checkbox wire:model.debounce="categoriesId" value="{{ $category->id }}" multiple name="categories[]" id="categories" />
-                                            <span class="ml-2 text-sm text-gray-600"> {{ $category->name ?? '' }} </span>
-                                        </label>
-                                    </div>
+                                    @if($category->hasChildren())
+                                        <div class="block">
+                                            <label for="categories" class="flex items-center">
+                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $category->id }}" multiple name="categories[]" id="categories" />
+                                                <span class="ml-2 text-sm text-gray-600"> {{ $category->name ?? '' }} </span>
+                                            </label>
+                                            <div class="ml-2 border-l pl-2">
+                                                @foreach($category->children as $child)
+                                                    @if($child->hasChildren())
+                                                        <div class="block">
+                                                            <label for="categories" class="flex items-center">
+                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $child->id }}" multiple name="categories[]" id="categories" />
+                                                                <span class="ml-2 text-sm text-gray-600"> {{ $child->name ?? '' }} </span>
+                                                            </label>
+                                                            <div class="ml-2 border-l pl-2">
+                                                                @foreach($child->children as $grandChild)
+                                                                    @if($grandChild->hasChildren())
+                                                                        <div class="block">
+                                                                            <label for="categories" class="flex items-center">
+                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandChild->id }}" multiple name="categories[]" id="categories" />
+                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandChild->name ?? '' }} </span>
+                                                                            </label>
+                                                                            <div class="ml-2 border-l pl-2">
+                                                                                @foreach($grandChild->children as $grandGrandChild)
+                                                                                    @if($grandGrandChild->hasChildren())
+                                                                                        <div class="block">
+                                                                                            <label for="categories" class="flex items-center">
+                                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandGrandChild->id }}" multiple name="categories[]" id="categories" />
+                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandChild->name ?? '' }} </span>
+                                                                                            </label>
+                                                                                            <div class="ml-2 border-l pl-2">
+                                                                                                @foreach($grandGrandChild->children as $grandGrandGrandChildren)
+                                                                                                    @if($grandGrandGrandChildren->hasChildren())
+                                                                                                        <div class="block">
+                                                                                                            <label for="categories" class="flex items-center">
+                                                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandGrandGrandChildren->id }}" multiple name="categories[]" id="categories" />
+                                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandChildren->name ?? '' }} </span>
+                                                                                                            </label>
+                                                                                                            <div class="ml-2 border-l pl-2">
+                                                                                                                @foreach($grandGrandGrandChildren->children as $grandGrandGrandGrandChidlren)
+                                                                                                                    @if($grandGrandGrandGrandChidlren->hasChildren())
+                                                                                                                            <div class="block">
+                                                                                                                                <label for="categories" class="flex items-center">
+                                                                                                                                    <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandGrandGrandGrandChidlren->id }}" multiple name="categories[]" id="categories" />
+                                                                                                                                    <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandGrandChidlren->name ?? '' }} </span>
+                                                                                                                                </label>
+                                                                                                                                <div class="ml-2 border-l pl-2">
+                                                                                                                                    @foreach($grandGrandGrandGrandChidlren->children as $lastChild)
+                                                                                                                                        <div class="block">
+                                                                                                                                            <label for="categories" class="flex items-center">
+                                                                                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $lastChild->id }}" multiple name="categories[]" id="categories" />
+                                                                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $lastChild->name ?? '' }} </span>
+                                                                                                                                            </label>
+                                                                                                                                        </div>
+                                                                                                                                    @endforeach
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                                                                                    @else
+                                                                                                                        <div class="block">
+                                                                                                                            <label for="categories" class="flex items-center">
+                                                                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandGrandGrandGrandChidlren->id }}" multiple name="categories[]" id="categories" />
+                                                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandGrandChidlren->name ?? '' }} </span>
+                                                                                                                            </label>
+                                                                                                                        </div>
+                                                                                                                    @endif
+                                                                                                                @endforeach
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    @else 
+                                                                                                        <div class="block">
+                                                                                                            <label for="categories" class="flex items-center">
+                                                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandGrandGrandChildren->id }}" multiple name="categories[]" id="categories" />
+                                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandGrandChildren->name ?? '' }} </span>
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                    @endif
+                                                                                                @endforeach
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @else
+                                                                                        <div class="block">
+                                                                                            <label for="categories" class="flex items-center">
+                                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandGrandChild->id }}" multiple name="categories[]" id="categories" />
+                                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandGrandChild->name ?? '' }} </span>
+                                                                                            </label>
+                                                                                        </div>
+                                                                                    @endif
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="block">
+                                                                            <label for="categories" class="flex items-center">
+                                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $grandChild->id }}" multiple name="categories[]" id="categories" />
+                                                                                <span class="ml-2 text-sm text-gray-600"> {{ $grandChild->name ?? '' }} </span>
+                                                                            </label>
+                                                                        </div>
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+                                                    @else
+                                                        <div class="block">
+                                                            <label for="categories" class="flex items-center">
+                                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $child->id }}" multiple name="categories[]" id="categories" />
+                                                                <span class="ml-2 text-sm text-gray-600"> {{ $child->name ?? '' }} </span>
+                                                            </label>
+                                                        </div>
+                                                    @endif
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @else
+                                        <div class="block">
+                                            <label for="categories" class="flex items-center">
+                                                <x-checkbox wire:model.debounce="categoriesId" value="{{ $category->id }}" multiple name="categories[]" id="categories" />
+                                                <span class="ml-2 text-sm text-gray-600"> {{ $category->name ?? '' }} </span>
+                                            </label>
+                                        </div>
+                                    @endif
                                 @endforeach
-
                             </div>
                         </div>
+
 
                         <div class="mt-2">
                             <x-label  for="youtube_video_url" value="{{ __('Guide Youtube Video Url') }}" />
@@ -308,6 +446,7 @@
 
 
         function createTinymceInstance(selector){
+
             tinymce.remove('#' + selector)
             tinymce.init({
                 selector: '#' + selector,
@@ -344,12 +483,15 @@
                             editor.setContent('');
                         })
 
-                        window.addEventListener('tinymce:set:' + selector, function(e){
-                            editor.setContent(selector, e.detail);
-                        })
                 }
 
             });
+
+            window.addEventListener('tinymce:set:' + selector, function(e){
+                let editor = tinymce.get(selector);
+                editor.setContent(e.detail);
+            })
+
         }
 
 
