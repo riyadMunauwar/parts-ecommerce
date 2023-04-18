@@ -3,7 +3,7 @@
 
     <form >
         <div>
-            <x-label for="vat_rate" value="{{ __('Vat Rate') }}" />
+            <x-label for="vat_rate" value="{{ __('Vat/Tax Rate') }}" />
             <x-input wire:model.debounce="vat_rate" step=any id="vat_rate" class="block mt-1 w-full" type="number" />
         </div>
 

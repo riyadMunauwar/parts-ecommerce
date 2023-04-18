@@ -11,6 +11,8 @@ class Page extends Component
 {
     use WithSweetAlert;
 
+    public $locale;
+
     public $pages = [];
     public $isEditModeOn = false;
     public $pageId;
@@ -44,9 +46,13 @@ class Page extends Component
     }
 
 
-    public function updatedName($value)
+    public function updatedLocale($localeValue)
     {
-        $this->slug = Str::slug($value);
+        $this->preparedInitialData($localeValue);
+
+        if($this->isEditModeOn){
+            $this->enablePageEditMode($this->pageId);
+        }
     }
 
     public function createPage()
@@ -55,6 +61,11 @@ class Page extends Component
 
         if(!$this->isInputDataValid()){
             return $this->error('Validation failed', 'Name and Slug must be required');
+        }
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
         }
 
 
@@ -71,9 +82,11 @@ class Page extends Component
 
         if($page){
 
+            $locale = $this->locale;
+
             $this->reset();
 
-            $this->preparedInitialData();
+            $this->preparedInitialData($locale);
 
             $this->dispatchBrowserEvent('content:clear');
     
@@ -93,6 +106,11 @@ class Page extends Component
             return $this->error('Validation failed', 'Name and Slug must be required');
         }
 
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
 
         $page = _Page::find($this->pageId);
 
@@ -106,9 +124,11 @@ class Page extends Component
 
         if($page->save()){
 
+            $locale = $this->locale;
+
             $this->reset();
 
-            $this->preparedInitialData();
+            $this->preparedInitialData($locale);
 
             $this->dispatchBrowserEvent('content:clear');
 
@@ -153,6 +173,11 @@ class Page extends Component
     public function enablePageEditMode($id)
     {
 
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $page = _Page::find($id);
 
         $this->pageId = $page->id;
@@ -180,8 +205,20 @@ class Page extends Component
     }
 
 
-    private function preparedInitialData()
+    private function preparedInitialData($locale = null)
     {
+        if($locale){
+            $this->locale = $locale;
+        }
+        else {
+            $this->locale = app()->getLocale();
+        }
+
+        if($this->locale)
+        {
+            app()->setLocale($this->locale);
+        }
+
         $this->pages = _Page::all();
     }
 

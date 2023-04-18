@@ -1,29 +1,64 @@
 <section class="container mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div class="col-span-2">
         <div class="bg-white p-5 md:p-7 rounded-md">
-            <h1 class="mb-5">Add Page</h1>
+            <div class="flex justify-between flex-col md:flex-row">
+                <h1 class="mb-3">
+                    @if($isEditModeOn)
+                        Edit Page
+                    @else 
+                        Add Page
+                    @endif
+                </h1>
+
+                <div class="flex gap-2 mb-4">
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+                        </label>
+                    </div>
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
 
             <x-validation-errors class="mb-4" />
 
             <div class="space-y-3">
 
                 <div>
-                    <x-label  for="metaTitle" value="{{ __('Meta Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Meta Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="metaTitle" id="metaTitle" class="block mt-1 h-8 w-full" type="text" />
                 </div>
 
                 <div>
-                    <x-label  for="metaTags" value="{{ __('Meta Tags') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Meta Tags') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="metaTags" id="metaTags" class="block mt-1 h-8 w-full" type="text" />
                 </div>
 
                 <div>
-                    <x-label  for="metaDesc" value="{{ __('Meta Description') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Meta Description') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-ui.textarea wire:model.debounce="metaDescription" id="metaDesc" class="block mt-1 w-full" type="text" />
                 </div>
 
                 <div>
-                    <x-label  for="name" value="{{ __('Page Name') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Page Name') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="name" id="name" class="block mt-1 h-8 w-full" type="text" />
                 </div>
 
@@ -33,7 +68,10 @@
                 </div>
 
                 <div wire:ignore>
-                    <x-label class="block mb-1"  for="editor" value="{{ __('Content') }}" />
+                    <div class="flex gap-1 mb-2">
+                        <x-label  for="" value="{{ __('Content') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <textare wire:model.debounce="content" id="editor">
                         @if($isEditModeOn)
                             {!! $content !!}

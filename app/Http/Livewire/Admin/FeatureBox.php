@@ -13,6 +13,8 @@ class FeatureBox extends Component
     use WithSweetAlert;
     use WithFileUploads;
 
+    public $locale;
+
     public $featureBoxs = [];
     public $isEditModeOn = false;
     public $featureBoxId;
@@ -54,10 +56,22 @@ class FeatureBox extends Component
         return view('admin.components.feature-box');
     }
 
+    public function updatedLocale($localeValue)
+    {
+        $this->preparedInitialData($localeValue);
+        
+        if($this->isEditModeOn){
+            $this->enableFeatureBoxEditMode($this->featureBoxId);
+        }
+    }
 
     public function createFeatureBox()
     {
         $this->validate();
+
+        if($this->locale){
+            app()->setLocale($this->locale);
+        }
 
         $featureBox = _FeatureBox::create([
             'sup_title' => $this->supTitle,
@@ -70,11 +84,13 @@ class FeatureBox extends Component
 
         if($featureBox){
 
+            $locale = $this->locale;
+
             $featureBox->addMedia($this->image)->toMediaCollection('image');
 
             $this->reset();
 
-            $this->preparedInitialData();
+            $this->preparedInitialData($locale);
     
             return $this->success('Created', 'Feature box created successfully');
         }
@@ -94,6 +110,10 @@ class FeatureBox extends Component
             'buttonLink' => ['required', 'string'],
         ]);
 
+        if($this->locale){
+            app()->setLocale($this->locale);
+        }
+
         $featureBox = _FeatureBox::find($this->featureBoxId);
 
         $featureBox->sup_title = $this->supTitle;
@@ -108,8 +128,9 @@ class FeatureBox extends Component
         }
 
         if($featureBox->save()){
+            $locale = $this->locale;
             $this->reset();
-            $this->preparedInitialData();
+            $this->preparedInitialData($locale);
             return $this->success('Updated', 'Feature box updated successfully');
         }
 
@@ -145,6 +166,11 @@ class FeatureBox extends Component
 
     public function enableFeatureBoxEditMode($id)
     {
+
+        if($this->locale){
+            app()->setLocale($this->locale);
+        }
+
         $featureBox = _FeatureBox::find($id);
 
         $this->featureBoxId = $featureBox->id;
@@ -168,8 +194,19 @@ class FeatureBox extends Component
     }
 
 
-    private function preparedInitialData()
+    private function preparedInitialData($locale = null)
     {
+        if($locale)
+        {
+            $this->locale = $locale;
+        }else {
+            $this->locale = app()->getLocale();
+        }
+
+        if($this->locale){
+            app()->setLocale($this->locale);
+        }
+
         $this->featureBoxs = _FeatureBox::all();
     }
 }

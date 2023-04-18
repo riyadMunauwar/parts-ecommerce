@@ -1,28 +1,55 @@
 <section class="grid grid-cols-1 md:grid-cols-3 md:gap-5">
     <div>
         <div class="bg-white mx-auto p-5 md:p-7 md:rounded-md">
-            <h1 class="mb-5">Add Feature Box</h1>
+            <h1 class="mb-4">Add Feature Box</h1>
+
+            <div class="flex gap-2 mb-4">
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+                        </label>
+                    </div>
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+                        </label>
+                    </div>
+                </div>
 
             <x-validation-errors class="mb-4" />
 
             <div class="space-y-3">
                 <div>
-                    <x-label  for="sup_title" value="{{ __('Sup Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Sup Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="supTitle" id="sup_title" class="block mt-1 w-full" type="text" required />
                 </div>
 
                 <div>
-                    <x-label  for="title" value="{{ __('Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="title" id="title" class="block mt-1 w-full" type="text" required />
                 </div>
 
                 <div>
-                    <x-label  for="sub_title" value="{{ __('Sub Title') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Sub Title') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="subTitle" id="sub_title" class="block mt-1 w-full" type="text" required />
                 </div>
 
                 <div>
-                    <x-label  for="button_text" value="{{ __('Button Text') }}" />
+                    <div class="flex gap-1">
+                        <x-label  for="" value="{{ __('Button Text') }}" />
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $locale ?? '' }}</span>
+                    </div>
                     <x-input wire:model.debounce="buttonText" id="button_text" class="block mt-1 w-full" type="text" required />
                 </div>
 
