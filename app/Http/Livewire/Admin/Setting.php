@@ -14,9 +14,18 @@ class Setting extends Component
 
     public $locale;
 
-    public $website_name;
-    public $website_email;
-    public $website_phone;
+    public $company_name;
+    public $company_owner_name;
+    public $street_no;
+    public $street_1;
+    public $street_2;
+    public $street_3;
+    public $city;
+    public $state;
+    public $zip;
+    public $country;
+    public $email;
+    public $phone;
     public $meta_title;
     public $meta_tags;
     public $meta_description;
@@ -28,9 +37,18 @@ class Setting extends Component
 
 
     protected $rules = [
-        'website_name' => ['nullable', 'string'],
-        'website_email' => ['nullable', 'email'],
-        'website_phone' => ['nullable', 'string'],
+        'company_name' => ['nullable', 'string', 'max:255'],
+        'company_owner_name' => ['nullable', 'string', 'max:255'],
+        'street_no' => ['nullable', 'string', 'max:55'],
+        'street_1' => ['nullable', 'string', 'max:255'],
+        'street_2' => ['nullable', 'string', 'max:255'],
+        'street_3' => ['nullable', 'string', 'max:255'],
+        'city' => ['nullable', 'string', 'max:120'],
+        'state' => ['nullable', 'string', 'max:120'],
+        'zip' => ['nullable', 'string', 'max:55'],
+        'country' => ['nullable', 'string', 'max:125'],
+        'email' => ['nullable', 'email', 'max:255'],
+        'phone' => ['nullable', 'string', 'max:17'],
         'meta_title' => ['nullable', 'string'],
         'meta_tags' => ['nullable', 'string'],
         'meta_description' => ['nullable', 'string'],
@@ -65,9 +83,18 @@ class Setting extends Component
         $setting = _Setting::first();
 
 
-        $setting->website_name = $this->website_name;
-        $setting->website_email = $this->website_email;
-        $setting->website_phone = $this->website_phone;
+        $setting->company_name = $this->company_name;
+        $setting->company_owner_name = $this->company_owner_name;
+        $setting->street_no = $this->street_no;
+        $setting->street_1 = $this->street_1;
+        $setting->street_2 = $this->street_2;
+        $setting->street_3 = $this->street_3;
+        $setting->city = $this->city;
+        $setting->zip = $this->zip;
+        $setting->state = $this->state;
+        $setting->country = $this->country;
+        $setting->email = $this->email;
+        $setting->phone = $this->phone;
         $setting->meta_title = $this->meta_title;
         $setting->meta_tags = $this->meta_tags;
         $setting->meta_description = $this->meta_description;
@@ -110,9 +137,18 @@ class Setting extends Component
 
         $setting = _Setting::firstOrCreate();
 
-        $this->website_name = $setting->website_name;
-        $this->website_email = $setting->website_email;
-        $this->website_phone = $setting->website_phone;
+        $this->company_name = $setting->company_name;
+        $this->company_owner_name = $setting->company_owner_name;
+        $this->street_no = $setting->street_no;
+        $this->street_1 = $setting->street_1;
+        $this->street_2 = $setting->street_2;
+        $this->street_3 = $setting->street_3;
+        $this->city = $setting->city;
+        $this->zip = $setting->zip;
+        $this->state = $setting->state;
+        $this->country = $setting->country;
+        $this->email = $setting->email;
+        $this->phone = $setting->phone;
         $this->meta_title = $setting->meta_title;
         $this->meta_tags = $setting->meta_tags;
         $this->meta_description = $setting->meta_description;

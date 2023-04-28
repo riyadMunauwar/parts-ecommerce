@@ -4,6 +4,7 @@ namespace App\Actions\Front;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use App\Models\Product;
+use App\Models\Coupon;
 
 class ShoppingCart {
 
@@ -156,12 +157,10 @@ class ShoppingCart {
     }
 
 
-
     public function totalItems()
     {
         return Cart::count();
     }
-
 
 
     public function totalWeight()
@@ -185,6 +184,35 @@ class ShoppingCart {
             return $carry +  ( $item->qty * $item->options->vat_amount);
 
         }, 0);
+    }
+
+
+    public function removePreviousCouponIfExpired()
+    {
+        if(session()->has('is_coupon_applied') && session()->has('coupon_code'))
+        {
+            $coupon = Coupon::valid()->where('code', session()->get('coupon_code'))->first();
+
+            if(!$coupon){
+                session()->forget('is_coupon_applied');
+                session()->forget('coupon_code');
+            }
+        }
+    }
+
+    public function totalCouponDiscount()
+    {
+        $discount = 0;
+
+        $this->removePreviousCouponIfExpired();
+
+        if(session()->has('is_coupon_applied') && session()->has('coupon_code'))
+        {
+            $coupon = Coupon::valid()->where('code', session()->get('coupon_code'))->first();
+            $discount = $coupon->getCouponDiscount($this->subTotalPrice());
+        }
+
+        return $discount;
     }
 
 
@@ -214,12 +242,17 @@ class ShoppingCart {
 
     public function orderTotalPrice()
     {
-        return $this->subTotalPrice() +  $this->totalVat() + $this->totalShippingCost();
+        return ( $this->subTotalPrice() +  $this->totalVat() + $this->totalShippingCost() ) - $this->totalCouponDiscount();
     }
 
 
     public function totalShippingCost()
     {
+        if(session()->has('shipping_cost'))
+        {
+            return session()->get('shipping_cost');
+        }
+
         return 0;
     }
 

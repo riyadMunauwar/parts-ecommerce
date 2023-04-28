@@ -22,6 +22,7 @@ return new class extends Migration
             $table->foreignId('admin_id')->nullalbe()->constrained('users', 'id');
             $table->foreignId('coupon_id')->nullalbe()->constrained();
             $table->foreignId('shipper_id')->nullalbe()->constrained();
+            $table->string('shippo_address_object_id')->nullable();
             $table->foreignId('payment_method_id')->nullalbe()->constrained();
             $table->foreignId('order_status_id')->nullalbe()->constrained();
             $table->timestamps();

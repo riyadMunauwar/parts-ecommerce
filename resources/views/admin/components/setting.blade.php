@@ -19,21 +19,67 @@
             </div>
 
             <x-validation-errors class="mb-4" />
+            
             <div class="space-y-3">
 
                 <div>
-                    <x-label  for="name" value="{{ __('Website Name') }}" />
-                    <x-input wire:model.debounce="website_name" id="name" class="block mt-1 w-full" type="text" />
+                    <x-label  for="company_name" value="{{ __('Company Name') }}" />
+                    <x-input wire:model.debounce="company_name" id="company_name" class="block mt-1 w-full" type="text" />
                 </div>
 
                 <div>
-                    <x-label  for="email" value="{{ __('Website Email') }}" />
-                    <x-input wire:model.debounce="website_email" id="name" class="block mt-1 w-full" type="email"  />
+                    <x-label  for="company_owner_name" value="{{ __('Company Owner Name') }}" />
+                    <x-input wire:model.debounce="company_owner_name" id="company_owner_name" class="block mt-1 w-full" type="text"  />
                 </div>
 
                 <div>
-                    <x-label  for="phone" value="{{ __('Website Conact Phone') }}" />
-                    <x-input wire:model.debounce="website_phone" id="phone" class="block mt-1 w-full" type="text"  />
+                    <x-label  for="street_no" value="{{ __('Street No') }}" />
+                    <x-input wire:model.debounce="street_no" id="street_no" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="street_1" value="{{ __('Street 1') }}" />
+                    <x-input wire:model.debounce="street_1" id="street_1" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="street_2" value="{{ __('Street 2') }}" />
+                    <x-input wire:model.debounce="street_2" id="street_2" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="street_3" value="{{ __('Street 3') }}" />
+                    <x-input wire:model.debounce="street_3" id="street_3" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="city" value="{{ __('City') }}" />
+                    <x-input wire:model.debounce="city" id="city" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="state" value="{{ __('State') }}" />
+                    <x-input wire:model.debounce="state" id="state" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="zip" value="{{ __('Zip') }}" />
+                    <x-input wire:model.debounce="zip" id="zip" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="country" value="{{ __('Country') }}" />
+                    <x-input wire:model.debounce="country" id="country" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="email" value="{{ __('Email') }}" />
+                    <x-input wire:model.debounce="email" id="email" class="block mt-1 w-full" type="email"  />
+                </div>
+
+                <div>
+                    <x-label  for="phone" value="{{ __('Phone') }}" />
+                    <x-input wire:model.debounce="phone" id="phone" class="block mt-1 w-full" type="text"  />
                 </div>
 
                 <div>

@@ -9,6 +9,7 @@ use Spatie\Translatable\HasTranslations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Models\Category;
+use App\Models\Vat;
 
 class Product extends Model implements HasMedia
 {
@@ -276,7 +277,17 @@ class Product extends Model implements HasMedia
 
     public function vatAmount()
     {
-        return 0;
+        $vat = $this->vat;
+
+        if(!$vat){
+            return 0;
+        }
+
+        $salePrice =  $this->salePrice();
+
+        $vatAmount = $salePrice * ($vat->vat_rate / 100);
+
+        return  $vatAmount;
     }
 
     // Relationship
@@ -293,5 +304,9 @@ class Product extends Model implements HasMedia
     }
 
 
+    public function vat()
+    {
+        return $this->belongsTo(Vat::class);
+    }
 
 }

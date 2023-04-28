@@ -56,11 +56,20 @@ return new class extends Migration
             $table->json('meta_title')->nullable();
             $table->json('meta_description')->nullable();
             $table->json('meta_tags')->nullable();
-
-            $table->string('website_name')->nullable();
-            $table->string('website_email')->nullable();
-            $table->string('website_phone')->nullable();
-            $table->string('website_contact_address')->nullable();
+            
+            $table->string('company_owner_name')->nullable();
+            $table->string('company_name')->nullable();
+            $table->string('street_no', 55)->nullable();
+            $table->string('street_1')->nullable();
+            $table->string('street_2')->nullable();
+            $table->string('street_3')->nullable();
+            $table->string('city', 120)->nullable();
+            $table->string('state', 120)->nullable();
+            $table->string('zip', 55)->nullable();
+            $table->string('country', 125)->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone', 17)->nullable();
+            $table->string('shippo_address_object_id')->nullable();
 
             $table->json('footer_column_one_title')->nullable();
             $table->json('footer_column_two_title')->nullable();

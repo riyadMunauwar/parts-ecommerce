@@ -36,7 +36,7 @@
                         @foreach($customers ?? [] as $customer)
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row" class="px-4 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <img class="w-8 h-8 border rounded-full object-cover" src="" alt="{{ $customer->name ?? '' }}">
+                                <img class="w-8 h-8 border rounded-full object-cover" src="{{ $customer->profile_photo_url ?? '' }}" alt="{{ $customer->name ?? '' }}">
                             </th>
 
                             <td class="px-4 py-1">

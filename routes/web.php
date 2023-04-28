@@ -6,6 +6,9 @@ use App\Http\Controllers\SingleProductController;
 use App\Http\Controllers\CategoryWiseProductController;
 use App\Http\Controllers\LocalizationController;
 use App\Http\Controllers\ParentCategoryController;
+use App\Http\Controllers\SearchResultController;
+
+
 
 
 /*
@@ -55,11 +58,13 @@ Route::middleware([
 
 // Front
 Route::view('/', 'front.pages.home')->name('home');
+Route::get('/results', SearchResultController::class)->name('search');
 Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
 Route::get('categories/all', ParentCategoryController::class)->name('parent-category');
 Route::get('/category/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
-Route::get('/{pageSlug}', CustomPageController::class)->name('custom-page');
 Route::get('/product/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
-Route::get('locale/{language}', LocalizationController::class)->name('locale');
+Route::get('/locale/{language}', LocalizationController::class)->name('locale');
+Route::get('/{pageSlug}', CustomPageController::class)->name('custom-page');
+
 

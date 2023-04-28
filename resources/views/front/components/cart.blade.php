@@ -80,6 +80,12 @@
                         <p>Shipping</p>
                         <p>$ {{ $totalShippingCost }}</p>
                     </div>
+                    @if($isCouponApplied)
+                        <div class="flex justify-between">
+                            <p>Coupon Discount</p>
+                            <p>$ {{ $couponDiscount ?? 0 }}</p>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="py-4 border-b">
@@ -92,33 +98,52 @@
 
                 <div x-data="{ isOpen: false }" class="py-3">
                     <div @click="isOpen = !isOpen" class="cursor-pointer flex justify-between items-center">
-                        <h4 class="text-md font-medium">APPLY COUPON</h4>
-                        <span x-show="!isOpen">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
-                            </svg>
-                        </span>
-                        <span x-show="isOpen">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-                            </svg>
-                        </span>
+                        <h4 class="text-md font-medium">
+                            @if(!$isCouponApplied)
+                                APPLY COUPON
+                            @else 
+                                COUPON APPLIED 
+                            @endif
+                        </h4>
+                        @if(!$isCouponApplied)
+                            <span x-show="!isOpen">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </span>
+                            <span x-show="isOpen">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+                                </svg>
+                            </span>
+                        @else
+                            <div class="flex gap-2">
+                                <span wire:click.debounce="removeCoupon" class="text-red-400 hover:text-red-600">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 9.75l4.5 4.5m0-4.5l-4.5 4.5M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                </span>
+                                
+                                <span class="text-green-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                                    </svg>
+                                </span>
+                            </div>
+                        @endif
                     </div>
-
-                    <div x-show="isOpen" x-transition class="mt-3">
-                        <form action="" class="flex">
-                            <input class="w-3/4 h-8 focus:border-gray-900 focus:outline-0 focus:ring-0" type="text">
-                            <button class="w-1/4 text-xs bg-gray-900 font-semibold text-white">Apply</button>
-                        </form>
-                    </div>
+                    @if(!$isCouponApplied)
+                        <div x-cloack x-show="isOpen" x-transition class="mt-3">
+                            <div class="flex">
+                                <input wire:model.debounce="couponCode" class="w-3/4 h-8 focus:border-gray-900 focus:outline-0 focus:ring-0" type="text">
+                                <button wire:click.debounce="applyCoupon" class="w-1/4 text-xs bg-gray-900 font-semibold text-white">Apply</button>
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="space-y-3 mt-5">
                         <x-button class="w-full justify-center">
                             {{ __('Checkout') }}
-                        </x-button>
-
-                        <x-button class="w-full justify-center">
-                            {{ __('Paypal') }}
                         </x-button>
                     </div>
                 </div>
@@ -126,5 +151,5 @@
 
         </div>
     </div>
-    <x-ui.loading-spinner wire:loading.flex wire:target="removeCartItem, removeAllCartItem" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="removeCartItem, removeAllCartItem, applyCoupon, removeCoupon" />
 </section>
