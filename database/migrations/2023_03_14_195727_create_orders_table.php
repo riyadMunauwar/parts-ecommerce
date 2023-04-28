@@ -23,6 +23,11 @@ return new class extends Migration
             $table->foreignId('coupon_id')->nullalbe()->constrained();
             $table->foreignId('shipper_id')->nullalbe()->constrained();
             $table->string('shippo_address_object_id')->nullable();
+            $table->string('lebel_url', 2048)->nullable();
+            $table->string('tracking_url', 2048)->nullable();
+            $table->string('tracking_number')->nullable();
+            $table->string('parcel_id')->nullable();
+            $table->string('rate_object_id')->nullable();
             $table->foreignId('payment_method_id')->nullalbe()->constrained();
             $table->foreignId('order_status_id')->nullalbe()->constrained();
             $table->timestamps();
