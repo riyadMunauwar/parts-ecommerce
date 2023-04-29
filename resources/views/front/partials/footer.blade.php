@@ -82,7 +82,7 @@
             <div class="flex mt-3 -mx-2 sm:mt-0">
                 @foreach($socialLinks ?? [] as $link)
                     <a href="{{ $link->link ?? '' }}" target="_blank" class="mx-2 footer-text hover:text-gray-500" aria-label="Reddit">
-                       <img class="block h-10 w-10 rounded-full" src="{{ $link->iconUrl('thumb-50') ?? '' }}" alt="{{ $icon->name ?? '' }}">
+                       <img class="block h-6 w-6 rounded-full" src="{{ $link->iconUrl('thumb-50') ?? '' }}" alt="{{ $icon->name ?? '' }}">
                     </a>
                 @endforeach
             </div>
