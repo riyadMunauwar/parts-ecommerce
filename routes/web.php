@@ -28,7 +28,7 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-    // 'role:admin|manager|editor',
+    'role:admin|manager|editor',
 ])->prefix('admin')->group(function () {
 
     Route::view('/dashboard', 'admin.pages.dashboard')->name('dashboard');
