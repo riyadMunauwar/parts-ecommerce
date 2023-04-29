@@ -77,13 +77,26 @@
                         @endif
                     </x-slot>
 
+                    @php 
+                        
+                        $role = auth()->user()->getRoleNames()->first();
+
+                        $route = route('admin-user-profile');
+
+                        if(!$role || $role === 'user')
+                        {
+                            $route = route('user-profile');
+                        }
+
+                    @endphp
+
                     <x-slot name="content">
                         <!-- Account Management -->
                         <div class="block px-4 py-2 text-xs text-gray-400">
                             {{ __('Manage Account') }}
                         </div>
 
-                        <x-dropdown-link href="{{ route('profile.show') }}">
+                        <x-dropdown-link href="{{ $route }}">
                             {{ __('Profile') }}
                         </x-dropdown-link>
 
@@ -128,6 +141,19 @@
                         </a>
                     </li>
                 @endguest
+
+                @auth 
+                    <li>
+                        <a href="{{ route('user-profile') }}" class="flex border-b uppercase items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                            Profile
+                        </a>
+                    </li>
+                    <li>
+                        <a href="" class="flex border-b uppercase items-center py-1 font-medium pr-4 pl-3 primary-text secondary-hover-bg">
+                            My Order
+                        </a>
+                    </li>
+                @endauth
 
                 <a href="{{ route('parent-category') }}" class="group cursor-pointer border-b border-t text-white px-3 py-1 font-bold hover:bg-white hover:text-gray-900 flex items-center">
                     All

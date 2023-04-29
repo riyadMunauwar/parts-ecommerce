@@ -35,13 +35,28 @@
                       @endif
                   </x-slot>
 
+
+
+                  @php 
+                
+                      $role = auth()->user()->getRoleNames()->first();
+
+                      $route = route('admin-user-profile');
+
+                      if(!$role || $role === 'user')
+                      {
+                          $route = route('user-profile');
+                      }
+
+                  @endphp
+
                   <x-slot name="content">
                       <!-- Account Management -->
                       <div class="block px-4 py-2 text-xs text-gray-400">
                           {{ __('Manage Account') }}
                       </div>
 
-                      <x-dropdown-link href="{{ route('profile.show') }}">
+                      <x-dropdown-link href="{{ $route }}">
                           {{ __('Profile') }}
                       </x-dropdown-link>
 

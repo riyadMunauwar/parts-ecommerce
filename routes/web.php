@@ -27,8 +27,9 @@ use App\Http\Controllers\SearchResultController;
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
+    'verified',
+    // 'role:admin|manager|editor',
+])->prefix('admin')->group(function () {
 
     Route::view('/dashboard', 'admin.pages.dashboard')->name('dashboard');
     
@@ -51,9 +52,21 @@ Route::middleware([
     Route::view('/subscriber', 'admin.pages.subscriber-list')->name('subscriber-list');
     Route::view('/admins', 'admin.pages.admins-list')->name('admins.list');
     Route::view('/solcial-links', 'admin.pages.social-links')->name('social-link');
-
+    Route::view('/user/profile', 'admin.pages.user-profile')->name('admin-user-profile');
 
 });
+
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+
+    Route::view('/user/profile', 'front.pages.user-profile')->name('user-profile');
+
+});
+
 
 
 // Front
