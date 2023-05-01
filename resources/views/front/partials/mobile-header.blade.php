@@ -55,7 +55,7 @@
         </span>
     </div>
 
-    <nav x-show="isMenuOpen" x-cloak x-transition class="fixed inset-0 z-50 overflow-hidden w-4/5 h-full primary-bg primary-text p-3">
+    <nav x-show="isMenuOpen" x-cloak x-transition class="fixed inset-0 z-50 overflow-y-auto w-4/5 h-full primary-bg primary-text p-3">
         @auth
             <div class="ml-3 relative">
                 <x-dropdown align="right" width="48">
