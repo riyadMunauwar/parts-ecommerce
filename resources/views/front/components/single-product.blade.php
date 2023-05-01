@@ -53,13 +53,13 @@
                             <p class="absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-white">Loading...</p>
                         </div>
                     </div>
-                    <div class="mt-8 flex gap-2">
-                        <div wire:click="changeThumbnail('{{ $product->thumbnailUrl() }}')" class="cursor-pointer border rounded-md">
-                            <img class="w-20 h-20 rounded-md object-cover" src="{{ $product->thumbnailUrl() }}" alt="">
+                    <div class="mt-8 grid grid-cols-5 gap-2">
+                        <div wire:click="changeThumbnail('{{ $product->thumbnailUrl() }}')" class="aspect-square cursor-pointer border rounded-md">
+                            <img class="block w-full max-h-full rounded-md object-cover" src="{{ $product->thumbnailUrl() }}" alt="">
                         </div>
                         @foreach($product->getMedia('gallery') ?? [] as $media)
-                            <div wire:click="changeThumbnail('{{ $media->getUrl() }}')" class="cursor-pointer border rounded-md">
-                                <img class="w-20 h-20 rounded-md object-cover" src="{{ $media->getUrl() }}" alt="">
+                            <div wire:click="changeThumbnail('{{ $media->getUrl() }}')" class="aspect-square cursor-pointer border rounded-md">
+                                <img class="block w-full h-full rounded-md object-cover" src="{{ $media->getUrl() }}" alt="">
                             </div>
                         @endforeach
                     </div>
