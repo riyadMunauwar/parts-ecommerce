@@ -25,7 +25,7 @@ class SearchResultController extends Controller
         $cacheKey = "search:{$searchQuery}_page:{$page}";
 
         $products = Cache::remember($cacheKey, 3600, function() use($page, $searchQuery){
-            return Product::where('search_name', 'like', '%' . $searchQuery . '%')->orWhere('search_name', $searchQuery)->paginate(12);
+            return Product::where('search_name', 'like', '%' . $searchQuery . '%')->orWhere('search_name', $searchQuery)->paginate(12)->withQueryString();
         });
 
         return view('front.pages.search-results', compact('searchQuery', 'products'));
