@@ -76,10 +76,6 @@
                         <p>Tax</p>
                         <p>$ {{ $totalVat }}</p>
                     </div>
-                    <div class="flex justify-between">
-                        <p>Shipping</p>
-                        <p>$ {{ $totalShippingCost }}</p>
-                    </div>
                     @if($isCouponApplied)
                         <div class="flex justify-between">
                             <p>Coupon Discount</p>
@@ -142,7 +138,7 @@
                     @endif
 
                     <div class="space-y-3 mt-5">
-                        <x-button class="w-full justify-center">
+                        <x-button wire:click="redirectToCheckout" type="button" class="w-full justify-center">
                             {{ __('Checkout') }}
                         </x-button>
                     </div>
@@ -151,5 +147,5 @@
 
         </div>
     </div>
-    <x-ui.loading-spinner wire:loading.flex wire:target="removeCartItem, removeAllCartItem, applyCoupon, removeCoupon" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="redirectToCheckout, removeCartItem, removeAllCartItem, applyCoupon, removeCoupon" />
 </section>

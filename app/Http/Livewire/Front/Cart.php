@@ -70,6 +70,12 @@ class Cart extends Component
     }
 
 
+    public function redirectToCheckout()
+    {
+        return redirect()->route('checkout');
+    }
+    
+
     public function removeAllCartItem()
     {
         $cart = new ShoppingCart();

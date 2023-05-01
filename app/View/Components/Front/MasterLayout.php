@@ -8,17 +8,13 @@ use Illuminate\View\Component;
 
 class MasterLayout extends Component
 {
-    public $meta_title;
-    public $meta_tags;
-    public $meta_description;
+
     /**
      * Create a new component instance.
      */
-    public function __construct($meta_title = '', $meta_description = '', $meta_tags = '')
+    public function __construct()
     {
-        $this->meta_title = $meta_title;
-        $this->meta_description = $meta_description;
-        $this->meta_tags = $meta_tags;
+
     }
 
     /**

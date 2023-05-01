@@ -5,12 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ $meta_title ?? '' }}</title>
-        <meta name="title" content="{{ $meta_title ?? '' }}" />
-        <meta name="description" content="{{ $meta_description ?? '' }}" />
-        <meta name="keywords" content="{{ $meta_tags ?? '' }}" />
-        <meta name="robots" content="INDEX,FOLLOW" />
-        <meta name="format-detection" content="telephone=no" />
+        @if($meta_data)
+            {{ $meta_data }}
+        @else 
+
+            <title>{{ config('setting')->website_name ?? '' }}</title>
+
+        @endif
+
         <link rel="icon" href="{{ config('setting')->faviconUrl() }}" type="image/png">
 
         <!-- Fonts -->
