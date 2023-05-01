@@ -146,10 +146,10 @@
                                 </div>
 
                                 <div>
-                                    <p class="text-sm font-medium text-gray-900">$ {{ $product->salePrice() }}</p>
+                                    <p class="text-sm font-medium whitespace-nowrap text-gray-900">$ {{ $product->salePrice() }}</p>
                                     @if($product->hasDiscount())
                                         <del>
-                                            <p class="text-xs text-gray-500">$ {{ $product->regularPrice() }}</p>
+                                            <p class="text-xs whitespace-nowrap text-gray-500">$ {{ $product->regularPrice() }}</p>
                                         </del>
                                     @endif
                                 </div>
