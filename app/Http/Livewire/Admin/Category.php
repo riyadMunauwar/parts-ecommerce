@@ -87,7 +87,7 @@ class Category extends Component
             }
             
             $this->reset();
-            $this->categories = ProductCategory::all();
+            $this->preparedInitState();
             $this->emit('onCategoryCreated');
             return $this->success('Created', 'Category created successfully');
         }

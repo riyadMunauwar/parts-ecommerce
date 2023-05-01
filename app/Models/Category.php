@@ -68,7 +68,7 @@ class Category extends Model implements HasMedia
     
     public function children()
     {
-        return $this->hasMany(Category::class, 'parent_id')->with('children');
+        return $this->hasMany(Category::class, 'parent_id')->with('children')->orderBy('order');
     }
 
 
@@ -103,5 +103,15 @@ class Category extends Model implements HasMedia
     public function menu()
     {
         return $this->hasOne(Menu::class);
+    }
+
+    public function scopeOrderAsc($query)
+    {
+        return $query->orderBy('order');
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('is_published', true);
     }
 }
