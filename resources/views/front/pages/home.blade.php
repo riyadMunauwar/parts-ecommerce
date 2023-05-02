@@ -2,6 +2,7 @@
    <x-slot name="meta_data">
         <title>{{ config('setting')->meta_title ?? '' }}</title>
         <meta name="description" content="{{ config('setting')->meta_description ?? '' }}" />
+        <meta name="keywords" content="{{ config('setting')->meta_tags ?? '' }}" />
         <link rel="canonical" href="{{ URL('') }}" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />

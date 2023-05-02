@@ -1,3 +1,8 @@
+@php 
+  $dimension_unit = ' (' . config('shippo.dimension_unit') . ')';
+  $weight_unit = ' (' . config('shippo.weight_unit') . ')';
+@endphp
+
 <div class="">
     <div class="grid grid-cols-1 md:grid-cols-6 md:gap-5">
         <div class="col-span-4">
@@ -62,22 +67,22 @@
                         </div>
 
                         <div class="">
-                            <x-label for="weight" value="{{ __('Weight (g)') }}" />
+                            <x-label for="weight" value="{{ __('Weight') . $weight_unit }}" />
                             <x-input wire:model.debounce="weight" id="weight" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                     </div>
 
                     <div class="col-span-2 grid grid-cols-3 gap-5 mt-2">
                         <div>
-                            <x-label  for="height" value="{{ __('Height (cm)') }}" />
+                            <x-label  for="height" value="{{ __('Height') . $dimension_unit }}" />
                             <x-input wire:model.debounce="height" id="height" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                         <div>
-                            <x-label  for="wdith" value="{{ __('Width (cm)') }}" />
+                            <x-label  for="wdith" value="{{ __('Width') . $dimension_unit }}" />
                             <x-input wire:model.debounce="width" id="wdith" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                         <div>
-                            <x-label  for="length" value="{{ __('Length (cm)') }}" />
+                            <x-label  for="length" value="{{ __('Length') . $dimension_unit }}" />
                             <x-input wire:model.debounce="length" id="length" class="block mt-1 h-8 w-full" type="number" />
                         </div>
                     </div>
