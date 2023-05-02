@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "bumbummen99/shoppingcart": "^4.2",
         "guzzlehttp/guzzle": "^7.2",
+        "laracraft-tech/laravel-date-scopes": "^1.0",
         "laravel/framework": "^9.19",
         "laravel/jetstream": "3.0",
         "laravel/sanctum": "^3.0",

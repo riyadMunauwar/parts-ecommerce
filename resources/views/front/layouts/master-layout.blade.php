@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        @if($meta_data)
+        @if($meta_data ?? null)
             {{ $meta_data }}
         @else 
 

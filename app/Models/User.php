@@ -12,6 +12,8 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Address;
 use App\Models\Discount;
+use LaracraftTech\LaravelDateScopes\DateScopes;
+
 
 class User extends Authenticatable
 {
@@ -21,6 +23,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use DateScopes;
 
     /**
      * The attributes that are mass assignable.
