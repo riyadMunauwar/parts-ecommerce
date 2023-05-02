@@ -88,6 +88,6 @@ class SaleReportWidget extends Component
 
     private function todayCustomers()
     {
-        return Product::ofToday()->count();
+        return User::ofToday()->count();
     }
 }
