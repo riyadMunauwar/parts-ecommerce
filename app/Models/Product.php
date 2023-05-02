@@ -10,6 +10,7 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Models\Category;
 use App\Models\Vat;
+use LaracraftTech\LaravelDateScopes\DateScopes;
 
 class Product extends Model implements HasMedia
 {
@@ -17,6 +18,7 @@ class Product extends Model implements HasMedia
     use HasFactory;
     use HasTranslations;
     use InteractsWithMedia;
+    use DateScopes;
 
     public $translatable = [
         'name',
