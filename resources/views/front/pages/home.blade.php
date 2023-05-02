@@ -1,16 +1,16 @@
 <x-front.master-layout >
    <x-slot name="meta_data">
-        <title>Khalid Farhan - Marketer, Content Creator, Business Operator</title>
-        <meta name="description" content="I try to document as much of my professional life as possible here. Visit my website to know more about my businesses, what I do &amp; to consume my content." />
-        <link rel="canonical" href="https://khalidfarhan.com/" />
+        <title>{{ config('setting')->meta_title ?? '' }}</title>
+        <meta name="description" content="{{ config('setting')->meta_description ?? '' }}" />
+        <link rel="canonical" href="{{ URL('') }}" />
         <meta property="og:locale" content="en_US" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Khalid Farhan - Marketer, Content Creator, Business Operator" />
-        <meta property="og:description" content="I try to document as much of my professional life as possible here. Visit my website to know more about my businesses, what I do &amp; to consume my content." />
-        <meta property="og:url" content="https://khalidfarhan.com/" />
-        <meta property="og:site_name" content="KHALID FARHAN" />
-        <meta property="article:modified_time" content="2023-03-06T16:18:12+00:00" />
-        <meta property="og:image" content="https://khalidfarhan.com/wp-content/uploads/2022/02/Screenshot-2022-02-06-at-22.24.50.png" />
+        <meta property="og:title" content="{{ config('setting')->meta_title ?? '' }}" />
+        <meta property="og:description" content="{{ config('setting')->meta_description ?? '' }}" />
+        <meta property="og:url" content="{{ URL('') }}" />
+        <meta property="og:site_name" content="{{ config('setting')->website_name ?? '' }}" />
+        <meta property="article:modified_time" content="{{ config('setting')->updated_at ?? '' }}" />
+        <meta property="og:image" content="{{ config('setting')->logoUrl() ?? '' }}" />
         <meta property="og:image:width" content="470" />
         <meta property="og:image:height" content="82" />
         <meta property="og:image:type" content="image/png" />

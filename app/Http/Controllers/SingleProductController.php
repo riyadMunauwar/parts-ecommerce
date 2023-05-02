@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;
 
 class SingleProductController extends Controller
 {
@@ -16,6 +17,9 @@ class SingleProductController extends Controller
     {
         $productSlug = $request->productSlug;
         $productId = $request->productId;
-        return view('front.pages.single-product', compact('productSlug', 'productId'));
+
+        $product = Product::find($productId);
+
+        return view('front.pages.single-product', compact('productSlug', 'productId', 'product'));
     }
 }
