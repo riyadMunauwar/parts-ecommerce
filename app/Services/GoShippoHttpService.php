@@ -11,7 +11,7 @@ class GoShippoHttpService
 
     public function __construct()
     {
-        $this->apiUrl = config('shippo.api_url');
+        $this->apiUrl = config('shippo.base_api_url');
         $this->apiKey = config('shippo.api_key');
     }
 
@@ -121,7 +121,7 @@ class GoShippoHttpService
             $response->throw();
             return [
                 'success' => true,
-                'data' => $response->json(),
+                'data' => $response->collect(),
             ];
         } catch (\Exception $e) {
             return [
