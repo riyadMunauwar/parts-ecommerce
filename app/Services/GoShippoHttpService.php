@@ -64,6 +64,7 @@ class GoShippoHttpService
                 'height' => 0,
                 'weight' => 0,
                 'length' => 0,
+                'weight' => 0,
                 'distance_unit' => 'in',
                 'mass_unit' => 'lb',
         ];

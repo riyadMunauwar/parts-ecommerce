@@ -6,6 +6,8 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use App\Models\Setting as _Setting;
 use App\Traits\WithSweetAlert;
+use App\Events\OnSettingUpdated;
+
 
 class Setting extends Component
 {
@@ -14,6 +16,7 @@ class Setting extends Component
 
     public $locale;
 
+    public $shippo_pickup_address_object_id = false;
     public $company_name;
     public $company_owner_name;
     public $street_no;
@@ -108,6 +111,10 @@ class Setting extends Component
             $this->new_favicon = null;
             $this->old_favicon = $setting->faviconUrl();
 
+            event(new OnSettingUpdated($setting));
+
+            $this->preparedInitData();
+
             return $this->success('Saved', '');
         }
 
@@ -137,6 +144,7 @@ class Setting extends Component
 
         $setting = _Setting::firstOrCreate();
 
+        $this->shippo_pickup_address_object_id = $setting->shippo_address_object_id;
         $this->company_name = $setting->company_name;
         $this->company_owner_name = $setting->company_owner_name;
         $this->street_no = $setting->street_no;

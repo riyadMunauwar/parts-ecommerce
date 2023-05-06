@@ -165,7 +165,9 @@ class ShoppingCart {
 
     public function totalWeight()
     {
-        return Cart::content()->sum('weight');
+        return Cart::content()->reduce(function($carry, $item){
+            return $carry + ($item->weight * $item->qty);
+        }, 0);
     }
 
 
@@ -173,7 +175,13 @@ class ShoppingCart {
     {
         return Cart::content()->reduce(function($carry, $item){
             return $carry + (($item->options->height * $item->options->length * $item->options->width) * $item->qty);
-        }, 0);
+        }, 2);
+    }
+
+
+    public function averageHWL()
+    {
+        return number_format(pow($this->totalDimension(), 1/3), 2);
     }
 
 

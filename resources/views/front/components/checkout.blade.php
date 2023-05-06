@@ -149,14 +149,17 @@
                         <h1 class="bg-black text-white py-2 px-4 text-center text-lg font-semibold mb-5 rounded-sm">Shipping Method</h1>
 
                         <div class="space-y-3">
-                            @foreach([1,2,3] as $shipper)
-                                <div class="flex items-center pl-4 border border-gray-200 rounded">
-                                    <input id="rates-{{$shipper}}" type="radio" value="" name="shipping_rate" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 focus:ring-gray-900 focus:ring-2">
-                                    <label for="rates-{{$shipper}}" class="cursor-pointer w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                            @foreach($shippingRates as $rate)
+                                <div class="flex items-center gap-5 pl-4 border border-gray-200 rounded">
+                                    <input id="rates-{{$rate['object_id']}}" type="radio" value="" name="shipping_rate" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 focus:ring-gray-900 focus:ring-2">
+                                    <label for="rates-{{$rate['object_id']}}" class="cursor-pointer w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                         <div class="flex justify-between items-center px-4 text-gray-700">
-                                            <h2>$ 656</h2>
-                                            <h2>UPS International</h2>
-                                            <h2>5 - 8 Business Dasy</h2>
+                                            <h2>
+                                                <img class="block h-10 object-contain" src="{{ $rate['provider_image_200'] }}" alt="">
+                                            </h2>
+                                            <h2 class="whitespace-nowrap">$ {{ $rate['amount'] }}</h2>
+                                            <h2 class="whitespace-nowrap">{{ $rate['provider'] }}</h2>
+                                            <h2 class="w-1/4">{{ $rate['duration_terms'] }}</h2>
                                         </div>
                                     </label>
                                 </div>

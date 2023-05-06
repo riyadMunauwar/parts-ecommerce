@@ -48,7 +48,7 @@ class Checkout extends Component
         'first_name' => ['required', 'string', 'max:255'],
         'last_name' => ['required', 'string', 'max:255'],
         'street_1' => ['required', 'string', 'max:255'],
-        'street_2' => ['required', 'string', 'max:255'],
+        'street_2' => ['nullable', 'string', 'max:255'],
         'city' => ['required', 'string', 'max:255'],
         'zip' => ['required', 'string', 'max:255'],
         'state' => ['required', 'string', 'max:255'],
@@ -60,10 +60,13 @@ class Checkout extends Component
         'onCartItemQuantityChange' => '$refresh',
     ];
 
+    public function mount()
+    {
+        $this->preparedInitState();
+    }
 
     public function render()
     {
-        $this->preparedInitState();
         return view('front.components.checkout');
     }
 
@@ -135,21 +138,75 @@ class Checkout extends Component
 
                 return $this->error('Address Validation Failed', '');
 
-            }else {
-
-                $address = $response['data'];
-
-                $this->street_1 = $address['street1'];
-                $this->street_2 = $address['street2'];
-                $this->city = $address['city'];
-                $this->zip = $address['zip'];
-                $this->state = $address['state'];
-                $this->country = $address['country'];
-
-                return $this->success('Address validation success', '');
-
-
             }
+
+
+            $address = $response['data'];
+
+            $this->street_1 = $address['street1'];
+            $this->street_2 = $address['street2'];
+            $this->city = $address['city'];
+            $this->zip = $address['zip'];
+            $this->state = $address['state'];
+            $this->country = $address['country'];
+            $this->phone = $address['phone'];
+            $this->email = $address['email'];
+
+            $shippingAddress = [
+                'first_name' => $this->first_name,
+                'last_name' => $this->last_name,
+                'email' => $this->email,
+                'phone' => $this->phone,
+                'street_1' => $this->street_1,
+                'street_2' => $this->street_2, 
+                'city' => $this->city,
+                'zip' => $this->zip,
+                'state' => $this->state,
+                'country' => $this->country,
+                'shippo_address_object_id' => $address['object_id'],
+            ]; 
+
+            if(session()->has('shipping_address')){
+                session()->forget('shipping_address');
+            }
+
+            session()->put('shipping_address', $shippingAddress);
+            
+            $cart = new ShoppingCart();
+
+            $pickup_address_object_id = config('setting.shippo_address_object_id') ?? false;
+
+            if(!$pickup_address_object_id) {
+                return $this->error('Failed', 'Admin not setup pickup address');
+            }
+
+            $parcel = [
+                'height' => $cart->averageHWL(),
+                'width' => $cart->averageHWL(),
+                'length' => $cart->averageHWL(),
+                'weight' => $cart->totalWeight(),
+            ];
+
+
+            $addresses = [
+                'address_from' => $pickup_address_object_id,
+                'address_to' => session()->get('shipping_address')['shippo_address_object_id'],
+            ];
+
+
+            $response = $shippo->createShipmentAndGetRates($parcel, $addresses);
+
+            if(!$response['success'] && $response['data']['status'] !== 'SUCCESS' && !count($response['data']['rates'])){
+                $this->$addressValidationErrors = $response['messages'];
+                return $this->error('Shipping Rates Found Failed', '');
+            }
+
+            $this->shippingRates = $response['data']['rates'];
+
+            session()->put('shipping_rates', $response['data']['rates']);
+
+
+            return $this->success('Address validation success', '');
 
 
 
@@ -167,7 +224,7 @@ class Checkout extends Component
     {
 
         $cart = new ShoppingCart();
-        
+
         $cart->removePreviousCouponIfExpired();
 
         $this->items = $cart->totalItems();
@@ -175,6 +232,32 @@ class Checkout extends Component
         $this->totalShippingCost = $cart->totalShippingCost();
         $this->subTotalPrice = $cart->showSubTotalPrice();
         $this->orderTotalPrice = $cart->orderTotalPrice();
+
+        if(session()->has('shipping_address')){
+
+            $shippingAddress = session()->get('shipping_address');
+
+
+            $this->first_name = $shippingAddress['first_name'];
+            $this->last_name = $shippingAddress['last_name'];
+            $this->street_1 = $shippingAddress['street_1'];
+            $this->street_2 = $shippingAddress['street_2'];
+            $this->city = $shippingAddress['city'];
+            $this->zip = $shippingAddress['zip'];
+            $this->state = $shippingAddress['state'];
+            $this->country = $shippingAddress['country'];
+            $this->phone = $shippingAddress['phone'];
+            $this->email = $shippingAddress['email'];
+
+
+        }
+
+        if(session()->has('shipping_rates')){
+
+            $this->shippingRates = session()->get('shipping_rates');
+
+            $this->isAddressValidated = true;
+        }
 
 
         if(session()->has('is_coupon_applied') && session()->has('coupon_code'))

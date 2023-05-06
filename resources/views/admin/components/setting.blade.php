@@ -3,20 +3,31 @@
         <div class="bg-white p-5 md:p-7 md:rounded-md">
             <h1 class="mb-5">General Setting</h1>
 
-            <div class="flex gap-2 mb-5">
-                <div class="block">
-                    <label for="locale" class="flex items-center">
-                        <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
-                        <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
-                    </label>
+            <div class="flex justify-between items-center">
+                <div class="flex gap-2 mb-5">
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="en" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('English') }}</span>
+                        </label>
+                    </div>
+                    <div class="block">
+                        <label for="locale" class="flex items-center">
+                            <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
+                            <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
+                        </label>
+                    </div>
                 </div>
-                <div class="block">
-                    <label for="locale" class="flex items-center">
-                        <x-ui.radio wire:model="locale" value="es" id="locale" name="locale" />
-                        <span class="ml-2 text-sm text-gray-600">{{ __('Spanish') }}</span>
-                    </label>
+
+                <div>
+                    @if($shippo_pickup_address_object_id)
+                        <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Pickup Address Validated</span>
+                    @else 
+                        <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">Pickup Address Not Validated</span>
+                    @endif
                 </div>
             </div>
+
 
             <x-validation-errors class="mb-4" />
             
@@ -164,5 +175,5 @@
         </div>
     </div>
 
-    <x-ui.loading-spinner wire:loading.flex wire:target="confirmDeleteDiscount, enableDiscountEditMode, createDiscount, updateDiscount, cancelDiscountEditMode" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="saveSetting" />
 </section>
