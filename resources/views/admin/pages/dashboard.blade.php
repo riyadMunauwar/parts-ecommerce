@@ -1,23 +1,29 @@
 <x-admin.master-layout title="Dashboard">
 
-    <livewire:admin.sale-report-widget />
 
-
-    <div class="flex gap-5 mt-5">
-        <div class="flex-1">
+    <div>
+        <livewire:admin.dashboard-report-box />
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 md:gap-5 md:mt-5">
+        <div  class="col-span-1 bg-white rounded-sm">
+            <livewire:admin.dashboard-latest-order-list-box />
+        </div>
+        <div  class="col-span-2 bg-white rounded-sm">
             <livewire:admin.current-month-sales-chart />
         </div>
-        <div class="flex-1">
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 md:gap-5 md:mt-5">
+        <div class="col-span-2 bg-white rounded-sm">
             <livewire:admin.current-month-orders-chart />
         </div>
-    </div>
-
-    <div class="flex gap-5 mt-5">
-        <div class="flex-1">
-            <livewire:admin.sales-chart-widget />
-        </div>
-        <div class="flex-1">
+        <div class="col-span-1 bg-white rounded-sm">
+            <livewire:admin.latest-search-keyword-list />
         </div>
     </div>
 
+    <div class="md:mt-5">
+        <livewire:admin.sales-chart-widget />
+    </div>
 </x-admin.master-layout>

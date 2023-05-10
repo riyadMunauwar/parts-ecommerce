@@ -35,8 +35,8 @@ class SalesChartWidget extends Component
             'labels' => $orders->pluck('month'),
             'datasets' => [
                 [
-                    'label' => 'Sales',
-                    'backgroundColor' => '#f87979',
+                    'label' => 'Total Sales',
+                    'backgroundColor' => '#06b6d4',
                     'data' => $orders->pluck('total')
                 ]
             ]

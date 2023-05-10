@@ -18,10 +18,10 @@
             data: {
                 labels: labels,
                 datasets: [{
-                        label: 'This Month Sales',
+                        label: '{{ now()->format("M Y") }} Sales',
                         data: salesData,
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: '#c084fc',
+                        borderColor: '#c084fc',
                         borderWidth: 1
                     }]
             },

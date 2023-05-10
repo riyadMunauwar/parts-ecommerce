@@ -35,6 +35,7 @@ Route::middleware([
     
     Route::view('/orders', 'admin.pages.orders.list')->name('orders.list');
     Route::view('/orders/new', 'admin.pages.orders.new-order-list')->name('orders.new-list');
+    Route::get('/orders/{order}/show', \App\Http\Controllers\Admin\OrderDetailController::class)->name('orders.show');
     Route::view('/category/add', 'admin.pages.category.create')->name('category.create');
     Route::view('/categories', 'admin.pages.category.list')->name('category.list');
     Route::view('/discounts', 'admin.pages.discount')->name('discount');
