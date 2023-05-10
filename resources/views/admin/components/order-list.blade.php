@@ -119,10 +119,3 @@
     </div>
     <x-ui.loading-spinner wire:loading.flex wire:target="search, status, to_date, enableAddStockModal, confirmDeleteProduct, deleteProduct, enableProductEditMode, showVariationList" />
 </section>
-
-
-@push('modals')
-    <livewire:admin.edit-product />
-    <livewire:admin.variation-list />
-    <livewire:admin.add-stock />
-@endpush
