@@ -15,6 +15,7 @@ class Order extends Model
     use HasFactory;
     use DateScopes;
 
+
     protected $casts = [
         'order_date' => 'datetime',
         'paid_at' => 'datetime',
@@ -22,15 +23,17 @@ class Order extends Model
 
 
 
+    public function totalPrice()
+    {
+        return $this->total_product_price + $this->shipping_cost + $this->total_vat;
+    }
+
     public static function getCurrentMonthSales()
     {
         $currentMonthStart = Carbon::now()->startOfMonth();
         $currentMonthEnd = Carbon::now()->endOfMonth();
 
-        // $currentMonthStart = '2022-05-01';
-        // $currentMonthEnd = '2022-05-31';
-
-        $sales = Order::selectRaw('DATE(order_date) as date, SUM(total_product_price) as total_sales')
+        $sales = static::selectRaw('DATE(order_date) as date, SUM(total_product_price) as total_sales')
             ->whereBetween('order_date', [$currentMonthStart, $currentMonthEnd])
             ->groupBy('date')
             ->get();
@@ -49,10 +52,7 @@ class Order extends Model
         $currentMonthStart = Carbon::now()->startOfMonth();
         $currentMonthEnd = Carbon::now()->endOfMonth();
 
-        // $currentMonthStart = '2022-05-01';
-        // $currentMonthEnd = '2022-05-31';
-
-        $orders = Order::selectRaw('DATE(order_date) as date, COUNT(*) as total_orders')
+        $orders = static::selectRaw('DATE(order_date) as date, COUNT(*) as total_orders')
             ->whereBetween('order_date', [$currentMonthStart, $currentMonthEnd])
             ->groupBy('date')
             ->get();
@@ -71,6 +71,7 @@ class Order extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
 
     public function user()
     {

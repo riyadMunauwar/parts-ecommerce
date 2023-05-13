@@ -281,3 +281,6 @@
     <x-ui.loading-spinner wire:loading.flex wire:target="validateAddress, applyCoupon, removeCoupon" />
 </section>
 
+@push('modals')
+    <livewire:front.register-user />
+@endpush
