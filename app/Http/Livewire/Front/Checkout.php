@@ -42,6 +42,9 @@ class Checkout extends Component
     public $addressValidationErrors = [];
 
 
+    public $selectedShippingRate;
+
+
     protected $rules = [
         'email' => ['required', 'email', 'max:255'],
         'phone' => ['required', 'string', 'max:255'],
@@ -70,6 +73,24 @@ class Checkout extends Component
         return view('front.components.checkout');
     }
 
+    public function updatedSelectedShippingRate($value)
+    {
+        session()->put('shipping_cost', (float) $value);
+        $this->preparedInitState();
+    }
+
+
+    public function nextStepForPayment()
+    {
+        $this->validate(['selectedShippingRate' => ['required', 'numeric']]);
+
+        if(!auth()->check()){
+            return $this->emit('onRegisterMode');
+        }
+
+        return $this->emit('onPaymentMode');
+
+    }
 
     public function applyCoupon()
     {
@@ -202,9 +223,10 @@ class Checkout extends Component
             }
 
             $this->shippingRates = $response['data']['rates'];
-
-            session()->put('shipping_rates', $response['data']['rates']);
-
+            $this->isAddressValidated = true;
+    
+            // session()->put('shipping_rates', $response['data']['rates']);
+            // dd($this->shippingRates);
 
             return $this->success('Address validation success', '');
 
@@ -223,6 +245,12 @@ class Checkout extends Component
     private function preparedInitState()
     {
 
+        if(count($this->shippingRates) === 0)
+        {
+            session()->forget('shipping_cost');
+        }
+
+
         $cart = new ShoppingCart();
 
         $cart->removePreviousCouponIfExpired();
@@ -232,6 +260,7 @@ class Checkout extends Component
         $this->totalShippingCost = $cart->totalShippingCost();
         $this->subTotalPrice = $cart->showSubTotalPrice();
         $this->orderTotalPrice = $cart->orderTotalPrice();
+
 
         if(session()->has('shipping_address')){
 
@@ -250,13 +279,6 @@ class Checkout extends Component
             $this->email = $shippingAddress['email'];
 
 
-        }
-
-        if(session()->has('shipping_rates')){
-
-            $this->shippingRates = session()->get('shipping_rates');
-
-            $this->isAddressValidated = true;
         }
 
 

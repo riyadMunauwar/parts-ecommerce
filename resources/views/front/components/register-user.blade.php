@@ -28,7 +28,7 @@
                     <div class="flex gap-1">
                         <x-label  for="email" value="{{ __('Email') }}" />
                     </div>
-                    <x-input wire:model.debounce="name" id="email" class="block mt-1 w-full" type="email" required />
+                    <x-input wire:model.debounce="email" id="email" class="block mt-1 w-full" type="email" required />
                 </div>
 
                 <div>

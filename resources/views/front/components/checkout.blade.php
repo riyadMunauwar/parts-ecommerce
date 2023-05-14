@@ -151,7 +151,7 @@
                         <div class="space-y-3">
                             @foreach($shippingRates as $rate)
                                 <div class="flex items-center gap-5 pl-4 border border-gray-200 rounded">
-                                    <input id="rates-{{$rate['object_id']}}" type="radio" value="" name="shipping_rate" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 focus:ring-gray-900 focus:ring-2">
+                                    <input wire:model.debounce="selectedShippingRate" id="rates-{{$rate['object_id']}}" type="radio" value="{{ $rate['amount'] }}" name="shipping_rate" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 focus:ring-gray-900 focus:ring-2">
                                     <label for="rates-{{$rate['object_id']}}" class="cursor-pointer w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                         <div class="flex justify-between items-center px-4 text-gray-700">
                                             <h2>
@@ -264,11 +264,8 @@
 
                         @if($isAddressValidated)
                             <div class="space-y-3 mt-5">
-                                <x-button class="w-full justify-center">
-                                    {{ __('Paypal') }}
-                                </x-button>
-                                <x-button class="w-full justify-center">
-                                    {{ __('Stripe') }}
+                                <x-button wire:click.debounce="nextStepForPayment" type="button" class="w-full justify-center">
+                                    {{ __('Pay') }}
                                 </x-button>
                             </div>
                         @endif
@@ -278,9 +275,10 @@
 
         </div>
     </div>
-    <x-ui.loading-spinner wire:loading.flex wire:target="validateAddress, applyCoupon, removeCoupon" />
+    <x-ui.loading-spinner wire:loading.flex wire:target="validateAddress, applyCoupon, removeCoupon, nextStepForPayment" />
 </section>
 
 @push('modals')
     <livewire:front.register-user />
+    <livewire:front.square-payment-method />
 @endpush
