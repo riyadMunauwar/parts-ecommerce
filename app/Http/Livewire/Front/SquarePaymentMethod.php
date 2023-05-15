@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class SquarePaymentMethod extends Component
 {
-    public $isPaymentModeOn = false;
+    public $isPaymentModeOn = true;
 
     protected $listeners = [
         'onPaymentMode' => 'enablePaymentMode',
