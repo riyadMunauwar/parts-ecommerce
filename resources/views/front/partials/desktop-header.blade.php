@@ -1,4 +1,4 @@
-<section class="sticky top-0">
+<section class="sticky top-0 z-50">
 <header x-data="{isSearchOpen: false}" class="hidden md:block relative z-50 main-header-bg main-header-text">
     
     <div class="middle-header-bg middle-header-text py-1 text-gray-900 px-5">
