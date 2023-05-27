@@ -79,8 +79,8 @@ Route::get('/results', SearchResultController::class)->name('search');
 Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
 Route::get('categories/all', ParentCategoryController::class)->name('parent-category');
-Route::get('/category/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
-Route::get('/product/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
+Route::get('/categories/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
+Route::get('/products/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
 Route::get('/locale/{language}', LocalizationController::class)->name('locale');
 Route::get('/{pageSlug}', CustomPageController::class)->name('custom-page');
 
