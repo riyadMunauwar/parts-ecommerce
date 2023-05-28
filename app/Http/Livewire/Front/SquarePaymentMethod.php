@@ -3,6 +3,18 @@
 namespace App\Http\Livewire\Front;
 
 use Livewire\Component;
+// use Square\SquareClient;
+// use Square\LocationApi;
+// use Square\ApiResponse;
+// use Square\Models\CreatePaymentRequest;
+// use Square\Models\Money;
+// use Square\Models\CreatePayment;
+use Square\Environment;
+
+use Square\SquareClient;
+use Square\Models\CreatePaymentRequest;
+use Square\Models\Money;
+use Square\Exceptions\ApiException;
 
 class SquarePaymentMethod extends Component
 {
@@ -64,6 +76,73 @@ class SquarePaymentMethod extends Component
 
 
     public function startPaymentProcess($token){
-        dd($token);
+
+        $square = new SquareClient([
+            'accessToken' => config('square.access_token'),
+            'environment' => Environment::SANDBOX,
+        ]);
+
+//    
+        // $paymentApi = $square->getPaymentsApi();
+
+        // $requestBody = new CreatePaymentRequest([
+        //     'source_id' => $token,
+        //     'amount_money' => [
+        //         'amount' => 100, // replace with your amount
+        //         'currency' => 'USD',
+        //     ],
+        //     'idempotency_key' => uniqid(),
+        // ]);
+        
+
+        // try {
+
+        //     $money = new Money();
+        //     $money->setAmount(500);
+        //     $money->setCurrency('USD');
+
+        //     $requestBody = new CreatePaymentRequest($token, 123, $money);
+          
+
+        //     $response = $paymentApi->createPayment($requestBody);
+
+        //     dd($response->isSuccess);
+            
+        // } catch (\Square\Exceptions\ApiException $e) {
+        //     dd($e->getMessage());            
+        // } catch (\Exception $e) {
+        //     dd($e->getMessage());
+        // }
+
+        
+        // $request_body = new CreatePaymentRequest([
+        //     'source_id' => $token,
+        //     'amount_money' => [
+        //         'amount' => 100, // replace with your amount
+        //         'currency' => 'USD',
+        //     ],
+        //     'idempotency_key' => uniqid(),
+        // ]);
+        
+        // $money = new Money([
+        //     'amount_money' => [
+        //         'amount' => 500,
+        //         'currency' => 'USD',
+        //     ]
+        // ]);
+        $money = new Money();
+        $money->setAmount(10*50);
+        $money->setCurrency("USD");
+        
+        $request_body = new CreatePaymentRequest($token, uniqid(), $money);
+        
+        try {
+            $response = $square->getPaymentsApi()->createPayment($request_body);
+            // handle success response
+            dd($response->getResult());
+        } catch (ApiException $e) {
+            // handle error response
+            echo $e->getMessage();
+        }
     }
 }

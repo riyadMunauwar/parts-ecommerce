@@ -137,8 +137,8 @@
 <script type="text/javascript" src="https://sandbox.web.squarecdn.com/v1/square.js"></script>
 <script type="text/javascript">
 
-  const  appId = 'sandbox-sq0idb-Xrn3FKX2QWZItCtTVZjOXA';
-  const  locationId = 'LWJFEZ7KD3AZE';
+  const  appId = "{{ config('square.app_id') }}";
+  const  locationId = "{{ config('square.location_id') }}";
   const loadingSpinner = document.getElementById('loading-spinner');
 
   async function initializeCard(payments, payWithCardBtn) {
@@ -226,6 +226,7 @@
           
           if(result.status === 'OK'){
               const { token } = result;
+              console.log(result);
               Livewire.emit('onPayment', token);
               payWithCardBtn.disabled = false;
               payWithCardBtn.innerText = 'Pay';
