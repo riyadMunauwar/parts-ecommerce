@@ -179,6 +179,9 @@
             <a href="{{ route('subscriber-list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
                 Subscriber List
             </a>
+            <a href="{{ route('contact-form-list') }}" class="border-l cursor-pointer flex items-center text-sm py-1 px-3 hover:bg-gray-700" >
+                Contact Form List
+            </a>
         </div>
     </div>
 

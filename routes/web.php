@@ -54,6 +54,7 @@ Route::middleware([
     Route::view('/page', 'admin.pages.page')->name('page');
     Route::view('/setting', 'admin.pages.setting')->name('setting');
     Route::view('/subscriber', 'admin.pages.subscriber-list')->name('subscriber-list');
+    Route::view('/contact-form-list', 'admin.pages.contact-form-list')->name('contact-form-list');
     Route::view('/admins', 'admin.pages.admins-list')->name('admins.list');
     Route::view('/solcial-links', 'admin.pages.social-links')->name('social-link');
     Route::view('/user/profile', 'admin.pages.user-profile')->name('admin-user-profile');
@@ -78,6 +79,7 @@ Route::view('/', 'front.pages.home')->name('home');
 Route::get('/results', SearchResultController::class)->name('search');
 Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
+Route::view('/contact', 'front.pages.contact-us')->name('contact-us');
 Route::get('categories/all', ParentCategoryController::class)->name('parent-category');
 Route::get('/categories/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
 Route::get('/products/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
