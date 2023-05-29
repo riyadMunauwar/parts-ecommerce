@@ -16,7 +16,7 @@
                 </div>
 
                 @foreach($column_one_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-3 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -29,7 +29,7 @@
                 </div>
 
                 @foreach($column_two_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-3 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -42,7 +42,7 @@
                 </div>
 
                 @foreach($column_three_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-3 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
@@ -55,7 +55,7 @@
                 </div>
 
                 @foreach($column_four_items ?? [] as $item)
-                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-5 text-sm font-medium footer-text duration-700">
+                    <a href="{{ $item->menu_item_link ?? '' }}" class="block mt-3 text-sm font-medium footer-text duration-700">
                         {{ $item->menu_item_name ?? '' }}
                     </a>
                 @endforeach
