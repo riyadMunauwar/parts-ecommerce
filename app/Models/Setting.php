@@ -36,6 +36,15 @@ class Setting extends Model implements HasMedia
 
         $this->addMediaCollection('favicon')->singleFile();
 
+        $this->addMediaCollection('selling_feature_column_1_icon')->singleFile();
+
+        $this->addMediaCollection('selling_feature_column_2_icon')->singleFile();
+
+        $this->addMediaCollection('selling_feature_column_3_icon')->singleFile();
+
+        $this->addMediaCollection('selling_feature_column_4_icon')->singleFile();
+
+
     }
 
 
@@ -55,6 +64,46 @@ class Setting extends Model implements HasMedia
         if($this->hasMedia('favicon'))
         {
             return $this->getFirstMediaUrl('favicon');
+        }
+
+        return '';
+    }
+
+    public function sellingFeatureColumnOneIcon()
+    {
+        if($this->hasMedia('selling_feature_column_1_icon'))
+        {
+            return $this->getFirstMediaUrl('selling_feature_column_1_icon');
+        }
+
+        return '';
+    }
+
+    public function sellingFeatureColumnTwoIcon()
+    {
+        if($this->hasMedia('selling_feature_column_2_icon'))
+        {
+            return $this->getFirstMediaUrl('selling_feature_column_2_icon');
+        }
+
+        return '';
+    }
+
+    public function sellingFeatureColumnThreeIcon()
+    {
+        if($this->hasMedia('selling_feature_column_3_icon'))
+        {
+            return $this->getFirstMediaUrl('selling_feature_column_3_icon');
+        }
+
+        return '';
+    }
+
+    public function sellingFeatureColumnFourIcon()
+    {
+        if($this->hasMedia('selling_feature_column_4_icon'))
+        {
+            return $this->getFirstMediaUrl('selling_feature_column_4_icon');
         }
 
         return '';

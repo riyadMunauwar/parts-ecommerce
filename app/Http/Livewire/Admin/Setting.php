@@ -38,6 +38,21 @@ class Setting extends Component
 
     public $setting;
 
+    public $selling_feature_column_1;
+    public $old_selling_feature_column_1_icon;
+    public $new_selling_feature_column_1_icon;
+
+    public $selling_feature_column_2;
+    public $old_selling_feature_column_2_icon;
+    public $new_selling_feature_column_2_icon;
+
+    public $selling_feature_column_3;
+    public $old_selling_feature_column_3_icon;
+    public $new_selling_feature_column_3_icon;
+
+    public $selling_feature_column_4;
+    public $old_selling_feature_column_4_icon;
+    public $new_selling_feature_column_4_icon;
 
     protected $rules = [
         'company_name' => ['nullable', 'string', 'max:255'],
@@ -73,6 +88,29 @@ class Setting extends Component
         $this->preparedInitData($localeValue);
     }
 
+    public function removeSellingFeatureIcon($icon_number)
+    {
+        if($icon_number === 1){
+            $this->new_selling_feature_column_1_icon->delete();
+            $this->new_selling_feature_column_1_icon = null;
+        }
+
+        if($icon_number === 2){
+            $this->new_selling_feature_column_2_icon->delete();
+            $this->new_selling_feature_column_2_icon = null;
+        }
+
+        if($icon_number === 3){
+            $this->new_selling_feature_column_3_icon->delete();
+            $this->new_selling_feature_column_3_icon = null;
+        }
+
+        if($icon_number === 4){
+            $this->new_selling_feature_column_4_icon->delete();
+            $this->new_selling_feature_column_4_icon = null;
+        }
+    }
+
     public function saveSetting()
     {
         
@@ -102,14 +140,48 @@ class Setting extends Component
         $setting->meta_tags = $this->meta_tags;
         $setting->meta_description = $this->meta_description;
 
+        $setting->selling_feature_column_1 = $this->selling_feature_column_1;
+        $setting->selling_feature_column_2 = $this->selling_feature_column_2;
+        $setting->selling_feature_column_3 = $this->selling_feature_column_3;
+        $setting->selling_feature_column_4 = $this->selling_feature_column_4;
+
         if($setting && $this->new_favicon){
             $setting->addMedia($this->new_favicon)->toMediaCollection('favicon');
+        }
+
+        if($setting && $this->new_selling_feature_column_1_icon){
+            $setting->addMedia($this->new_selling_feature_column_1_icon)->toMediaCollection('selling_feature_column_1_icon');
+        }
+
+        if($setting && $this->new_selling_feature_column_2_icon){
+            $setting->addMedia($this->new_selling_feature_column_2_icon)->toMediaCollection('selling_feature_column_2_icon');
+        }
+
+        if($setting && $this->new_selling_feature_column_3_icon){
+            $setting->addMedia($this->new_selling_feature_column_3_icon)->toMediaCollection('selling_feature_column_3_icon');
+        }
+
+
+        if($setting && $this->new_selling_feature_column_4_icon){
+            $setting->addMedia($this->new_selling_feature_column_4_icon)->toMediaCollection('selling_feature_column_4_icon');
         }
 
         if($setting->save())
         {
             $this->new_favicon = null;
             $this->old_favicon = $setting->faviconUrl();
+
+            $this->new_selling_feature_column_1_icon = null;
+            $this->old_selling_feature_column_1_icon = $setting->sellingFeatureColumnOneIcon();
+
+            $this->new_selling_feature_column_2_icon = null;
+            $this->old_selling_feature_column_2_icon = $setting->sellingFeatureColumnTwoIcon();
+
+            $this->new_selling_feature_column_3_icon = null;
+            $this->old_selling_feature_column_3_icon = $setting->sellingFeatureColumnThreeIcon();
+
+            $this->new_selling_feature_column_4_icon = null;
+            $this->old_selling_feature_column_4_icon = $setting->sellingFeatureColumnFourIcon();
 
             event(new OnSettingUpdated($setting));
 
@@ -160,6 +232,16 @@ class Setting extends Component
         $this->meta_title = $setting->meta_title;
         $this->meta_tags = $setting->meta_tags;
         $this->meta_description = $setting->meta_description;
+
+        $this->selling_feature_column_1 = $setting->selling_feature_column_1;
+        $this->selling_feature_column_2 = $setting->selling_feature_column_2;
+        $this->selling_feature_column_3 = $setting->selling_feature_column_3;
+        $this->selling_feature_column_4 = $setting->selling_feature_column_4;
+
+        $this->old_selling_feature_column_1_icon = $setting->sellingFeatureColumnOneIcon();
+        $this->old_selling_feature_column_2_icon = $setting->sellingFeatureColumnTwoIcon();
+        $this->old_selling_feature_column_3_icon = $setting->sellingFeatureColumnThreeIcon();
+        $this->old_selling_feature_column_4_icon = $setting->sellingFeatureColumnFourIcon();
 
         $this->old_favicon = $setting->faviconUrl();
     }
