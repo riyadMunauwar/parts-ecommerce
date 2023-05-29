@@ -11,7 +11,7 @@
     <div class="container px-6 py-8 mx-auto">
         <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             <div>
-                <div class="text-md font-medium footer-text uppercase">
+                <div class="text-md font-medium footer-text uppercase mb-3">
                     {{ $setting->footer_column_one_title ?? '' }}
                 </div>
 
@@ -24,7 +24,7 @@
             </div>
 
             <div>
-                <div class="text-md font-medium footer-text uppercase">
+                <div class="text-md font-medium footer-text uppercase mb-3">
                     {{ $setting->footer_column_two_title ?? '' }}
                 </div>
 
@@ -37,7 +37,7 @@
             </div>
 
             <div>
-                <div class="text-md font-medium footer-text uppercase">
+                <div class="text-md font-medium footer-text uppercase mb-3">
                     {{ $setting->footer_column_three_title ?? '' }}
                 </div>
 
@@ -50,7 +50,7 @@
             </div>
 
             <div>
-                <div class="text-md font-medium footer-text uppercase">
+                <div class="text-md font-medium footer-text uppercase mb-3">
                     {{ $setting->footer_column_four_title ?? '' }}
                 </div>
 
