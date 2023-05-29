@@ -34,15 +34,15 @@ return new class extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            Schema::dropColumn('order_note');
-            Schema::dropColumn('admin_note');
-            Schema::dropColumn('parcel_height');
-            Schema::dropColumn('parcel_length');
-            Schema::dropColumn('parcel_width');
-            Schema::dropColumn('shipped_date');
-            Schema::dropColumn('estimate_delivery_date');
-            Schema::dropColumn('estimate_delivery_time');
-            Schema::dropColumn('status');
+            $table->updropColumn('order_note');
+            $table->updropColumn('admin_note');
+            $table->updropColumn('parcel_height');
+            $table->updropColumn('parcel_length');
+            $table->updropColumn('parcel_width');
+            $table->updropColumn('shipped_date');
+            $table->updropColumn('estimate_delivery_date');
+            $table->updropColumn('estimate_delivery_time');
+            $table->updropColumn('status');
         });
     }
 };
