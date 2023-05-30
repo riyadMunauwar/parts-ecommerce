@@ -25,6 +25,7 @@
                             <th scope="col" class="px-4 py-3">Name</th>
                             <th scope="col" class="px-4 py-3">Email</th>
                             <th scope="col" class="px-4 py-3">Message</th>
+                            <th scope="col" class="px-4 py-3">Date</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
@@ -38,6 +39,7 @@
                             </td>
                             <td class="px-4 py-3">{{ $contactForm->email ?? '' }}</td>
                             <td class="px-4 py-3">{{ $contactForm->message ?? '' }}</td>
+                            <td class="px-4 py-3">{{ $contactForm->created_at->format('d M Y') ?? '' }}</td>
                             <td class="px-4 py-3">
                                 <div class="flex items-center justify-end">
                                     <button wire:click.debounce="confirmDeleteContactForm({{ $contactForm->id }})" class="ml-1 text-red-400" type="button">
