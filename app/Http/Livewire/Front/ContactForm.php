@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\ContactForm as _ContactForm;
 use App\Traits\WithSweetAlertToast;
 use App\Traits\WithSweetAlert;
+use App\Models\SocialLink;
 
 class ContactForm extends Component
 {
@@ -16,11 +17,18 @@ class ContactForm extends Component
     public $email;
     public $message;
 
+    public $socialLinks = [];
+
     protected $rules = [
         'first_name' => ['required', 'string', 'max:255'],
         'email' => ['required', 'email', 'max:255'],
         'message' => ['required', 'string', 'max:2500'],
     ];
+
+    public function mount()
+    {
+        $this->socialLinks = SocialLink::whereNotNull('is_published')->get();
+    }
 
     public function render()
     {

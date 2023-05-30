@@ -321,6 +321,21 @@
                     @endif
                 </div>
 
+                <div>
+                    <x-label  for="contact_page_email" value="{{ __('Contact Page Email') }}" />
+                    <x-input wire:model.debounce="contact_page_email" id="contact_page_email" class="block mt-1 w-full" type="email"  />
+                </div>
+
+                <div>
+                    <x-label  for="contact_page_phone" value="{{ __('Contact Page Phone') }}" />
+                    <x-input wire:model.debounce="contact_page_phone" id="contact_page_phone" class="block mt-1 w-full" type="text"  />
+                </div>
+
+                <div>
+                    <x-label  for="contact_page_address" value="{{ __('Contact Page Address') }}" />
+                    <x-input wire:model.debounce="contact_page_address" id="contact_page_address" class="block mt-1 w-full" type="text"  />
+                </div>
+
                 <div class="flex items-center justify-end">
                     <x-button wire:click.debounce="saveSetting" type="button"  class="ml-4">
                         {{ __('Save') }}

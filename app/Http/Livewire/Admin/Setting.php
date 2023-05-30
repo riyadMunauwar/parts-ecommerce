@@ -54,6 +54,11 @@ class Setting extends Component
     public $old_selling_feature_column_4_icon;
     public $new_selling_feature_column_4_icon;
 
+
+    public $contact_page_email;
+    public $contact_page_phone;
+    public $contact_page_address;
+
     protected $rules = [
         'company_name' => ['nullable', 'string', 'max:255'],
         'company_owner_name' => ['nullable', 'string', 'max:255'],
@@ -70,7 +75,10 @@ class Setting extends Component
         'meta_title' => ['nullable', 'string'],
         'meta_tags' => ['nullable', 'string'],
         'meta_description' => ['nullable', 'string'],
-        'new_favicon' => ['nullable', 'image']
+        'new_favicon' => ['nullable', 'image'],
+        'contact_page_phone' => ['nullable', 'string', 'max:255'],
+        'contact_page_address' => ['nullable', 'string', 'max:255'],
+        'contact_page_email' => ['nullable', 'email', 'max:255'],
     ];
 
     public function mount()
@@ -144,6 +152,10 @@ class Setting extends Component
         $setting->selling_feature_column_2 = $this->selling_feature_column_2;
         $setting->selling_feature_column_3 = $this->selling_feature_column_3;
         $setting->selling_feature_column_4 = $this->selling_feature_column_4;
+
+        $setting->contact_page_email = $this->contact_page_email;
+        $setting->contact_page_phone = $this->contact_page_phone;
+        $setting->contact_page_address = $this->contact_page_address;
 
         if($setting && $this->new_favicon){
             $setting->addMedia($this->new_favicon)->toMediaCollection('favicon');
@@ -237,6 +249,11 @@ class Setting extends Component
         $this->selling_feature_column_2 = $setting->selling_feature_column_2;
         $this->selling_feature_column_3 = $setting->selling_feature_column_3;
         $this->selling_feature_column_4 = $setting->selling_feature_column_4;
+
+        $this->contact_page_email = $setting->contact_page_email;
+        $this->contact_page_phone = $setting->contact_page_phone;
+        $this->contact_page_address = $setting->contact_page_address;
+        
 
         $this->old_selling_feature_column_1_icon = $setting->sellingFeatureColumnOneIcon();
         $this->old_selling_feature_column_2_icon = $setting->sellingFeatureColumnTwoIcon();
