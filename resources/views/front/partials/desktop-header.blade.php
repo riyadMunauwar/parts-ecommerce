@@ -42,11 +42,12 @@
                     
                           $role = auth()->user()->getRoleNames()->first();
     
-                          $route = route('admin-user-profile');
+                          $user_profile_route = route('admin-user-profile');
     
                           if(!$role || $role === 'user')
                           {
-                              $route = route('user-profile');
+                              $role = 'user';
+                              $user_profile_route = route('user-profile');
                           }
     
                       @endphp
@@ -57,7 +58,19 @@
                               {{ __('Manage Account') }}
                           </div>
     
-                          <x-dropdown-link href="{{ $route }}">
+                          
+
+                          @if($role !== 'user')
+                            <x-dropdown-link href="{{ route('dashboard') }}">
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
+                          @else 
+                            <x-dropdown-link href="">
+                                {{ __('My Order') }}
+                            </x-dropdown-link>
+                          @endif
+
+                          <x-dropdown-link href="{{ $user_profile_route }}">
                               {{ __('Profile') }}
                           </x-dropdown-link>
     
