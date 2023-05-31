@@ -8,7 +8,7 @@
             </div>
     
             <div class="flex gap-3 items-center">
-              <a href="" class="text-thin middle-header-text uppercase text-xs">Track Order</a>
+              <a href="{{ route('track-order') }}" class="text-thin middle-header-text uppercase text-xs">Track Order</a>
               
               @guest 
                 <a href="{{ route('register') }}" class="text-thin middle-header-text uppercase text-xs">Create Account</a>
