@@ -23,4 +23,5 @@
    @include('front.partials.caurosel')
    @include('front.partials.selling-feature')
    @include('front.partials.feature-box-grid')
+   <livewire:front.contact-form />
 </x-front.master-layout>
