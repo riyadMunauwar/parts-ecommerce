@@ -10,8 +10,10 @@
             @include('front.partials.user-dashboard-side-navigation')
         </div>
 
-        <div class="col-span-5 border-l">
+        <div class="col-span-5 border-l pb-10">
             <livewire:front.user.order-stats/>
+
+            <livewire:front.user.user-order-list />
         </div>
     </div>
 </x-front.master-layout>
