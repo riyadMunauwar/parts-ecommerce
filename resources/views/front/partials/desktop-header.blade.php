@@ -1,18 +1,19 @@
 <section class="sticky top-0 z-50">
 <header x-data="{isSearchOpen: false}" class="hidden md:block relative z-50 main-header-bg main-header-text">
     
-    <div class="middle-header-bg middle-header-text py-1 text-gray-900 px-5">
+    <div class="middle-header-bg middle-header-text text-gray-900 px-5">
         <div class="container mx-auto flex justify-between items-center">
             <div>
                 <a class="middle-header-text" href="">{{ config('setting')->middle_header_message_text ?? '' }}</a>
             </div>
     
-            <div class="flex gap-3 items-center">
-              <a href="{{ route('track-order') }}" class="text-thin middle-header-text uppercase text-xs">Track Order</a>
+            <div class="flex items-center">
+              <a href="{{ route('track-order') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Track Order</a>
+              <a href="{{ route('track-order') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Became Wholesaler</a>
               
               @guest 
-                <a href="{{ route('register') }}" class="text-thin middle-header-text uppercase text-xs">Create Account</a>
-                <a href="{{ route('login') }}" class="text-thin middle-header-text uppercase text-xs">Sign In</a>
+                <a href="{{ route('register') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Create Account</a>
+                <a href="{{ route('login') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Sign In</a>
               @endguest
               
               @auth 

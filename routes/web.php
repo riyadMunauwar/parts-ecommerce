@@ -69,7 +69,7 @@ Route::middleware([
 ])->group(function () {
 
     Route::view('/user/profile', 'front.pages.user-profile')->name('user-profile');
-
+    Route::view('/user/dashboard', 'front.pages.user.dashboard')->name('user-dashboard');
 });
 
 
