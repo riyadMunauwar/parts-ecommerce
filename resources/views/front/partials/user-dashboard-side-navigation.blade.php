@@ -9,7 +9,7 @@
     <ul class="mt-6 space-y-1">
       <li>
         <a
-          href=""
+          href="{{ route('user-dashboard') }}"
           class="block rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700"
         >
           Dashboard
@@ -71,19 +71,19 @@
           <ul class="mt-2 space-y-1 px-4">
             <li>
               <a
-                href=""
+                href="{{ route('user-profile') }}"
                 class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
-                Profile & Security
+                Profile
               </a>
             </li>
 
             <li>
               <a
-                href=""
+                href="{{ route('user-security') }}"
                 class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
               >
-                Wholesaler Information
+                Security
               </a>
             </li>
 

@@ -66,10 +66,12 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
+])->prefix('user')->group(function () {
 
-    Route::view('/user/profile', 'front.pages.user-profile')->name('user-profile');
-    Route::view('/user/dashboard', 'front.pages.user.dashboard')->name('user-dashboard');
+    Route::view('/profile', 'front.pages.user.profile')->name('user-profile');
+    Route::view('/dashboard', 'front.pages.user.dashboard')->name('user-dashboard');
+    Route::view('/security', 'front.pages.user.security')->name('user-security');
+    
 });
 
 

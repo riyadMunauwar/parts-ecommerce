@@ -66,8 +66,8 @@
                                 {{ __('Dashboard') }}
                             </x-dropdown-link>
                           @else 
-                            <x-dropdown-link href="">
-                                {{ __('My Order') }}
+                            <x-dropdown-link href="{{ route('user-dashboard') }}">
+                                {{ __('Dashboard') }}
                             </x-dropdown-link>
                           @endif
 
