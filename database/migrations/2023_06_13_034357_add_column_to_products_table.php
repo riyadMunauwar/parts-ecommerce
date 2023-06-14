@@ -33,6 +33,7 @@ return new class extends Migration
             $table->dropColumn('royal_sale_price');
             $table->dropColumn('retailer_sale_price');
             $table->dropColumn('wholesaler_id');
+            $table->dropForeign('wholesaler_id');
         });
     }
 };

@@ -26,8 +26,11 @@
                             <th scope="col" class="px-4 py-3">Name</th>
                             <th scope="col" class="px-4 py-3">Categories</th>
                             <th scope="col" class="px-4 py-3">Stock</th>
-                            <th scope="col" class="px-4 py-3">Regular Price</th>
-                            <th scope="col" class="px-4 py-3">Sale Price</th>
+                            <th scope="col" class="px-4 py-3">General Price</th>
+                            <th scope="col" class="px-4 py-3">Retailer Price</th>
+                            <th scope="col" class="px-4 py-3">Royal Price</th>
+                            <th scope="col" class="px-4 py-3">Wholesale Price</th>
+                            <th scope="col" class="px-4 py-3">Regular M. Price</th>
                             <th scope="col" class="px-4 py-3 text-center">Status</th>
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -59,12 +62,28 @@
                                     </span>
                                 @endif
                             </td>
-                            <td class="px-4 py-1">
-                                {{ $product->regular_price }}
-                            </td>
+
                             <td class="px-4 py-1">
                                 {{ $product->sale_price }}
                             </td>
+
+                            <td class="px-4 py-1">
+                                {{ $product->retailer_sale_price ?? '---' }}
+                            </td>
+
+                            <td class="px-4 py-1">
+                                {{ $product->royal_sale_price ?? '---' }}
+                            </td>
+
+                            <td class="px-4 py-1">
+                                {{ $product->wholesale_price ?? '---' }}
+                            </td>
+
+
+                            <td class="px-4 py-1">
+                                {{ $product->regular_price }}
+                            </td>
+
                             <td class="px-4 py-1">
                                 @if($product->is_published)
                                     <span class="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">Published</span>

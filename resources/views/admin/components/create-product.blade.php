@@ -23,14 +23,34 @@
                     </div>
 
                     <div class="">
-                        <x-label for="salePrice" value="{{ __('Sale Price') }}" />
+                        <x-label for="salePrice" value="{{ __('General Sale Price') }}" />
                         <x-input wire:model.debounce="sale_price" id="salePrice" class="block mt-1 h-8 w-full" type="number"/>
                     </div>
 
                     <div class="">
-                        <x-label for="regularPrice" value="{{ __('Regular Price') }}" />
-                        <x-input wire:model.debounce="regular_price" id="regularPrice" class="block mt-1 h-8 w-full" type="number"/>
+                        <x-label for="retailer_sale_price" value="{{ __('Retailer Sale Price') }}" />
+                        <x-input wire:model.debounce="retailer_sale_price" id="retailer_sale_price" class="block mt-1 h-8 w-full" type="number"/>
                     </div>
+
+                    <div class="col-span-2 grid grid-cols-3 gap-5 mt-2">
+                        <div class="">
+                            <x-label for="royal_sale_price" value="{{ __('Royal Sale Price') }}" />
+                            <x-input wire:model.debounce="royal_sale_price" id="royal_sale_price" class="block mt-1 h-8 w-full" type="number"/>
+                        </div>
+
+                        <div class="">
+                            <x-label for="wholesale_price" value="{{ __('Wholesale Price') }}" />
+                            <x-input wire:model.debounce="wholesale_price" id="wholesale_price" class="block mt-1 h-8 w-full" type="number"/>
+                        </div>
+
+
+                        <div class="">
+                            <x-label for="regularPrice" value="{{ __('Regular Market Price') }}" />
+                            <x-input wire:model.debounce="regular_price" id="regularPrice" class="block mt-1 h-8 w-full" type="number"/>
+                        </div>
+                    </div>
+
+ 
 
                     <div class="col-span-2 grid grid-cols-3 gap-5 mt-2">
                         <div class="">

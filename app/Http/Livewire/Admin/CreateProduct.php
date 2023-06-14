@@ -27,6 +27,9 @@ class CreateProduct extends Component
     public $slug;
     public $regular_price;
     public $sale_price;
+    public $wholesale_price;
+    public $royal_sale_price;
+    public $retailer_sale_price;
     public $stock_qty;
     public $sku;
     public $weight;
@@ -63,6 +66,9 @@ class CreateProduct extends Component
         'slug' => ['required', 'string', 'unique:products'],
         'regular_price' => ['required', 'numeric'],
         'sale_price' => ['required', 'numeric'],
+        'royal_sale_price' => ['required', 'numeric'],
+        'wholesale_price' => ['required', 'numeric'],
+        'retailer_sale_price' => ['required', 'numeric'],
         'stock_qty' => ['required', 'integer'],
         'height' => ['required', 'numeric'],
         'width' => ['required', 'numeric'],
@@ -206,6 +212,9 @@ class CreateProduct extends Component
             'search_name' => $this->name,
             'slug' => $this->slug,
             'sale_price' => $this->sale_price,
+            'wholesale_price' => $this->wholesale_price,
+            'royal_sale_price' => $this->royal_sale_price,
+            'retailer_sale_price' => $this->retailer_sale_price,
             'regular_price' => $this->regular_price,
             'stock_qty' => $this->stock_qty,
             'sku' => $this->sku,

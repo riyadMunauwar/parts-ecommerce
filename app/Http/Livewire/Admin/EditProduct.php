@@ -30,6 +30,9 @@ class EditProduct extends Component
     public $slug;
     public $regular_price;
     public $sale_price;
+    public $wholesale_price;
+    public $royal_sale_price;
+    public $retailer_sale_price;
     public $stock_qty;
     public $sku;
     public $weight;
@@ -67,8 +70,11 @@ class EditProduct extends Component
         'meta_description' => ['nullable', 'string'],
         'name' => ['required', 'string'],
         'slug' => ['required', 'string'],
-        'regular_price' => ['nullable', 'numeric'],
+        'regular_price' => ['required', 'numeric'],
         'sale_price' => ['required', 'numeric'],
+        'royal_sale_price' => ['required', 'numeric'],
+        'wholesale_price' => ['required', 'numeric'],
+        'retailer_sale_price' => ['required', 'numeric'],
         'stock_qty' => ['required', 'integer'],
         'height' => ['required', 'numeric'],
         'width' => ['required', 'numeric'],
@@ -139,6 +145,9 @@ class EditProduct extends Component
         $product->slug = $this->slug;
         $product->regular_price = $this->regular_price;
         $product->sale_price = $this->sale_price;
+        $product->royal_sale_price = $this->royal_sale_price;
+        $product->wholesale_price = $this->wholesale_price;
+        $product->retailer_sale_price = $this->retailer_sale_price;
         $product->stock_qty = $this->stock_qty;
         $product->sku = $this->sku;
         $product->weight = $this->weight;
@@ -254,6 +263,9 @@ class EditProduct extends Component
         $this->slug = $product->slug;
         $this->regular_price = $product->regular_price;
         $this->sale_price = $product->sale_price;
+        $this->royal_sale_price = $product->royal_sale_price;
+        $this->retailer_sale_price = $product->retailer_sale_price;
+        $this->wholesale_price = $product->wholesale_price;
         $this->stock_qty = $product->stock_qty;
         $this->sku = $product->sku;
         $this->weight = $product->weight;

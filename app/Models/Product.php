@@ -39,6 +39,9 @@ class Product extends Model implements HasMedia
         'slug',
         'regular_price',
         'sale_price',
+        'wholesale_price',
+        'royal_sale_price',
+        'retailer_sale_price',
         'sku',
         'stock_qty',
         'total_review',
@@ -59,7 +62,7 @@ class Product extends Model implements HasMedia
         'is_published',
         'color',
         'color_code',
-        'vat_id'
+        'vat_id',
     ];
 
 

@@ -8,10 +8,20 @@
     <x-ui.edit-modal class="max-w-6xl">
 
         <div class="grid grid-cols-1 md:grid-cols-6 md:gap-5 p-5 bg-white rounded-md">
+            <div class="col-span-6 flex justify-end bg-white">
+
+                <span wire:click.debounce="cancelEditMode" class="cursor-pointer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </span>
+            </div>
 
             <div class="col-span-4">
                 <div class="rounded-md bg-white p-5 md:p-10 border">
                     <h1 class="font-bold text-xl mb-4">Edit Product</h1>
+
+
                     <x-validation-errors class="mb-4" />
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -33,13 +43,31 @@
                         </div>
 
                         <div class="">
-                            <x-label for="salePrice" value="{{ __('Sale Price') }}" />
+                            <x-label for="salePrice" value="{{ __('General Sale Price') }}" />
                             <x-input wire:model.debounce="sale_price" id="salePrice" class="block mt-1 h-8 w-full" type="number"/>
                         </div>
 
                         <div class="">
-                            <x-label for="regularPrice" value="{{ __('Regular Price') }}" />
-                            <x-input wire:model.debounce="regular_price" id="regularPrice" class="block mt-1 h-8 w-full" type="number"/>
+                            <x-label for="retailer_sale_price" value="{{ __('Retailer Sale Price') }}" />
+                            <x-input wire:model.debounce="retailer_sale_price" id="retailer_sale_price" class="block mt-1 h-8 w-full" type="number"/>
+                        </div>
+
+                        <div class="col-span-2 grid grid-cols-3 gap-5 mt-2">
+                            <div class="">
+                                <x-label for="royal_sale_price" value="{{ __('Royal Sale Price') }}" />
+                                <x-input wire:model.debounce="royal_sale_price" id="royal_sale_price" class="block mt-1 h-8 w-full" type="number"/>
+                            </div>
+
+                            <div class="">
+                                <x-label for="wholesale_price" value="{{ __('Wholesale Price') }}" />
+                                <x-input wire:model.debounce="wholesale_price" id="wholesale_price" class="block mt-1 h-8 w-full" type="number"/>
+                            </div>
+
+
+                            <div class="">
+                                <x-label for="regularPrice" value="{{ __('Regular Market Price') }}" />
+                                <x-input wire:model.debounce="regular_price" id="regularPrice" class="block mt-1 h-8 w-full" type="number"/>
+                            </div>
                         </div>
 
                         <div class="col-span-2 grid grid-cols-3 gap-5 mt-2">
