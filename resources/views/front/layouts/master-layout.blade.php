@@ -119,6 +119,8 @@
     </head>
     <body class="font-sans antialiased bg-gray-300">
 
+        <x-page-loader />
+
         @include('front.partials.top-header')
         @include('front.partials.desktop-header')
 
@@ -144,7 +146,7 @@
 
         <!-- Sweet Alert Cinfig -->
         <script>
-
+              
             @if(session()->has('swalToastOptions'))
 
                 @php 
@@ -190,7 +192,11 @@
             @endif
 
             window.addEventListener("DOMContentLoaded", function(){
-                
+
+                window.addEventListener('load', function() {
+                    document.getElementById('page-loader').remove();
+                });
+
                 window.addEventListener('swal:toast', function(event){
 
                     const Toast = Swal.mixin({

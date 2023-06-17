@@ -34,8 +34,12 @@
                   <input type="email" id="business_email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Business email" required="">
               </div>
               <div class="sm:col-span-2">
-                  <label for="business_phone" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Business Contact Number</label>
-                  <input type="number" id="business_phone" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Business phone" required="">
+                  <label for="business_contact_number" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Business Contact Number</label>
+                  <input type="number" id="business_contact_number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Business phone" required="">
+              </div>
+              <div class="sm:col-span-2">
+                  <label for="business_sales_tax" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Business Sales/Tax Number</label>
+                  <input type="number" id="business_sales_tax" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500" placeholder="Business sales/tax number" required="">
               </div>
               <div class="sm:col-span-2">
                   <label for="business_address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Business Address</label>
