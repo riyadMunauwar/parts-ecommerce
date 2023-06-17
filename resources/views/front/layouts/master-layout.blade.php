@@ -119,6 +119,7 @@
     </head>
     <body class="font-sans antialiased bg-gray-300">
 
+        <x-page-loader />
 
         @include('front.partials.top-header')
         @include('front.partials.desktop-header')
@@ -262,8 +263,6 @@
             });
 
         </script>
-
-        <x-page-loader />
 
     </body>
 </html>
