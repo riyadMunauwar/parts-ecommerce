@@ -9,7 +9,7 @@
     
             <div class="flex items-center">
               <a href="{{ route('track-order') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Track Order</a>
-              <a href="{{ route('track-order') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Became Wholesaler</a>
+              <a href="{{ route('register-wholesaler') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Become Wholesaler</a>
               
               @guest 
                 <a href="{{ route('register') }}" class="hover:bg-gray-300 py-2 px-3 text-thin middle-header-text uppercase text-xs">Create Account</a>

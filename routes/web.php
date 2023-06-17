@@ -83,6 +83,7 @@ Route::view('/cart', 'front.pages.cart')->name('cart');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
 Route::view('/contact', 'front.pages.contact-us')->name('contact-us');
 Route::view('/track-order', 'front.pages.track-order')->name('track-order');
+Route::view('/register-wholesaler', 'front.pages.register-wholesaler')->name('register-wholesaler');
 Route::get('categories/all', ParentCategoryController::class)->name('parent-category');
 Route::get('/categories/{categoryId}/{categorySlug}', CategoryWiseProductController::class)->name('category-product');
 Route::get('/products/{productId}/{productSlug}', SingleProductController::class)->name('single-product');
