@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('business_address')->nullable();
             $table->string('business_sales_tax')->nullable();
             $table->boolean('is_active')->default(false)->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }

@@ -17,7 +17,6 @@ return new class extends Migration
             $table->decimal('wholesale_price', 12, 2);
             $table->decimal('royal_sale_price', 12, 2);
             $table->decimal('retailer_sale_price', 12, 2);
-            $table->foreignId('wholesaler_id')->nullable()->constrained();
         });
     }
 
@@ -32,8 +31,6 @@ return new class extends Migration
             $table->dropColumn('wholesale_price');
             $table->dropColumn('royal_sale_price');
             $table->dropColumn('retailer_sale_price');
-            $table->dropColumn('wholesaler_id');
-            $table->dropForeign('wholesaler_id');
         });
     }
 };
