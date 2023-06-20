@@ -45,7 +45,7 @@
     
                           $user_profile_route = route('admin-user-profile');
     
-                          if(!$role || $role === 'user')
+                          if(!$role || $role === 'user' || $role === 'retailer' || $role === 'wholesaler' || $role === 'royal-user')
                           {
                               $role = 'user';
                               $user_profile_route = route('user-profile');

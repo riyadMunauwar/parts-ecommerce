@@ -135,6 +135,7 @@ class SquarePaymentMethod extends Component
         $money->setCurrency("USD");
         
         $request_body = new CreatePaymentRequest($token, uniqid(), $money);
+        $request_body->setAmountMoney($money);
         
         try {
             $response = $square->getPaymentsApi()->createPayment($request_body);
