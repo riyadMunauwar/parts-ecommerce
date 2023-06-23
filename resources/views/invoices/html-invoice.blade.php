@@ -86,7 +86,7 @@
 
         <div class="header">
             <div class="company-info">
-                <h3>{{ ucfirst(config('setting')->company_name) }}</h3>
+                <h3>{{ ucfirst($company->company_name) }}</h3>
                 <p>{{ $company->street_1 ?? ''}}, {{ $company->street_2 ?? '' }}, {{ $company->city ?? '' }}, {{ $company->state ?? '' }}, {{ $company->country ?? '' }}</p>
 
                 <p>Phone: {{ $company->phone ?? '' }}</p>
@@ -106,15 +106,15 @@
             </div>
             <div class="row">
                 <div class="label">Phone:</div>
-                <div class="value">{{ $order->address->phone }}</div>
+                <div class="value">{{ $order->address->phone ?? ''}}</div>
             </div>
             <div class="row">
                 <div class="label">Email:</div>
-                <div class="value">{{ $order->address->email }}</div>
+                <div class="value">{{ $order->address->email ?? '' }}</div>
             </div>
             <div class="row">
                 <div class="label">Address:</div>
-                <div class="value">{{ $order->address->street_1 }}, {{ $order->address->street_2 }}, {{ $order->address->city }}, {{ $order->address->state }}, {{ $order->address->country }}</div>
+                <div class="value">{{ $order->address->street_1 ?? '' }}, {{ $order->address->street_2 ?? '' }}, {{ $order->address->city ?? '' }}, {{ $order->address->state ?? '' }}, {{ $order->address->country ?? '' }}</div>
             </div>
         </div>
 
@@ -131,9 +131,9 @@
                 <tbody>
                     @foreach($order->orderItems as $item)
                         <tr>
-                            <td>{{ $item->product->name }}</td>
-                            <td>{{ $item->qty }}</td>
-                            <td>${{ $item->price }}</td>
+                            <td>{{ $item->product->name ?? '' }}</td>
+                            <td>{{ $item->qty ?? ''}}</td>
+                            <td>${{ $item->price ?? '' }}</td>
                             <td>${{ (float) $item->price * $item->qty }}</td>
                         </tr>
                     @endforeach
