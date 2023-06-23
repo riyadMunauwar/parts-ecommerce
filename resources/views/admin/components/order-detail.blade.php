@@ -24,7 +24,7 @@
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Shipped Date</h6>
-                <h6 class="grid-cols-2 text-md text-gray-600">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md text-gray-600">{{ $order->shipped_date ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
@@ -45,12 +45,17 @@
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Shipper</h6>
-                <h6 class="grid-cols-2 text-md text-gray-600"><span class="bg-indigo-100 text-indigo-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded">{{ $order->shipper_name ?? 'UPS' }}</span></h6>
+                <h6 class="grid-cols-2 text-md text-gray-600"><span class="bg-indigo-100 text-indigo-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded">{{ $order->shipper_name ?? '' }}</span></h6>
+            </div>
+
+            <div class="grid grid-cols-3 mt-2">
+                <h6 class="grid-cols-1 text-md text-gray-600">Payment Method</h6>
+                <h6 class="grid-cols-2 text-md text-gray-600"><span class="bg-indigo-100 text-indigo-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded">{{ $order->payment_method_name ?? '' }}</span></h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Parcel Id</h6>
-                <h6 class="grid-cols-2 text-md text-gray-600"><span class="bg-purple-100 text-purple-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded">{{ $order->parcel_id ?? '#646' }}</span></h6>
+                <h6 class="grid-cols-2 text-md text-gray-600"><span class="bg-purple-100 text-purple-800 text-lg font-medium mr-2 px-2.5 py-0.5 rounded">{{ $order->parcel_id ?? '' }}</span></h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
@@ -84,14 +89,14 @@
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Parcel Label</h6>
                 <div class="grid-cols-2">
-                    <a href="{{ $order->label_url }}" class="text-blue-400 underline" target="_blank">Downloand Label</a>
+                    <a href="{{ $order->lebel_url }}" class="text-blue-400 underline" target="_blank">Downloand Label</a>
                 </div>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Track Url</h6>
                 <div class="grid-cols-2">
-                    <a href="{{ $order->parcel_url }}" class="text-blue-400 underline" target="_blank">Track Parcel</a>
+                    <a href="{{ $order->tracking_url }}" class="text-blue-400 underline" target="_blank">Track Parcel</a>
                 </div>
             </div>
 
@@ -146,57 +151,48 @@
             <h5 class="text-xl font-bold">Shipping Address</h5>
             <div class="grid grid-cols-3 mt-4">
                 <h6 class="grid-cols-1 text-md text-gray-600">Name</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->name ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->full_name ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Email</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->email ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Phone</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
-            </div>
-
-            <div class="grid grid-cols-3 mt-2">
-                <h6 class="grid-cols-1 text-md text-gray-600">Street No</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->phone ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Street 1</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->street_1 ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Street 2</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->street_2 ?? '' }}</h6>
             </div>
 
-            <div class="grid grid-cols-3 mt-2">
-                <h6 class="grid-cols-1 text-md text-gray-600">Street 3</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
-            </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">City</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->city ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">State</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->state ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Zip Code</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->zip ?? '' }}</h6>
             </div>
 
             <div class="grid grid-cols-3 mt-2">
                 <h6 class="grid-cols-1 text-md text-gray-600">Country</h6>
-                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->user->email ?? '' }}</h6>
+                <h6 class="grid-cols-2 text-md font-semibold text-gray-900">{{ $order->address->country ?? ''}}</h6>
             </div>
         </div>
     </div>
@@ -237,7 +233,7 @@
                             <h5 class="text-md mt-5">Sub Total</h5>
                         </td>
                         <td class="px-4 py-1 whaitespace-nowrap">
-                            <h5 class="text-md mt-5">{{ number_format($order->orderItems->sum('price')) }}</h5>
+                            <h5 class="text-md mt-5">{{ number_format($orderSubtotalPrice) }}</h5>
                         </td>
                     </tr>
                     <tr>

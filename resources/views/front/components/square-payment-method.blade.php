@@ -139,9 +139,9 @@
 
   const  appId = "{{ config('square.app_id') }}";
   const  locationId = "{{ config('square.location_id') }}";
-  const loadingSpinner = document.getElementById('loading-spinner');
+  
 
-  async function initializeCard(payments, payWithCardBtn) {
+  async function initializeCard(payments, payWithCardBtn, loadingSpinner) {
     payWithCardBtn.disabled = true;
     payWithCardBtn.innerText = 'Loading...';
     loadingSpinner.classList.toggle('hidden');
@@ -154,7 +154,7 @@
   }
 
 
-  async function initializeGooglePay(payments, paymentRequestOptions){
+  async function initializeGooglePay(payments, paymentRequestOptions, loadingSpinner){
     loadingSpinner.classList.toggle('hidden');
     const googlePay = await payments.googlePay(paymentRequestOptions);
     await googlePay.attach('#google-pay-container'); 
@@ -162,14 +162,14 @@
     return googlePay;
   }
 
-  async function initializeApplePay(payments, paymentRequestOptions){
+  async function initializeApplePay(payments, paymentRequestOptions, loadingSpinner){
     loadingSpinner.classList.toggle('hidden');
     const applePay = await payments.applePay(paymentRequestOptions);
     loadingSpinner.classList.toggle('hidden');
     return applePay;
   }
 
-  async function initializeAchBankTransfer(payments, payWithAchBtn){
+  async function initializeAchBankTransfer(payments, payWithAchBtn, loadingSpinner){
     payWithAchBtn.disabled = true;
     payWithAchBtn.innerText = 'Loading...';
     loadingSpinner.classList.toggle('hidden');
@@ -180,7 +180,7 @@
     return ach; 
   }
 
-  async function initializeGiftCard(payments){
+  async function initializeGiftCard(payments, loadingSpinner){
     const giftCard = await payments.giftCard();
     loadingSpinner.classList.toggle('hidden');
     await giftCard.attach('#gift-card-container'); 
@@ -201,6 +201,8 @@
     // Card Payment Process
     window.addEventListener('init:card', async function(){
 
+      const loadingSpinner = document.getElementById('loading-spinner');
+
       const payments = window.Square.payments(appId, locationId);
       
       const payWithCardBtn = document.getElementById('pay-with-card-btn');
@@ -208,7 +210,7 @@
       let card;
 
       try {
-        card = await initializeCard(payments, payWithCardBtn);
+        card = await initializeCard(payments, payWithCardBtn, loadingSpinner);
       } catch (e) {
         console.error('Initializing Card failed', e);
         alert(e);
@@ -228,14 +230,15 @@
               const { token } = result;
               console.log(result);
               Livewire.emit('onPayment', token);
-              payWithCardBtn.disabled = false;
-              payWithCardBtn.innerText = 'Pay';
+              payWithCardBtn.innerText = 'It almost done ! wait a moment...';
+          }else {
+            payWithCardBtn.disabled = false;
+            payWithCardBtn.innerText = 'Pay';
           }
 
         }catch(error){
           payWithCardBtn.disabled = false;
           payWithCardBtn.innerText = 'Pay';
-          alert(error);
         }
 
       });
@@ -247,6 +250,8 @@
     // Ach Payment Process
     window.addEventListener('init:ach', async function(){
 
+        const loadingSpinner = document.getElementById('loading-spinner');
+
    
         const payments = window.Square.payments(appId, locationId);
 
@@ -255,11 +260,10 @@
         let ach;
 
         try {
-          ach = await initializeAchBankTransfer(payments, payWithAchBtn);
-        } catch (e) {
-          console.error('Initializing Card failed', e);
+          ach = await initializeAchBankTransfer(payments, payWithAchBtn, loadingSpinner);
+        } catch (error) {
+          console.error('Initializing Card failed', error);
           loadingSpinner.classList.toggle('hidden');
-          alert(e);
           return;
         }
 
@@ -275,8 +279,10 @@
             if(result.status === 'OK'){
                 const { token } = result;
                 Livewire.emit('onPayment', token);
-                payWithAchBtn.disabled = false;
-                payWithAchBtn.innerText = 'Pay';
+                payWithAchBtn.innerText = 'It almost done ! wait a moment...';
+            }else {
+              payWithAchBtn.disabled = false;
+              payWithAchBtn.innerText = 'Pay';
             }
 
           }catch(error){
@@ -290,13 +296,15 @@
 
 
     // Google Pay Payment Process
-    window.addEventListener('init:google-pay', async function(){
+    window.addEventListener('init:google-pay', async function(e){
+
+        const loadingSpinner = document.getElementById('loading-spinner');
 
         const payments = window.Square.payments(appId, locationId);
 
         const paymentRequest = payments.paymentRequest({
           total: {
-            amount: '1.5',
+            amount: e.detail.orderTotal,
             label: 'Total'
           },
           countryCode: 'US',
@@ -306,11 +314,10 @@
         let googlePay;
 
         try {
-          googlePay = await initializeGooglePay(payments, paymentRequest);
-        } catch (e) {
-          console.error('Initializing Card failed', e);
+          googlePay = await initializeGooglePay(payments, paymentRequest, loadingSpinner);
+        } catch (error) {
+          console.error('Initializing Card failed', error);
           loadingSpinner.classList.toggle('hidden');
-          alert(e);
           return;
         }
 
@@ -327,6 +334,8 @@
             if(result.status === 'OK'){
                 const { token } = result;
                 Livewire.emit('onPayment', token);
+                payWithGooglePayBtn.innerText = 'It almost done ! wait a moment...';
+            }else {
                 payWithGooglePayBtn.disabled = false;
                 payWithGooglePayBtn.innerText = 'Pay';
             }
@@ -343,11 +352,13 @@
     // Apple Pay Payment Process
     window.addEventListener('init:apple-pay', async function(){
 
+        const loadingSpinner = document.getElementById('loading-spinner');
+
         const payments = window.Square.payments(appId, locationId);
 
         const paymentRequest = payments.paymentRequest({
           total: {
-            amount: '1.5',
+            amount: e.detail.orderTotal,
             label: 'Total'
           },
           countryCode: 'US',
@@ -357,11 +368,11 @@
         let applePay;
 
         try {
-          applePay = await initializeApplePay(payments, paymentRequest);
-        } catch (e) {
-          console.error('Initializing Card failed', e);
+          applePay = await initializeApplePay(payments, paymentRequest, loadingSpinner);
+        } catch (error) {
+          console.error('Initializing Card failed', error);
           loadingSpinner.classList.toggle('hidden');
-          alert(e);
+          alert(error);
           return;
         }
 
@@ -378,8 +389,10 @@
             if(result.status === 'OK'){
                 const { token } = result;
                 Livewire.emit('onPayment', token);
-                payWithApplePayBtn.disabled = false;
-                payWithApplePayBtn.innerText = 'Pay';
+                payWithApplePayBtn.innerText = 'It almost done ! wait a moment...';
+            }else {
+              payWithApplePayBtn.disabled = false;
+              payWithApplePayBtn.innerText = 'Pay';
             }
 
           }catch(error){
@@ -395,16 +408,17 @@
   // Gift Card Payment Process
   window.addEventListener('init:gift-card', async function(){
 
+    const loadingSpinner = document.getElementById('loading-spinner');
+
     const payments = window.Square.payments(appId, locationId);
 
     let giftCard;
 
     try {
-      giftCard = await initializeGiftCard(payments);
-    } catch (e) {
-      console.error('Initializing Card failed', e);
+      giftCard = await initializeGiftCard(payments, loadingSpinner);
+    } catch (error) {
+      console.error('Initializing Card failed', error);
       loadingSpinner.classList.toggle('hidden');
-      alert(e);
       return;
     }
 
@@ -421,8 +435,10 @@
         if(result.status === 'OK'){
             const { token } = result;
             Livewire.emit('onPayment', token);
-            payWithGiftCardBtn.disabled = false;
-            payWithGiftCardBtn.innerText = 'Pay';
+            payWithGiftCardBtn.innerText = 'It almost done ! wait a moment...';
+        }else {
+          payWithGiftCardBtn.disabled = false;
+          payWithGiftCardBtn.innerText = 'Pay';
         }
 
       }catch(error){

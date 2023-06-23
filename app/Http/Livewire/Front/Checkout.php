@@ -73,16 +73,28 @@ class Checkout extends Component
         return view('front.components.checkout');
     }
 
-    public function updatedSelectedShippingRate($value)
+    public function updatedSelectedShippingRate($rate_object_id)
     {
-        session()->put('shipping_cost', (float) $value);
+        $target_rate;
+
+        foreach($this->shippingRates as $rate){
+            if($rate['object_id'] === $rate_object_id){
+                $target_rate = $rate;
+                break;
+            }
+        }
+
+        session()->put('shipping_cost', (float) $target_rate['amount']);
+
+        session()->put('shipping_rate', $target_rate);
+
         $this->preparedInitState();
     }
 
 
     public function nextStepForPayment()
     {
-        $this->validate(['selectedShippingRate' => ['required', 'numeric']]);
+        $this->validate(['selectedShippingRate' => ['required', 'string']]);
 
         if(!auth()->check()){
             return $this->emit('onRegisterMode');
@@ -125,7 +137,6 @@ class Checkout extends Component
 
 
     // Checkout Handeler
-
     public function validateAddress(GoShippoHttpService $shippo)
     {
         $this->validate();
@@ -185,6 +196,7 @@ class Checkout extends Component
                 'state' => $this->state,
                 'country' => $this->country,
                 'shippo_address_object_id' => $address['object_id'],
+                'order_note' => $this->order_note,
             ]; 
 
             if(session()->has('shipping_address')){
@@ -225,9 +237,7 @@ class Checkout extends Component
             $this->shippingRates = $response['data']['rates'];
             $this->isAddressValidated = true;
     
-            // session()->put('shipping_rates', $response['data']['rates']);
-            // dd($this->shippingRates);
-
+ 
             return $this->success('Address validation success', '');
 
 
@@ -277,6 +287,7 @@ class Checkout extends Component
             $this->country = $shippingAddress['country'];
             $this->phone = $shippingAddress['phone'];
             $this->email = $shippingAddress['email'];
+            $this->order_note = $shippingAddress['order_note'];
 
 
         }

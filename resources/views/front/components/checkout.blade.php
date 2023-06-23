@@ -151,7 +151,7 @@
                         <div class="space-y-3">
                             @foreach($shippingRates as $rate)
                                 <div class="flex items-center gap-5 pl-4 border border-gray-200 rounded">
-                                    <input wire:model.debounce="selectedShippingRate" id="rates-{{$rate['object_id']}}" type="radio" value="{{ $rate['amount'] }}" name="shipping_rate" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 focus:ring-gray-900 focus:ring-2">
+                                    <input wire:model.debounce="selectedShippingRate" id="rates-{{$rate['object_id']}}" type="radio" value="{{ $rate['object_id'] }}" name="shipping_rate" class="w-4 h-4 text-gray-900 bg-gray-100 border-gray-300 focus:ring-gray-900 focus:ring-2">
                                     <label for="rates-{{$rate['object_id']}}" class="cursor-pointer w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">
                                         <div class="flex justify-between items-center px-4 text-gray-700">
                                             <h2>

@@ -8,6 +8,7 @@ use LaracraftTech\LaravelDateScopes\DateScopes;
 use App\Models\OrderItem;
 use App\Models\User;
 use App\Models\Product;
+use App\Models\Address;
 use Carbon\Carbon;
 
 class Order extends Model
@@ -65,6 +66,14 @@ class Order extends Model
         return $chartData;
     }
 
+
+    // Dynamic Property
+
+    public function getTotalPriceAttribute()
+    {
+        return $this->total_product_price + $this->shipping_cost + $this->total_vat;
+    }
+
     // Relation
 
     public function orderItems()
@@ -81,6 +90,11 @@ class Order extends Model
     public function admin()
     {
        return $this->belongsTo(User::class);
+    }
+
+    public function address()
+    {
+        return $this->hasOne(Address::class);
     }
 
 }

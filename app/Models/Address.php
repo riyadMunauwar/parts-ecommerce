@@ -20,10 +20,20 @@ class Address extends Model
         'country',
         'state', 
         'city',
-        'zipcode',
-        'address_1',
-        'address_2',
+        'zip',
+        'street_1',
+        'street_2',
+        'user_id',
+        'order_id',
     ];
+
+
+
+    // Dynamic Attribute
+    public function getFullNameAttribute()
+    {
+        return ucwords(trim($this->first_name)) . ' ' . ucwords(trim($this->last_name)); 
+    }
 
 
     public function user()
@@ -34,6 +44,11 @@ class Address extends Model
     public function orders()
     {
         return $this->hasMany(Order::class);
+    }
+
+    public function order()
+    {
+       return $this->belongsTo(Order::class);
     }
 
 }

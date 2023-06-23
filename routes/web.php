@@ -68,6 +68,7 @@ Route::middleware([
     'verified',
 ])->prefix('user')->group(function () {
 
+    Route::get('/invoice/{orderId}', \App\Http\Controllers\Admin\InvoiceController::class)->name('invoice');
     Route::view('/profile', 'front.pages.user.profile')->name('user-profile');
     Route::view('/dashboard', 'front.pages.user.dashboard')->name('user-dashboard');
     Route::view('/security', 'front.pages.user.security')->name('user-security');
@@ -80,6 +81,7 @@ Route::middleware([
 Route::view('/', 'front.pages.home')->name('home');
 Route::get('/results', SearchResultController::class)->name('search');
 Route::view('/cart', 'front.pages.cart')->name('cart');
+Route::view('/order-confirm', 'front.pages.order-confirm')->name('order-confirm');
 Route::view('/checkout', 'front.pages.checkout')->name('checkout');
 Route::view('/contact', 'front.pages.contact-us')->name('contact-us');
 Route::view('/track-order', 'front.pages.track-order')->name('track-order');
