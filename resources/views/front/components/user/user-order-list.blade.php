@@ -19,20 +19,6 @@
                 </div>
                 <div class="w-full md:w-2/3">
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                        <div class="">
-                            <x-label for="status" value="{{ __('Status') }}" />
-                            <x-ui.select wire:model.debounce="status" id="status" class="block bg-gray-50 h-8 text-sm mt-1 w-full">
-                                <option value="">None</option>
-                                <option value="canceled">Canceled</option>
-                                <option value="completed">Completed</option>
-                                <option value="on_hold">On Hold</option>
-                                <option value="pending" selected="">Pending</option>
-                                <option value="pending_payment">Pending Payment</option>
-                                <option value="processing">Processing</option>
-                                <option value="refunded">Refunded</option>
-                            </x-ui.select>
-                        </div>
-
                         <div>
                             <x-label for="from_date" value="{{ __('From') }}" />
                             <x-input wire:model.debounce="from_date" id="from_date"  class="h-8 bg-gray-50 mt-1 w-full" type="date" />
@@ -49,38 +35,67 @@
                 <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
                     <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
-                            <th scope="col" class="px-4 py-3">Order Id</th>
+                            <th scope="col" class="px-4 py-3">Order No.</th>
+                            <th scope="col" class="px-4 py-3 text-center">Order Date</th>
+                            <th scope="col" class="px-4 py-3">Status</th>
                             <th scope="col" class="px-4 py-3">Total</th>
                             <th scope="col" class="px-4 py-3">Items</th>
-                            <th scope="col" class="px-4 py-3 text-center">Created</th>
-                            <th scope="col" class="px-4 py-3 text-center">Date</th>
-                            <th scope="col" class="px-4 py-3">Status</th>
+                            <th scope="col" class="px-4 py-3">Qty</th>
+                            <th scope="col" class="px-4 py-3 text-center">Invoice</th>
+                            <th scope="col" class="px-4 py-3 text-center">Track Parcel</th>
+                            <th scope="col" class="px-4 py-3 text-center">Tracking No.</th>
+                            <th scope="col" class="px-4 py-3 text-center">Parcel No.</th>
+                            
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="whitespace-nowrap">
                         @foreach($orders ?? [] as $order)
                         <tr class="border-b dark:border-gray-700">
                             <th scope="row" class="px-4 py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                                {{ $order->id ?? '' }}
                             </th>
-                            <td class="px-4 py-1">{{ $order->total_product_price ?? '' }}</td>
                             <td class="px-4 py-1">
-                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $order->order_items_count ?? '' }}</span>
+                                {{ $order->order_date->format('d M y') }}
+                                </br>
+                                <span class="text-xs">{{ $order->order_date->diffForHumans() }}</span>
                             </td>
-                            <td class="px-4 py-1">{{ $order->order_date->diffForHumans() }}</td>
-                            <td class="px-4 py-1">{{ $order->order_date->format('d M y') }}</td>
                             <td class="px-4 py-1">
-                                @if($order->status ?? '' === 'Canceled' || $order->status ?? '' === 'Refunded')
+                                @if($order->status === 'Canceled' || $order->status === 'Refunded')
                                     <span class="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-red-900 dark:text-red-300">{{ $order->status ?? '' }}</span>
-                                @elseif($order->status ?? '' === 'Payment Pending' || $order->status ?? '' === 'Pending')
+                                @elseif($order->status === 'Payment Pending' || $order->status  === 'Pending')
                                     <span class="bg-yellow-100 text-yellow-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-yellow-900 dark:text-yellow-300">{{ $order->status ?? '' }}</span>
                                 @else 
                                     <span class="bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-indigo-900 dark:text-indigo-300">{{ $order->status ?? 'Paid' }}</span>
                                 @endif
                             </td>
+                            <td class="px-4 py-1">
+                                ${{ number_format($order->total_price ?? 0) }}
+                            </td>
+                            <td class="px-4 py-1">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $order->order_items_count ?? '' }}</span>
+                            </td>
+                            <td class="px-4 py-1">
+                                <span class="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">{{ $order->orderItems->sum('qty') ?? 0 }}</span>
+                            </td>
+                            <td class="px-4 py-1">
+                                <a href="{{ route('invoice', ['orderId' => $order->id ]) }}" target="_blank" class="text-blue-500 font-semibold underline">Print</a>
+                            </td>
+                            <td class="px-4 py-1">
+                                @if($order->tracking_url)
+                                    <a href="{{ $order->tracking_url }}" target="_blank" class="text-blue-500 font-semibold underline">Track</a>
+                                @else 
+                                    <a  class="text-blue-500 font-semibold">---</a>
+                                @endif
+                            </td>
+                            <td class="px-4 py-1">
+                                {{ $order->tracking_number ?? '---'}}
+                            </td>
+                            <td class="px-4 py-1">
+                                {{ $order->parcel_id ?? '---' }}
+                            </td>   
                             <td class="px-4 py-1">
                                 <div class="flex items-center gap-1 justify-end">
                                     <a href="{{ route('orders.show', ['order' => $order->id]) }}">
@@ -91,11 +106,6 @@
                                             </svg>
                                         </span>
                                     </a>
-                                    <button wire:click.debounce="enableProductEditMode({{ $order->id }})" type="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-                                        </svg>
-                                    </button>
                                 </div>
                             </td>
                         </tr>

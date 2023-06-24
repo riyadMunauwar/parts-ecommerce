@@ -16,7 +16,6 @@ class UserOrderList extends Component
     public $search;
     public $from_date;
     public $to_date;
-    public $status;
 
     protected $listeners = [
         'onOrderCreated' => '$refresh',
@@ -84,11 +83,10 @@ class UserOrderList extends Component
     {
 
         $search = $this->search;
-        $status = $this->status;
         $from_date = $this->from_date;
         $to_date = $this->to_date;
 
-        $query = Order::query();
+        $query = Order::where('user_id', auth()->id());
 
         $query->when($this->search, function($query) use($search){
             $query->withWhereHas('user', function($query) use($search){
@@ -99,14 +97,12 @@ class UserOrderList extends Component
             });
         });
 
-        $query->when($this->status, function($query) use($status){
-
-        });
 
         $query->when($this->from_date && $this->to_date, function($query) use($from_date, $to_date){
-            
             $query->whereBetween('order_date', [$from_date, $to_date]);
         });
+
+
 
         return $query->with('orderItems', 'user')->withCount('orderItems')->latest()->paginate(50);
 
