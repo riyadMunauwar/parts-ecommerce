@@ -1,7 +1,7 @@
 <x-front.master-layout>
 
     <x-slot name="meta_data">
-        <title>Order List | MobileComusa</title>
+        <title>User Order Details | MobileComusa</title>
         <link rel="canonical" href="{{ URL('') }}" />
     </x-slot>
 
@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-span-5 border-l pb-10">
-            <livewire:front.user.user-order-list />
+            <livewire:front.user.user-order-detail orderId="26" />
         </div>
     </div>
 </x-front.master-layout>

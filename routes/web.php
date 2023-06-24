@@ -69,9 +69,11 @@ Route::middleware([
 ])->prefix('user')->group(function () {
 
     Route::get('/invoice/{orderId}', \App\Http\Controllers\Admin\InvoiceController::class)->name('invoice');
+    Route::view('/orders/detail/{orderId}', 'front.pages.user.user-order-detail')->name('user-order-detail');
     Route::view('/profile', 'front.pages.user.profile')->name('user-profile');
     Route::view('/dashboard', 'front.pages.user.dashboard')->name('user-dashboard');
     Route::view('/security', 'front.pages.user.security')->name('user-security');
+    Route::view('/orders', 'front.pages.user.user-order-list')->name('user-order-list');
     
 });
 
