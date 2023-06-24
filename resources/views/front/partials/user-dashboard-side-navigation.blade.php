@@ -25,23 +25,14 @@
         </a>
       </li>
 
-      <li>
+      <!-- <li>
         <a
           href=""
           class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
         >
           Returns
         </a>
-      </li>
-
-      <li>
-        <a
-          href=""
-          class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
-        >
-          Invoices
-        </a>
-      </li>
+      </li> -->
 
       <li>
         <details class="group [&_summary::-webkit-details-marker]:hidden">

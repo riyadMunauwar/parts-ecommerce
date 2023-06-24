@@ -9,7 +9,7 @@
             Order Placed
           </dt>
 
-          <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">24</dd>
+          <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">{{ number_format($totalOrderPlaced) }}</dd>
         </div>
 
         <div class="flex flex-col rounded-lg bg-blue-100 px-4 py-8 text-center">
@@ -18,7 +18,7 @@
           </dt>
 
           <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">
-            $4.8m
+            ${{ number_format($totalAmountSpent) }}
           </dd>
         </div>
 
@@ -27,7 +27,7 @@
             Due Amount
           </dt>
 
-          <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">86</dd>
+          <dd class="text-4xl font-extrabold text-blue-600 md:text-5xl">${{ number_format($totalAmountDue) }}</dd>
         </div>
       </dl>
     </div>
