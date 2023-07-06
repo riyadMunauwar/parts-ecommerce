@@ -12,6 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\Address;
 use App\Models\Discount;
+use App\Models\Order;
 use LaracraftTech\LaravelDateScopes\DateScopes;
 
 
@@ -79,5 +80,10 @@ class User extends Authenticatable
     public function discount()
     {
         return $this->belongsTo(Discount::class);
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 }

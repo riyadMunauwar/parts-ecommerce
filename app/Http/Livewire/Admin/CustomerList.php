@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Admin;
 use Livewire\Component;
 use Livewire\WithPagination;
 use App\Traits\WithSweetAlert;
+use Spatie\Permission\Models\Role;
 use App\Models\User as Customer;
 
 class CustomerList extends Component
@@ -21,13 +22,14 @@ class CustomerList extends Component
         'onCustomerDelete' => 'deleteCustomer',
     ];
 
-
     public function render()
     {
         $customers = $this->getCustomers();
 
         return view('admin.components.customer-list', compact('customers'));
     }
+
+
 
     public function enableCustomerEditMode($id)
     {
@@ -69,7 +71,7 @@ class CustomerList extends Component
 
         $search = $this->search;
 
-        $query = Customer::query();
+        $query = Customer::withCount('orders');
 
         $query->when($this->search, function($query) use($search){
             $query->where('name', 'like', '%' . $search . '%')
@@ -81,4 +83,7 @@ class CustomerList extends Component
         return $query->latest()->paginate(25);
 
     }
+
+
+
 }
