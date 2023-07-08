@@ -47,6 +47,7 @@ Route::middleware([
     Route::view('/caurosel', 'admin.pages.caurosel')->name('caurosel');
     Route::view('/menus', 'admin.pages.menu')->name('menu');
     Route::view('/customers', 'admin.pages.customer')->name('customer');
+    Route::view('/wholesalers', 'admin.pages.wholesaler')->name('wholesaler');
     Route::view('/vats', 'admin.pages.vat')->name('vat');
     Route::view('/footer', 'admin.pages.footer')->name('footer');
     Route::view('/color', 'admin.pages.color')->name('color');
@@ -58,6 +59,17 @@ Route::middleware([
     Route::view('/admins', 'admin.pages.admins-list')->name('admins.list');
     Route::view('/solcial-links', 'admin.pages.social-links')->name('social-link');
     Route::view('/user/profile', 'admin.pages.user-profile')->name('admin-user-profile');
+
+
+    Route::view('/reports/sales', 'admin.pages.reports.sales-report')->name('reports.sales');
+    Route::view('/reports/purchases', 'admin.pages.reports.purchases-report')->name('reports.purchases');
+    Route::view('/reports/stocks', 'admin.pages.reports.stocks-report')->name('reports.stocks');
+    Route::view('/reports/branded-products', 'admin.pages.reports.branded-products-report')->name('reports.branded-products');
+    Route::view('/reports/categorized-products', 'admin.pages.reports.categorized-products-report')->name('reports.categorized-products');
+    Route::view('/reports/products-view', 'admin.pages.reports.products-view-report')->name('reports.products-view');
+    Route::view('/reports/products-search', 'admin.pages.reports.products-search-report')->name('reports.products-search');
+    Route::view('/reports/customer-orders', 'admin.pages.reports.customer-orders-report')->name('reports.customer-orders');
+    
 
 });
 

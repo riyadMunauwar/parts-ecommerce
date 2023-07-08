@@ -21,12 +21,12 @@ class Wholesaler extends Model implements HasMedia
         $this->addMediaCollection('sales_tax_certificate')->singleFile();;
     }
 
-    public function businessLicence()
+    public function businessLicenceUrl()
     {
         return $this->getFirstMediaUrl('business_licence');
     }
 
-    public function salesTaxCertificate()
+    public function salesTaxCertificateUrl()
     {
         return $this->getFirstMediaUrl('sales_tax_certificate');
     }
