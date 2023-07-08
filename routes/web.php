@@ -86,6 +86,7 @@ Route::middleware([
     Route::view('/dashboard', 'front.pages.user.dashboard')->name('user-dashboard');
     Route::view('/security', 'front.pages.user.security')->name('user-security');
     Route::view('/orders', 'front.pages.user.user-order-list')->name('user-order-list');
+    Route::view('/orders/return/{orderId}', 'front.pages.user.return-apply')->name('return-apply');
     
 });
 

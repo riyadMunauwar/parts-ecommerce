@@ -3,7 +3,13 @@
     <span
       class="grid h-10 w-32 place-content-center rounded-lg bg-gray-100 text-xs text-gray-600"
     >
-      Logo
+      <span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300">
+        @php 
+            $user = auth()->user()->getRoleNames()->first();
+        @endphp
+
+        {{ ucfirst($user) }}
+      </span>
     </span>
 
     <ul class="mt-6 space-y-1">
@@ -22,6 +28,15 @@
           class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
         >
           Orders
+        </a>
+      </li>
+
+      <li>
+        <a
+          href="{{ route('user-order-list') }}"
+          class="block rounded-lg px-4 py-2 text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-700"
+        >
+          Returns
         </a>
       </li>
 

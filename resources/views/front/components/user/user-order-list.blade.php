@@ -45,6 +45,7 @@
                             <th scope="col" class="px-4 py-3 text-center">Track Parcel</th>
                             <th scope="col" class="px-4 py-3 text-center">Tracking No.</th>
                             <th scope="col" class="px-4 py-3 text-center">Parcel No.</th>
+                            <th scope="col" class="px-4 py-3 text-center">Return/Refund</th>
                             
                             <th scope="col" class="px-4 py-3">
                                 <span class="sr-only">Actions</span>
@@ -95,7 +96,14 @@
                             </td>
                             <td class="px-4 py-1">
                                 {{ $order->parcel_id ?? '---' }}
-                            </td>   
+                            </td>
+                            <td class="px-4 py-1">
+                                @if($order->status === 'Paid' && $order->order_date->diffInDays() <= 7)
+                                    <a href="{{ route('return-apply', ['orderId' => $order->id]) }}" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Return</a>
+                                @else 
+                                    <span class="text-xs">7 days exceed</span>
+                                @endif
+                            </td> 
                             <td class="px-4 py-1">
                                 <div class="flex items-center gap-1 justify-end">
                                     <a href="{{ route('user-order-detail', ['orderId' => $order->id]) }}">
